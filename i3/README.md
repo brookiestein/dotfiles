@@ -32,3 +32,5 @@ para el fondo. Hay otras líneas comentadas que son para ejecutar aplicaciones
 al inicio, en este caso es porque no todos tenemos los mismos programas y para 
 que i3 no intente ejecutar un programa que, posiblemente no tengas instalado, 
 están comentados.**
+
+**Como última nota, te podrás dar cuenta que hay dos archivos de config: "config-generic" y "config-personal". Una es "genérica", es decir, con casi nula personalización, como atajos de teclado, aplicaciones que se ejecutan al iniciar el sistema, etc. Y la otra está más personalizada, con atajos de teclado que yo configuré para algunas aplicaciones que utilizo, con aplicaciones que quiero que se ejecuten cuándo inicio mi sistema, aplicaciones que se ejecutan en modo "ventana flotante", etc.
