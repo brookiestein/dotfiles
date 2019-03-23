@@ -1,0 +1,21 @@
+" Codificación
+set encoding=utf8
+
+" Resaltado de color de sintaxis.
+syntax on
+
+" Números de líneas, filas y columnas.
+set number
+set ruler
+
+" Indentado y espaciado
+set tabstop=4
+set shiftwidth=4
+set ai
+set cindent
+
+" Mostrar inicio y fin de paréntesis
+set showmatch
+
+" Configuraciones de vim y no de vi.
+set nocompatible
