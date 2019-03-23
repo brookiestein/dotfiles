@@ -1,0 +1,112 @@
+# Brookiestein - Archivo conky
+
+# Alinear en el centro a la derecha
+alignment middle_right
+# ¿Poner fondo?
+background no
+# ¿Usar xft?
+use_xft yes
+# Fuentes a utilizar
+font Dejavu Sans:size=8
+xftalpha 0
+# Tiempo de refresco
+update_interval 1.0
+# Tiempo límite de corrido, dejar en 0 para correr siempre
+total_run_times 0
+# Crear su propia ventana en vez de usar el escritorio.
+own_window yes
+own_window_transparent no
+own_window_type desktop
+own_window_argb_visual yes
+own_window_argb_value 120
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+# Usar el doble de buffer (Reduce el parpadeo pero puede no funcionar siempre)
+double_buffer yes
+# Tamaño mínimo del texto en el área.
+minimum_size 200 200
+maximum_width 200
+# ¿Dibujar sombras?
+draw_shades no
+# ¿Dibujar un esquema?
+draw_outline yes
+# ¿Dibujar borde?
+draw_borders no
+# ¿Dibujar los bordes gráficos?
+draw_graph_borders no
+# Color predeterminado
+default_color 999999
+# Color de sombra predeterminado
+default_shade_color black
+# Color de contorno predeterminado
+default_outline_color black
+# Alinear a la derecha
+alignment top_right
+# Brecha entre las fronteras de la pantalla y el texto
+gap_x 4
+gap_y 154
+# ¿Restar los almacenamientos intermedios del sistema de archivos de la memoria usada?
+no_buffers yes
+# Número de muestra de CPU a promedio.
+cpu_avg_samples 4
+# Tamaño del buffer de texto.
+text_buffer_size 1024
+# ¿Forzar el uso de UTF-8?
+override_utf8_locale no
+# ¿Todo el texto el mayúscula?
+uppercase no
+# Usar el doble de buffer (Reduce el parpadeo pero puede no funcionar siempre)
+double_buffer yes
+
+TEXT
+${color purple}S I S T E M A @ G N U / L I N U X
+${color grey}$hr
+${color grey}Kernel:${color grey} $sysname $kernel
+${color green}Tiempo encendido:${color grey} $uptime
+${color red}Hora: ${color red}${time %X}         ${color red}Fecha: ${time %x}
+${color grey}$hr
+# Debes conocer la frecuencia máxima a la que corre tu CPU y cambiar 3.30GHz por la correspondiente a tu CPU.
+${color grey}C P U: ${color grey}${alignr}${freq_g}GHz / 3.30GHz
+${color green}${cpubar 4 cpu0}${color grey}
+${color grey}CPU0: ${cpu cpu1}% ${alignr}${color grey}${cpubar cpu1 8,60}
+${color grey}CPU1: ${cpu cpu2}% ${alignr}${color grey}${cpubar cpu2 8,60}
+${color grey}CPU2: ${cpu cpu3}% ${alignr}${color grey}${cpubar cpu3 8,60}
+${color grey}CPU3: ${cpu cpu4}% ${alignr}${color grey}${cpubar cpu4 8,60}
+${color grey}$hr
+PROCESOS$alignr CPU% MEM%
+${top name 1}$alignr${top cpu 1}   ${top mem 1}
+${top name 2}$alignr${top cpu 2}   ${top mem 2}
+${top name 3}$alignr${top cpu 3}   ${top mem 3}
+${top name 4}$alignr${top cpu 4}   ${top mem 4}
+${top name 5}$alignr${top cpu 5}   ${top mem 5}
+$hr
+${color grey}VELOCIDAD DE LA RED $hr
+# Cambiar la interface de red, si ésta no es la que tienes.
+Bajada $alignr ${color green}${downspeed wlp2s0, eno1} kb/s
+${color grey}Subida $alignr ${color green}${upspeed wlp2s0, eno1} kb/s
+${color grey}$hr
+${color grey}TRAFICO DE LA RED $hr
+# Cambiar la interface de red, si ésta no es la que tienes.
+Bajado: $alignr ${color green}${totaldown wlp2s0, eno1}
+${color grey}Subido: $alignr  ${color green}${totalup wlp2s0, eno1}
+${color grey}$hr
+${color grey}ALMACENAMIENTO $hr
+# Mostrar la home (Usado/Tamaño)
+$HOME $alignr ${fs_used /home} / ${fs_size /home}
+${fs_bar /home}
+# Mostrar la raíz (Usado/Tamaño)
+$RAIZ $alignr ${fs_used /} / ${fs_size /}
+${fs_bar /}
+# Mostrar la RAM (Usado/Tamaño)
+$RAM: $alignr $mem}/${memmax}  
+${membar} 
+# Mostrar la swap (Usado/Tamaño)
+$SWAP: $alignr ${swap}/${swapmax} 
+${swapbar}
+${color grey}$hr
+# Mostrar porcentaje de carga de la batería
+${color grey}BATERIA $hr
+${battery BAT0} $alignr
+${color grey}${battery_bar BAT0}
+
+# Mostrar nombre de usuario.
+${color red}BROOKIE${color grey}$hr
