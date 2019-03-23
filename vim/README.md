@@ -1,1 +1,1 @@
-
+**Aquí tenemos dos archivos de configuración del software "vim". Uno es un tanto básico y el otro es "hecho" por un amigo con el nick "The nameless" que me ha dado permiso para subir su config a mi repo, desde ya muchas gracias "The nameless". Esta config por el momento necesita o utiliza [bundle](https://github.com/VundleVim/Vundle.vim.git), sólo clona el repo en tu carpeta ~/.vim y mete este archivo "vimrc-2" a esa carpeta o en tu home, como desees.
