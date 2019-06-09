@@ -30,7 +30,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec mate-terminal
+bindsym $mod+Return exec kitty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -167,7 +167,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-	position top
+    position top
     colors {
     background #2f343f
     statusline #2f343f
@@ -179,12 +179,13 @@ bar {
     inactive_workspace  #2f343f #2f343f #d8dee8
     urgent_workspace    #2f343f #ebcb8b #2f343f
     }
-	#status_command ~/.config/i3/bumblebee-status/bumblebee-status -m disk:root disk:home cpu memory uptime battery brightness amixer layout date time -p root.path=/ home.path=/home time.format="%H:%M:%S" date.format="%a, %b %d %Y" -t greyish-powerline
-	
-	status_command ~/.config/i3/bumblebee-status/bumblebee-status -m traffic disk:home cpu memory uptime battery brightness amixer pasource layout time -p home.path=/home time.format="%c" -t greyish-powerline
+    status_command ~/.config/i3/bumblebee-status/bumblebee-status -m traffic disk:home cpu memory uptime battery brightness amixer pasource layout time -p home.path=/home time.format="%c" -t greyish-powerline
+
 }
 
 # Atajos de teclado
+bindsym $mod+Shift+S exec pavucontrol
+bindsym $mod+Shift+T exec Thunar
 bindsym Ctrl+Shift+E exec ~/.eclipse/java-latest-released/eclipse/eclipse
 bindsym $mod+Shift+M exec virtualbox
 bindsym $mod+Shift+F exec firefox
@@ -197,7 +198,7 @@ bindsym $mod+Shift+Z exec --no-startup-id setxkbmap -layout us -variant intl
 bindsym Print exec scrot 'BrookieShot_%a-%d%b%y_%H.%M.%S.png' -e 'viewnior ~/$f'
 
 # Fondo de pantalla
-exec --no-startup-id feh --bg-scale ~/Wallpapers/Variados/wallhaven-572459.jpg
+exec --no-startup-id feh --bg-fill ~/Wallpapers/Variados/IMG_0555.JPG
 
 # PulseAudio key bindings
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 05%+ unmute
@@ -209,8 +210,8 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # Aplicaciones al inicio - Descomenta o agrega las que necesites.
-exec --no-startup-id xfce4-clipman &
 exec --no-startup-id megasync &
+exec --no-startup-id xfce4-clipman &
 exec --no-startup-id setxkbmap -layout us -variant intl &
 exec --no-startup-id synclient TapButton1=1 TapButton2=3 &
 exec --no-startup-id compton &
@@ -218,21 +219,22 @@ exec --no-startup-id xfce4-power-manager &
 
 # Ejecutar aplicaciones en áreas de trabajo específicos.
 assign [class="Firefox"] $WS1
-assign [class="Caja"] $WS2
+assign [class="Thunar"] $WS2
 assign [class="vlc"] $WS3
 assign [class="keepassxc"] $WS4
 assign [class="VirtualBox"] $WS5
 assign [class="qBittorrent"] $WS6
 assign [class="Atril"] $WS7
 
+# Estilo de bordes por defecto.
+default_border pixel
+
 # Ventanas flotantes.
 for_window [class=Viewnior] floating enable
 for_window [class=Leafpad] floating enable
 for_window [class=Engrampa] floating enable
 for_window [class=GParted] floating enable
-
-# Estilo de los bordes por defecto.
-default_border pixel
+for_window [class=Pavucontrol] floating enable
 
 # colour of border, background, text, indicator, and child_border
 client.focused          #bf616a #2f343f #d8dee8 #bf616a #d8dee8
@@ -312,4 +314,3 @@ mode "$mode_gaps_outer" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
