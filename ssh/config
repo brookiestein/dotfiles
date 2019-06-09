@@ -1,0 +1,7 @@
+Host *
+	Protocol 2
+	IdentityFile ~/.ssh/id_rsa
+	LoginGraceTime 30
+	PermitRootLogin no
+	MaxAuthTries 2
+	MaxStartups 1
