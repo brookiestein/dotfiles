@@ -82,8 +82,8 @@ Plugin 'KKPMW/oldbook-vim'
 Plugin 'dylanaraps/wal.vim'
 
 " plugin LatexPlugin
-Plugin 'xuhdev/vim-latex-live-preview'
-Plugin 'brennier/quicktex'
+"Plugin 'xuhdev/vim-latex-live-preview'
+"Plugin 'brennier/quicktex'
 " All of your Plugins must be added before the following line
 call vundle#end() " required
 filetype on
@@ -140,13 +140,13 @@ syntax enable " enable syntax highlighting
 
 set pyxversion=0
 let g:loaded_python_provider = 1
-set shell=/bin/zsh
+set shell=/bin/bash
 set number " show line numbers
 set ruler
 set ttyfast " terminal acceleration
 
-set tabstop=4 " 4 whitespaces for tabs visual presentation
-set shiftwidth=4 " shift lines by 4 spaces
+set tabstop=8 " 8 whitespaces for tabs visual presentation
+set shiftwidth=8 " shift lines by 4 spaces
 set smarttab " set tabs for a shifttabs logic
 set expandtab " expand tabs into spaces
 set autoindent " indent when moving to the next line while writing code
@@ -293,8 +293,8 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 "=====================================================
 "" C/C++
 "=====================================================
-autocmd FileType c setlocal tabstop=4 shiftwidth=4 expandtab
-autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+autocmd FileType c setlocal tabstop=8 shiftwidth=8 expandtab
+autocmd FileType cpp setlocal tabstop=8 shiftwidth=8 expandtab
 
 "=====================================================
 "" Jedi
@@ -302,7 +302,7 @@ autocmd FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
 
 augroup vimrc-python
   autocmd!
-  autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=8 colorcolumn=79
+  autocmd FileType python setlocal expandtab shiftwidth=8 tabstop=8 colorcolumn=79
       \ formatoptions+=croq softtabstop=4
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
