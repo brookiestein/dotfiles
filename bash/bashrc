@@ -18,7 +18,8 @@ fi
 # Put your fun stuff here.
 
 # Texto en ASCII al iniciar una sesión.
-figlet LORD BROOKIE
+#figlet LORD BROOKIE
+cowsay "Hello, welcome again Lord Brookie!"
 
 # Configuración de powerline.
 if [ -f `which powerline-daemon` ]; then
