@@ -6,7 +6,7 @@ get_threads() {
         read threads
         echo -en $threads | grep '[[:digit:]]' > /dev/null 2> /dev/null
 
-        while [ $? -ne 0 ]; do
+        while [[ $? -ne 0 || $threads -le 0 ]]; do
                 if [[ -z $threads ]]; then
                         threads=1
                         break
