@@ -197,6 +197,7 @@ if [ $user = 'root' ]; then
                                         fi
                                 else
                                         echo && echo "Ha ocurrido un error en la instalación del núcleo." && echo "Saliendo..." && sleep 2
+                                fi
                         else
                                 echo && echo "Ha ocurrido un error en la instalación de los módulos. Saliendo..." && sleep 2
                         fi
