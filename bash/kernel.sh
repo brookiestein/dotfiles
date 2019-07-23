@@ -1,20 +1,4 @@
 #!/bin/bash
-# Copyright (C) 19aa Lord Brookie
-# Este programa es software libre. Puede redistribuirlo y/o
-# modificarlo bajo los términos de la Licencia Pública General
-# de GNU según es publicada por la Free Software Foundation,
-# bien de la versión 2 de dicha Licencia o bien --según su
-# elección-- de cualquier versión posterior.
-# Este programa se distribuye con la esperanza de que sea
-# útil, pero SIN NINGUNA GARANTÍA, incluso sin la garantía
-# MERCANTIL implícita o sin garantizar la CONVENIENCIA PARA UN
-# PROPÓSITO PARTICULAR. Para más detalles, véase la Licencia
-# Pública General de GNU.
-# Debería haber recibido una copia de la Licencia Pública
-# General junto con este programa. En caso contrario, escriba
-# a la Free Software Foundation, Inc., en 675 Mass Ave,
-# Cambridge, MA 02139, EEUU.
-
 message="¿Desea tener soporte para"
 answer="La respuesta introducida no es válida."
 get_threads() {
@@ -37,7 +21,7 @@ get_threads() {
 
 get_info() {
         echo "##############################################################################################"
-        echo "##### Bienvenido al script de automatización del proceso de compilación del kernel linux #####"
+        echo "##### Bienvenido al script de automatización del proceso de compilación del núcleo linux #####"
         echo "##############################################################################################"
         echo "A continuación dígame si desea que su initramfs tenga soporte para LVM y/o LUKS."
 
@@ -115,7 +99,7 @@ if [ $user = 'root' ]; then
 
         cd /usr/src/linux/
         if [ $? = '0' ]; then
-                echo "La compilación del kernel iniciará en 5 segundos. Puede presionar (CTRL + C) para cancelar esto."
+                echo "La compilación del núcleo iniciará en 5 segundos. Puede presionar (CTRL + C) para cancelar esto."
                 echo -n "("
                 for ((i=5; i>=1; i--)); do
                         if [ $i -gt 1 ]; then
@@ -132,77 +116,87 @@ if [ $user = 'root' ]; then
                         sleep 2
                         make modules_install
                         if [ $? = '0' ]; then
-                                echo && echo "Instalación de módulos finalizada. Generando initramfs..." && echo && sleep 2
-                                if [[ $lvm = 's' || $lvm = 'si' && $luks = 's' || $luks = 'si' ]]; then
-                                        genkernel --lvm --luks --install initramfs
-                                        if [ $? = '0' ]; then
-                                                echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
-                                                echo "configuración de GRUB..." && echo && sleep 2
-                                                grub-mkconfig -o /boot/grub/grub.cfg
+                                echo && echo "Instalación de módulos finalizada. Instalando núcleo..." && echo && sleep 2
+                                make install
+                                if [ $? = '0' ]; then
+                                        echo && echo "Instalación del núcleo finalizada. Generando initramfs..." && echo && sleep 2
+                                        if [[ $lvm = 's' || $lvm = 'si' && $luks = 's' || $luks = 'si' ]]; then
+                                                genkernel --lvm --luks --install initramfs
                                                 if [ $? = '0' ]; then
-                                                        echo && echo -n "Generación de archivo de configuración ee GRUB finalizada con éxito."
-                                                        echo "¡Trabajo finalizado!" && echo && sleep 2
+                                                        echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
+                                                        echo "configuración de GRUB..." && echo && sleep 2
+                                                        grub-mkconfig -o /boot/grub/grub.cfg
+                                                        if [ $? = '0' ]; then
+                                                                echo && echo -n "Generación de archivo de configuración de "
+                                                                echo "GRUB finalizada con éxito."
+                                                                echo "¡Trabajo finalizado!" && echo && sleep 2
 
+                                                        else
+                                                                echo && echo -n "Ha ocurrido un error en la (re)generación del archivo "
+                                                                echo "de configuración de GRUB. Saliendo..." && sleep 2
+                                                        fi
                                                 else
-                                                        echo && echo -n "Ha ocurrido un error en la (re)generación del archivo de configuración "
-                                                        echo "de GRUB. Saliendo..." && sleep 2
+                                                        echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..."
+                                                        sleep 2
+                                                fi
+                                        elif [[ $lvm = 's' || $lvm = 'si' && $luks = 'n' || $luks = 'no' ]]; then
+                                                genkernel --lvm --install initramfs
+                                                if [ $? = '0' ]; then
+                                                        echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
+                                                        echo "configuración de GRUB..." && sleep 2
+                                                        grub-mkconfig -o /boot/grub/grub.cfg
+                                                        if [ $? = '0' ]; then
+                                                                echo
+                                                                echo "Generación de archivo de configuración ee GRUB finalizada con éxito. "
+                                                                echo "¡Trabajo finalizado!" && echo && sleep 2
+
+                                                        else
+                                                                echo && echo -n "Ha ocurrido un error en la (re)generación del archivo de "
+                                                                echo "configuración de GRUB. Saliendo..." && sleep 2
+                                                        fi
+                                                else
+                                                        echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..."
+                                                        sleep 2
+                                                fi
+                                        elif [[ $lvm = 'n' || $lvm = 'no' && $luks = 's' || $luks = 'si' ]]; then
+                                                genkernel --luks --install initramfs
+                                                if [ $? = '0' ]; then
+                                                        echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
+                                                        echo "configuración de GRUB..." && sleep 2
+                                                        grub-mkconfig -o /boot/grub/grub.cfg
+                                                        if [ $? = '0' ]; then
+                                                                echo && echo -n "Generación de archivo de configuración de GRUB "
+                                                                echo "finalizada con éxito."
+                                                                echo "¡Trabajo finalizado!" && echo && sleep 2
+
+                                                        else
+                                                                echo && echo -n "Ha ocurrido un error en la (re)generación del archivo de "
+                                                                echo "configuración de GRUB. Saliendo..." && sleep 2
+                                                        fi
+                                                else
+                                                        echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..." && sleep 2
                                                 fi
                                         else
-                                                echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..." && sleep 2
-                                        fi
-                                elif [[ $lvm = 's' || $lvm = 'si' && $luks = 'n' || $luks = 'no' ]]; then
-                                        genkernel --lvm --install initramfs
-                                        if [ $? = '0' ]; then
-                                                echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
-                                                echo "configuración de GRUB..." && sleep 2
-                                                grub-mkconfig -o /boot/grub/grub.cfg
+                                                genkernel --install initramfs
                                                 if [ $? = '0' ]; then
-                                                        echo && echo "Generación de archivo de configuración ee GRUB finalizada con éxito. "
-                                                        echo "¡Trabajo finalizado!" && echo && sleep 2
+                                                        echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
+                                                        echo "configuración de GRUB..." && sleep 2
+                                                        grub-mkconfig -o /boot/grub/grub.cfg
+                                                        if [ $? = '0' ]; then
+                                                                echo && echo -n "Generación de archivo de configuración de GRUB "
+                                                                echo "finalizada con éxito."
+                                                                echo "¡Trabajo finalizado!" && echo && sleep 2
 
+                                                        else
+                                                                echo && echo -n "Ha ocurrido un error en la (re)generación del archivo de "
+                                                                echo "configuración de GRUB. Saliendo..." && sleep 2
+                                                        fi
                                                 else
-                                                        echo && echo -n "Ha ocurrido un error en la (re)generación del archivo de "
-                                                        echo "configuración de GRUB. Saliendo..." && sleep 2
+                                                        echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..." && sleep 2
                                                 fi
-                                        else
-                                                echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..."
-                                                sleep 2
-                                        fi
-                                elif [[ $lvm = 'n' || $lvm = 'no' && $luks = 's' || $luks = 'si' ]]; then
-                                        genkernel --luks --install initramfs
-                                        if [ $? = '0' ]; then
-                                                echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
-                                                echo "configuración de GRUB..." && sleep 2
-                                                grub-mkconfig -o /boot/grub/grub.cfg
-                                                if [ $? = '0' ]; then
-                                                        echo && echo "Generación de archivo de configuración ee GRUB finalizada con éxito."
-                                                        echo "¡Trabajo finalizado!" && echo && sleep 2
-
-                                                else
-                                                        echo && echo -n "Ha ocurrido un error en la (re)generación del archivo de "
-                                                        echo "configuración de GRUB. Saliendo..." && sleep 2
-                                                fi
-                                        else
-                                                echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..." && sleep 2
                                         fi
                                 else
-                                        genkernel --install initramfs
-                                        if [ $? = '0' ]; then
-                                                echo && echo -n "Generación de initramfs finalizada. Re(generando) archivo de "
-                                                echo "configuración de GRUB..." && sleep 2
-                                                grub-mkconfig -o /boot/grub/grub.cfg
-                                                if [ $? = '0' ]; then
-                                                        echo && echo "Generación de archivo de configuración ee GRUB finalizada con éxito."
-                                                        echo "¡Trabajo finalizado!" && echo && sleep 2
-
-                                                else
-                                                        echo && echo -n "Ha ocurrido un error en la (re)generación del archivo de "
-                                                        echo "configuración de GRUB. Saliendo..." && sleep 2
-                                                fi
-                                        else
-                                                echo && echo "Ha ocurrido un error en la generación del initramfs. Saliendo..." && sleep 2
-                                        fi
-                                fi
+                                        echo && echo "Ha ocurrido un error en la instalación del núcleo." && echo "Saliendo..." && sleep 2
                         else
                                 echo && echo "Ha ocurrido un error en la instalación de los módulos. Saliendo..." && sleep 2
                         fi
