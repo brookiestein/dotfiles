@@ -17,6 +17,7 @@ fi
 
 # Put your fun stuff here.
 
+# Here start my personal configuration
 # Texto en ASCII al iniciar una sesión.
 #figlet LORD BROOKIE
 cowsay "Hello, welcome again Lord Brookie!"
@@ -28,3 +29,11 @@ if [ -f `which powerline-daemon` ]; then
   POWERLINE_BASH_SELECT=1
   . /usr/share/powerline/bash/powerline.sh
 fi
+
+# Alias
+alias p="ps aux | grep "
+alias la="ls -a"
+alias ll="ls -l"
+alias lla="ls -la"
+alias lash="ls -ash"
+
