@@ -14,15 +14,18 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
-
 # Put your fun stuff here.
 
 # Here start my personal configuration
-# Texto en ASCII al iniciar una sesión.
-#figlet LORD BROOKIE
-cowsay "Hello, welcome again Lord Brookie!"
 
-# Configuración de powerline.
+# Text in ASCII when start a new session.
+if [ $(echo $(($RANDOM % 2))) -eq 0 ]; then
+        figlet "LORD BROOKIE"
+else
+        cowsay "Hello, welcome again Lord Brookie!"
+fi
+
+# Configuration of powerline.
 if [ -f `which powerline-daemon` ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
