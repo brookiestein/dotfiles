@@ -16,7 +16,8 @@ fi
 # Put your fun stuff here.
 
 # Here start my personal configuration
-
+# Colors: In there order: Red, GREEN, Blue, White and the final
+colors=("\e[1;31m" "\e[1;32m" "\e[1;34m" "\e[1;37m" "\e[0m")
 # Text in ASCII when start a new session.
 message="| ￣￣￣￣￣￣|
 | Los hackers |
@@ -28,11 +29,15 @@ message="| ￣￣￣￣￣￣|
 / 　 づ"
 number=$(echo $(($RANDOM % 3)))
 if [ $number -eq 0 ]; then
+        echo -en "${colors[1]}"
         figlet "LORD BROOKIE"
+        echo -en "${colors[4]}"
 elif [ $number -eq 1 ]; then
+        echo -en "${colors[2]}"
         cowsay "Hello, welcome again Lord Brookie!"
+        echo -en "${colors[4]}"
 else
-        echo "$message"
+        echo -e "${colors[3]}$message${colors[4]}"
 fi
 
 # Configuration of powerline.
@@ -42,14 +47,16 @@ if [ -f `which powerline-daemon` ]; then
   POWERLINE_BASH_SELECT=1
   . /usr/share/powerline/bash/powerline.sh
 else
-        echo 'Ha ocurrido un problema al encontrar el archivo de configuración de powerline.'; echo
+        echo -e "\n${colors[0]}Ha ocurrido un problema al encontrar el archivo de configuración de powerline.${colors[4]}\n"
 fi
 
 # Alias
 alias p="ps aux | grep "
 alias l="ls --color=auto -F"
-alias la="ls -aF"
-alias ll="ls -lF"
-alias lla="ls -laF"
-alias lash="ls -ashF"
+alias la="ls -aF --color=auto"
+alias ll="ls -lF --color=auto"
+alias lla="ls -laF --color=auto"
+alias lash="ls -ashF --color=auto"
+alias music="youtube-dl -qx --audio-format mp3 $@ > /dev/null 2>&1"
+alias video="youtube-dl -qf mp4 $@ > /dev/null 2>&1"
 
