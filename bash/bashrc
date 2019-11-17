@@ -27,17 +27,19 @@ message="| ￣￣￣￣￣￣|
 (__/) ||
 (••) ||
 / 　 づ"
+
 number=$(echo $(($RANDOM % 3)))
+
 if [ $number -eq 0 ]; then
-        echo -en "${colors[1]}"
+        printf "${colors[1]}"
         figlet "LORD BROOKIE"
-        echo -en "${colors[4]}"
+        printf "${colors[4]}"
 elif [ $number -eq 1 ]; then
-        echo -en "${colors[2]}"
+        printf "${colors[2]}"
         cowsay "Hello, welcome again Lord Brookie!"
-        echo -en "${colors[4]}"
+        printf "${colors[4]}"
 else
-        echo -e "${colors[3]}$message${colors[4]}"
+        printf "${colors[3]}$message${colors[4]}\n"
 fi
 
 # Configuration of powerline.
@@ -46,17 +48,12 @@ if [ -f `which powerline-daemon` ]; then
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
   . /usr/share/powerline/bash/powerline.sh
-else
-        echo -e "\n${colors[0]}Ha ocurrido un problema al encontrar el archivo de configuración de powerline.${colors[4]}\n"
 fi
 
 # Alias
 alias p="ps aux | grep "
-alias l="ls --color=auto -F"
-alias la="ls -aF --color=auto"
-alias ll="ls -lF --color=auto"
-alias lla="ls -laF --color=auto"
-alias lash="ls -ashF --color=auto"
-alias music="youtube-dl -qx --audio-format mp3 $@ > /dev/null 2>&1"
-alias video="youtube-dl -qf mp4 $@ > /dev/null 2>&1"
-
+alias l="ls"
+alias ll="ls -l"
+alias lh="ls -hs"
+alias lla="ls -al"
+alias llah="ls -alhs"
