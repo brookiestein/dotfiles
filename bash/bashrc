@@ -53,7 +53,9 @@ fi
 # Alias
 alias p="ps aux | grep "
 alias l="ls"
+alias la="ls -a"
 alias ll="ls -l"
 alias lh="ls -hs"
 alias lla="ls -al"
 alias llah="ls -alhs"
+
