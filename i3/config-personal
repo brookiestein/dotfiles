@@ -152,18 +152,19 @@ bar {
                 inactive_workspace  #2f343f #2f343f #d8dee8
                 urgent_workspace    #2f343f #ebcb8b #2f343f
         }
-        status_command ~/.config/i3/bumblebee-status/bumblebee-status -m traffic disk:home cpu memory uptime battery brightness amixer pasource layout time -p home.path=/home time.format="%c" -t greyish-powerline
-
+        status_command ~/.config/i3/bumblebee-status/bumblebee-status -m network_traffic \
+        disk:home cpu memory uptime battery brightness amixer pasource layout \
+        time -p home.path=/home time.format="%c" -t greyish-powerline
 }
 
 # Keyboard shortcuts
 bindsym $mod+Ctrl+T exec sh -c '/opt/tor-browser_es-ES/Browser/start-tor-browser --detach || ([ ! -x /opt/tor-browser_es-ES/Browser/start-tor-browser ] && /opt/tor-browser_es-ES/start-tor-browser --detach)' dummy %k
 bindsym $mod+Shift+S exec pavucontrol
 bindsym $mod+Shift+T exec Thunar
-bindsym Ctrl+Shift+E exec ~/.eclipse/java-2019-06/eclipse/eclipse
+bindsym Ctrl+Shift+E exec ~/.eclipse/java-latest-released/eclipse/eclipse
 bindsym $mod+Shift+M exec virtualbox
 bindsym $mod+Shift+F exec firefox
-bindsym $mod+Ctrl+L exec i3lock -t -i ~/Wallpapers/ChicasAnime/BrookieWallpaper61.png
+bindsym $mod+Ctrl+L exec i3lock -t -i ~/OneDrive/Wallpapers/Others/Gentoo.png
 bindsym $mod+Shift+V exec vlc
 bindsym Ctrl+Shift+K exec keepassxc
 bindsym Ctrl+Shift+Q exec qbittorrent
@@ -172,7 +173,7 @@ bindsym $mod+Shift+Z exec --no-startup-id setxkbmap -layout us -variant intl
 bindsym Print exec scrot 'BrookieShot_%a-%d%b%y_%H.%M.%S.png' -e 'viewnior ~/$f'
 
 # Wallpaper
-exec --no-startup-id feh --bg-fill ~/Wallpapers/New/wallhaven-ox2gp9.jpg
+exec --no-startup-id feh --bg-fill ~/OneDrive/Wallpapers/Others/space-planets-diigtal-art-6k.jpg
 
 # PulseAudio key bindings
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 05%+ unmute
@@ -184,7 +185,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # Autostart
-exec --no-startup-id blueman-applet &
+exec ~/.scripts/resolution
+exec --no-startup-id nm-applet &
+#exec --no-startup-id blueman-applet &
 exec --no-startup-id megasync &
 exec --no-startup-id xfce4-clipman &
 exec --no-startup-id setxkbmap -layout us -variant intl &
@@ -194,13 +197,11 @@ exec --no-startup-id xfce4-power-manager &
 
 # Software in workspace specific
 assign [class="Firefox"] $WS1
-assign [class="Thunar"] $WS2
-assign [class="vlc"] $WS3
-assign [class="keepassxc"] $WS4
-assign [class="VirtualBox"] $WS5
-assign [class="qBittorrent"] $WS6
-assign [class="Atril"] $WS7
-assign [class="libreoffice"] $WS8
+assign [class="vlc"] $WS2
+assign [class="KeePassXC"] $WS3
+assign [class="VirtualBox"] $WS4
+assign [class="qBittorrent"] $WS5
+assign [class="Atril"] $WS6
 assign [class="Steam"] $WS9
 
 # Style of border
@@ -212,6 +213,8 @@ for_window [class=Leafpad] floating enable
 for_window [class=Engrampa] floating enable
 for_window [class=GParted] floating enable
 for_window [class=Pavucontrol] floating enable
+for_window [class=Thunar] floating enable
+for_window [class=Lxappearance] floating enable
 
 # colour of border, background, text, indicator, and child_border
 client.focused          #bf616a #2f343f #d8dee8 #bf616a #d8dee8
