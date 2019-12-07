@@ -8,7 +8,7 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+bindsym $mod+Return exec mate-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -159,12 +159,12 @@ bar {
 
 # Keyboard shortcuts
 bindsym $mod+Ctrl+T exec sh -c '/opt/tor-browser_es-ES/Browser/start-tor-browser --detach || ([ ! -x /opt/tor-browser_es-ES/Browser/start-tor-browser ] && /opt/tor-browser_es-ES/start-tor-browser --detach)' dummy %k
-bindsym $mod+Shift+S exec pavucontrol
-bindsym $mod+Shift+T exec Thunar
+bindsym $mod+Shift+T exec caja
 bindsym Ctrl+Shift+E exec ~/.eclipse/java-latest-released/eclipse/eclipse
+bindsym $mod+Shift+S exec pavucontrol
 bindsym $mod+Shift+M exec virtualbox
 bindsym $mod+Shift+F exec firefox
-bindsym $mod+Ctrl+L exec i3lock -t -i ~/OneDrive/Wallpapers/Others/Gentoo.png
+bindsym $mod+Ctrl+L exec i3lock -t -i ~/Dropbox/Wallpapers/Others/Gentoo.png
 bindsym $mod+Shift+V exec vlc
 bindsym Ctrl+Shift+K exec keepassxc
 bindsym Ctrl+Shift+Q exec qbittorrent
@@ -173,7 +173,7 @@ bindsym $mod+Shift+Z exec --no-startup-id setxkbmap -layout us -variant intl
 bindsym Print exec scrot 'BrookieShot_%a-%d%b%y_%H.%M.%S.png' -e 'viewnior ~/$f'
 
 # Wallpaper
-exec --no-startup-id feh --bg-fill ~/OneDrive/Wallpapers/Others/space-planets-diigtal-art-6k.jpg
+exec --no-startup-id feh --bg-fill ~/Dropbox/Wallpapers/Others/blue-mystic.jpg
 
 # PulseAudio key bindings
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 05%+ unmute
@@ -185,7 +185,9 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # Autostart
+exec ~/.scripts/verifyIptables
 exec ~/.scripts/resolution
+exec --no-startup-id dropbox &
 exec --no-startup-id nm-applet &
 #exec --no-startup-id blueman-applet &
 exec --no-startup-id megasync &
@@ -213,7 +215,7 @@ for_window [class=Leafpad] floating enable
 for_window [class=Engrampa] floating enable
 for_window [class=GParted] floating enable
 for_window [class=Pavucontrol] floating enable
-for_window [class=Thunar] floating enable
+for_window [class=Caja] floating enable
 for_window [class=Lxappearance] floating enable
 
 # colour of border, background, text, indicator, and child_border
