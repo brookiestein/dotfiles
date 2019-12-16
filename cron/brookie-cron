@@ -4,13 +4,6 @@ PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=root
 HOME=/
 
-# Home
-MY_HOME=/home/brookie
-# Directorio(s) a copiar.
-PATH_TO_BACKUP=/home/brookie/Workspace/
-# Directorio dónde se almacenarán las copias de seguridad.
-WHERE=/home/brookie/Backups/Workspace/
-
 # For details see man 4 crontabs
 
 # Example of job definition:
@@ -22,4 +15,7 @@ WHERE=/home/brookie/Backups/Workspace/
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
 
-#* * * * * if [[ ! -d "$WHERE" ]]; then mkdir -p "$WHERE"; if [ $? -ne 0 ]; then echo -e "$(date) ocurrió un error al crear el directorio de copias de seguridad\npor lo que no se podrá continuar." >> "$MY_HOME/Backups-errors.log"; exit 1; fi; fi; rsync -rq --ignore-existing "$PATH_TO_BACKUP" "$WHERE"; if [ $? -eq 0 ]; then echo "$(date) se creó la copia de seguridad programada." >> "$MY_HOME/Backups-success.log"; else echo "$(date) ocurrió un error al crear la copia de seguridad programada." >> "$MY_HOME/Backups-errors.log"; fi
+# A cada hora realizará una copia de seguridad de la carpeta Dropbox
+# a MEGAsync y OneDrive si han habido cambios y/o nuevos archivos en la primera.
+0 * * * * rsync -dpqrt --ignore-existing --log-file=/var/log/rsync-with-cron-megasync.log /home/brookie/Dropbox/* /home/brookie/MEGAsync/
+0 * * * * rsync -dpqrt --ignore-existing --log-file=/var/log/rsync-with-cron-onedrive.log /home/brookie/Dropbox/* /home/brookie/OneDrive/
