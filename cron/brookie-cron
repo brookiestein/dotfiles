@@ -17,5 +17,6 @@ HOME=/
 
 # A cada hora realizará una copia de seguridad de la carpeta Dropbox
 # a MEGAsync y OneDrive si han habido cambios y/o nuevos archivos en la primera.
-0 * * * * rsync -dpqrt --ignore-existing --log-file=/var/log/rsync-with-cron-megasync.log /home/brookie/Dropbox/* /home/brookie/MEGAsync/
-0 * * * * rsync -dpqrt --ignore-existing --log-file=/var/log/rsync-with-cron-onedrive.log /home/brookie/Dropbox/* /home/brookie/OneDrive/
+0 * * * * rsync -dpqrt --ignore-existing /home/brookie/Dropbox/* /home/brookie/MEGAsync/ > /var/log/rsync-with-cron-megasync.log 2>&1
+0 * * * * rsync -dpqrt --ignore-existing /home/brookie/Dropbox/* /home/brookie/OneDrive/ > /var/log/rsync-with-cron-onedrive.log 2>&1
+0 * * * * onedrive --synchronize > /var/log/onedrive-with-cron.log 2>&1
