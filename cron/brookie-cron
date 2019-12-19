@@ -18,7 +18,7 @@ HOME=/
 # A cada hora realizará una copia de seguridad de la carpeta Dropbox
 # a MEGAsync y OneDrive si han habido cambios y/o nuevos archivos en la primera.
 0 * * * * lines="$(cat /home/brookie/Logs/backup.log | wc -l)"; if [ $lines -gt 10 ]; then echo > /home/brookie/Logs/backup.log; fi
-0 * * * * rsync -dpqrt --ignore-existing --delete --log-file=/home/brookie/Logs/rsync-megasync.log /home/brookie/Dropbox/* /home/brookie/MEGASync/
+0 * * * * rsync -dpqrt --ignore-existing --delete --log-file=/home/brookie/Logs/rsync-megasync.log /home/brookie/Dropbox/* /home/brookie/MEGAsync/
 0 * * * * rsync -dpqrt --ignore-existing --delete --log-file=/home/brookie/Logs/rsync-onedrive.log /home/brookie/Dropbox/* /home/brookie/OneDrive/
-0 * * * * echo "¡Copia de seguridad hecha en: $(date)!" > /home/brookie/Logs/backup.log 2>&1
+0 * * * * echo "¡Copia de seguridad hecha en: $(date)!" >> /home/brookie/Logs/backup.log 2>&1
 
