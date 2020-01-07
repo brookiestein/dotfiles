@@ -47,3 +47,12 @@ espacios de indentación.
 2. Sin transparencia
 3. Soporte para Rust, C/C++ y Python (Quizás le agregue más en el futuro, tampoco quisiera hacerlo demasiado "pesado").
 4. Utiliza codificación UTF-8
+
+**Instalación:**
+
+```
+$ wget https://raw.githubusercontent.com/brookiestein/dotfiles/master/vim/vimrc
+$ git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim/
+$ mv vimrc ~/.vim/
+$ vim +PluginInstall! +qa!
+```
