@@ -56,3 +56,7 @@ $ git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim/
 $ mv vimrc ~/.vim/
 $ vim +PluginInstall! +qa!
 ```
+Tengo pensado, para el futuro, agregar nuevas características a esta configuración.
+
+Si desea tener las últimas características que se agreguen a esta configuración, repita el
+proceso de instalación, omitiendo el segundo comando.
