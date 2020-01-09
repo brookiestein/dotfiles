@@ -4,7 +4,7 @@
 ![](Screenshots/BrookieShot_Wed-08May19_19.45.12.png)
 
 **Vim**
-![](Screenshots/vim.png)
+![](screenshots/vim.png)
 
 **Dunst**
-![](Screenshots/dunst.png)
+![](screenshots/dunst.png)
