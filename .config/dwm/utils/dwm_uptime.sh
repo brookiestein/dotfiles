@@ -5,12 +5,12 @@
 
 dwm_uptime() {
         printf "$SEP1"
-        up="$(uptime | cut -d ' ' -f 4 | cut -d ',' -f 1)"
+        up="$(uptime | cut -d ' ' -f 5 | cut -d ',' -f 1)"
 
         # Verificar si es un número entero:
         echo -en $up | grep '[[:digit:]]' > /dev/null 2>&1
         if [ $? -ne 0 ]; then
-                up="$(uptime | cut -d ' ' -f 5 | cut -d ',' -f 1)"
+                up="$(uptime | cut -d ' ' -f 4 | cut -d ',' -f 1)"
                 isdigit="False"
         else
                 isdigit="True"
