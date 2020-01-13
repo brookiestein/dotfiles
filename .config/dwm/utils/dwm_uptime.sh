@@ -16,9 +16,9 @@ dwm_uptime() {
                 isdigit="True"
         fi
 
-        # Si es un número entero, se asume que tiene menos de
+        # Si no es un número entero, se asume que tiene menos de
         # una hora encendido el equipo.
-        if [ "$isdigit" = "True" ]; then
+        if [ "$isdigit" = "False" ]; then
                 up="Up:0 H|$up M"
         else
                 hour=$(echo $up | cut -d ':' -f 1)
