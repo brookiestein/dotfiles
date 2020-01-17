@@ -1,13 +1,19 @@
 #!/bin/bash
-# Line 2 and 3 are for that the programs written in Java, start without problems. (In theory)
-wmname LG3D
-AWT_TOOLKIT=MToolkit; export AWT_TOOLKIT
-feh --no-fehbg --bg-fill '/home/brookie/Dropbox/Wallpapers/Others/unix_reborn.png'
-setxkbmap -layout us -variant intl
-xfce4-clipman &
-compton &
-xfce4-power-manager &
 
+# Line 2 and 3 are for that the programs written in Java,
+# start without problems. (In theory)
+# wmname LG3D
+# AWT_TOOLKIT=MToolkit; export AWT_TOOLKIT
+export _JAVA_AWT_WM_NONREPARENTING=1
+wmname LG3D
+
+# Wallpaper
+feh --no-fehbg --bg-fill '/home/brookie/Dropbox/Wallpapers/Others/street.jpg'
+
+# Keyboard layout by default, see config.h for know some key bindings for change this
+setxkbmap -layout us -variant intl
+
+# For this to work you need to have acpi installed
 a=$(acpi --ac-adapter)
 a=${a:11:${#a}}
 
@@ -19,4 +25,13 @@ fi
 unset a
 
 # Disable the point stick
-xinput disable 12
+# You also need to know the ID of your pointer stick if you have it.
+# xinput disable 11
+xinput disable "AlpsPS/2 ALPS DualPoint Stick"
+
+xfce4-clipman &
+compton &
+dunst &
+xfce4-power-manager &
+nm-applet &
+dropbox &
