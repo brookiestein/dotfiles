@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Modified by Lord Brookie
+# https://github.com/brookiestein/
+# Credits to:
+#
 # A dwm_bar function to show the master volume of ALSA
 # Joe Standring <git@joestandring.com>
 # GNU GPLv3
@@ -7,18 +11,15 @@
 # Dependencies: alsa-utils
 
 dwm_alsa () {
-        VOL=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")
-        printf "%s" "$SEP1"
-        if [ "$VOL" -eq 0 ]; then
-                printf "V:"
-        elif [ "$VOL" -gt 0 ] && [ "$VOL" -le 33 ]; then
-                rintf "V:%s%%" "$VOL"
-        elif [ "$VOL" -gt 33 ] && [ "$VOL" -le 66 ]; then
-                printf "V:%s%%" "$VOL"
+        printf "$SEP1"
+        state=$(amixer get Master | tail -n 1 | cut -d ' ' -f 8)
+        if [ $state = "[on]" ]; then
+                vol=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")
+                printf "%s%%%s" $vol $SEP2
         else
-                printf "V:%s%%" "$VOL"
+                vol="Muted"
+                printf "%s%s" $vol $SEP2
         fi
-        printf "%s\n" "$SEP2"
 }
 
 dwm_alsa
