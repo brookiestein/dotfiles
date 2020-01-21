@@ -17,9 +17,9 @@ export SEP2="]"
 . "$DIR/utils/dwm_date.sh"
 . "$DIR/utils/dwm_resources.sh"
 . "$DIR/utils/dwm_acpilight.sh"
-. "$DIR/utils/dwm_network.sh"
+. "$DIR/utils/dwm_uptime.sh"
 
 while true; do
-        xsetroot -name "$(dwm_network)$(dwm_resources)$(dwm_acpilight)$(dwm_battery)$(dwm_alsa)$(dwm_keyboard)$(dwm_date)"
+        xsetroot -name "$(dwm_uptime)$(dwm_resources)$(dwm_acpilight)$(dwm_battery)$(dwm_alsa)$(dwm_keyboard)$(dwm_date)"
         sleep 1
 done
