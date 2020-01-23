@@ -22,6 +22,12 @@ dwm_uptime() {
                 echo -en $up | grep '[[:digit:]]' > /dev/null 2>&1
                 if [ $? -ne 0 ]; then
                         up="$(uptime | cut -d ' ' -f 4 | cut -d ',' -f 1)"
+                fi
+
+                # Si tiene dos puntos, se asume que tiene más de 10
+                # horas encendido.
+                echo $up | grep : > /dev/null 2>&1
+                if [ $? -eq 0 ]; then
                         isdigit="False"
                 else
                         isdigit="True"
@@ -29,7 +35,7 @@ dwm_uptime() {
 
                 # Si no es un número entero, se asume que tiene menos de
                 # una hora encendido el equipo.
-                if [ "$isdigit" = "False" ]; then
+                if [ "$isdigit" = "True" ]; then
                         up="Up:0 D|0 H|$up M"
                 else
                         hour=$(echo $up | cut -d ':' -f 1)
