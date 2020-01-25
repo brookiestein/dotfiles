@@ -9,10 +9,15 @@ dwm_uptime() {
         if [ $up = "day" ]; then
                 day="$(uptime | cut -d ' ' -f 4 | cut -d ',' -f 1)"
                 up="$(uptime | cut -d ' ' -f 6 | cut -d ',' -f 1)"
-                hour=$(echo $up | cut -d ':' -f 1)
 
-                echo -en $hour | grep '[[:digit:]]' > /dev/null 2>&1
-                if [ $? -ne 0 ]; then
+                echo $up | grep ":" > /dev/null 2>&1
+                if [ $? -eq 0 ]; then
+                        hour=$(echo $up | cut -d ':' -f 1)
+                        echo -en $hour | grep '[[:digit:]]' > /dev/null 2>&1
+                        if [ $? -ne 0 ]; then
+                                hour=0
+                        fi
+                else
                         hour=0
                 fi
 
