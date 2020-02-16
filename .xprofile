@@ -7,31 +7,31 @@
 export _JAVA_AWT_WM_NONREPARENTING=1
 wmname LG3D
 
-# Wallpaper
-feh --no-fehbg --bg-fill '/home/brookie/Dropbox/Wallpapers/Others/street.jpg'
-
 # Keyboard layout by default, see config.h for know some key bindings for change this
 setxkbmap -layout us -variant intl
 
 # For this to work you need to have acpi installed
-a=$(acpi --ac-adapter)
-a=${a:11:${#a}}
+a=$(acpi --ac-adapter | cut -d ' ' -f 3)
 
 if [ $a = "on-line" ]; then
         xbacklight -set 100
 else
         xbacklight -set 50
 fi
+
 unset a
 
 # Disable the point stick
-# You also need to know the ID of your pointer stick if you have it.
+# You also need to know the ID or name of your pointer stick if you have it.
 # xinput disable 11
 xinput disable "AlpsPS/2 ALPS DualPoint Stick"
+
+# Wallpaper
+feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/Others/view-from-my-home-12k-8z.jpg'
 
 xfce4-clipman &
 compton &
 dunst &
 xfce4-power-manager &
 nm-applet &
-dropbox &
+megasync &

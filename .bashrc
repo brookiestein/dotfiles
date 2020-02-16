@@ -58,7 +58,5 @@ alias ll="ls -l"
 alias lh="ls -hs"
 alias lla="ls -al"
 alias llah="ls -alhs"
-alias gowork="cd ~/Dropbox/Workspace/Programming/" # Go to programming directory.
-alias gogh="cd ~/Dropbox/Workspace/Git/Hub/" # Go to GitHub directory.
-alias gogl="cd ~/Dropbox/Workspace/Git/Lab" # Got to GitLab directory.
-
+alias gowork="cd ~/MEGAsync/Workspace/Programming/" # Go to programming directory.
+alias gogh="cd ~/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
