@@ -26,6 +26,10 @@ unset a
 # xinput disable 11
 xinput disable "AlpsPS/2 ALPS DualPoint Stick"
 
+# If there is a monitor connected by VGA (in my case) with a resolution of 1280x1024
+# configure this with a little script localized in:
+~/.scripts/resolution.sh
+
 # Wallpaper
 feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/Others/view-from-my-home-12k-8z.jpg'
 
