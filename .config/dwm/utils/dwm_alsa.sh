@@ -11,7 +11,7 @@
 # Dependencies: alsa-utils
 
 dwm_alsa () {
-        printf "$SEP1 "
+        printf "$SEP1:"
         state=$(amixer get Master | tail -n 1 | cut -d ' ' -f 8)
         if [ $state = "[on]" ]; then
                 vol=$(amixer get Master | tail -n1 | sed -r "s/.*\[(.*)%\].*/\1/")

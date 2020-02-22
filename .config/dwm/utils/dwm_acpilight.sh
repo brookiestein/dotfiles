@@ -8,15 +8,15 @@ dwm_acpilight() {
         if [ "$IDENTIFIER" = "unicode" ]; then
                 percent="$(xbacklight -get)"
                 if [ $percent -lt 15 ]; then
-                        printf "🌕 $percent"
+                        printf "🌕:$percent"
                 elif [ $percent -lt 25 ]; then
-                        printf "🌔 $percent"
+                        printf "🌔:$percent"
                 elif [ $percent -lt 50 ]; then
-                        printf "🌓 $percent"
+                        printf "🌓:$percent"
                 elif [ $percent -lt 75 ]; then
-                        printf "🌒 $percent"
+                        printf "🌒:$percent"
                 else
-                        printf "🌑 $percent"
+                        printf "🌑:$percent"
                 fi
         else
                 percent="$(xbacklight -get)"
