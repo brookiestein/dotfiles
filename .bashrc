@@ -51,7 +51,6 @@ if [ -f `which powerline-daemon` ]; then
 fi
 
 # Alias
-alias p="ps aux | grep "
 alias l="ls"
 alias la="ls -a"
 alias ll="ls -l"
@@ -60,3 +59,4 @@ alias lla="ls -al"
 alias llah="ls -alhs"
 alias gowork="cd ~/MEGAsync/Workspace/Programming/" # Go to programming directory.
 alias gogh="cd ~/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
+alias music="youtube-dl -x --audio-format aac --audio-quality 9" # Download music from YouTube.
