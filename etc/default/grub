@@ -1,23 +1,28 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 #
 # To populate all changes in this file you need to regenerate your
 # grub configuration file afterwards:
-#     'grub2-mkconfig -o /boot/grub/grub.cfg'
+#     'grub-mkconfig -o /boot/grub/grub.cfg'
 #
 # See the grub info page for documentation on possible variables and
 # their associated values.
 
-#GRUB_DISTRIBUTOR="Gentoo"
+# GRUB_DISTRIBUTOR="Gentoo"
 
-GRUB_DISTRIBUTOR="Lord Brookie - Gentoo"
-GRUB_TIMEOUT=2
+# Remember add the encrypted partition and root's logical volume to:
+# crypt_root and real_root variables.
+# Also, if you use another filesystem, change rootfstype's value.
+
+GRUB_DISTRIBUTOR="Brookientoo"
+GRUB_TIMEOUT=3
 GRUB_PRELOAD_MODULES=lvm
 GRUB_ENABLE_CRYPTODISK=y
 GRUB_DEVICE=/dev/ram0
-GRUB_CMDLINE_LINUX="crypt_root=UUID=b5afc6bd-b26f-4c95-bdb2-09680178c4ab real_root=UUID=8e61efb9-16d0-4004-b040-7d7b904fd6a6 rootfstype=ext4 dolvm"
+GRUB_CMDLINE_LINUX="crypt_root= real_root= rootfstype=ext4 dolvm quiet"
 GRUB_GFXMODE=1366x768
-GRUB_BACKGROUND="/boot/grub/backgrounds/planet_clouds_light_star_94996_1920x1080.jpg"
+GRUB_GFXPAYLOAD_LINUX=keep
+# GRUB_BACKGROUND="/boot/grub/backgrounds/"
 
 # Default menu entry
 #GRUB_DEFAULT=0
