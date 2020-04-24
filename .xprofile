@@ -1,9 +1,7 @@
 #!/bin/bash
 
-# Line 2 and 3 are for that the programs written in Java,
+# Line 5 and 6 are for that the programs written in Java,
 # start without problems. (In theory)
-# wmname LG3D
-# AWT_TOOLKIT=MToolkit; export AWT_TOOLKIT
 export _JAVA_AWT_WM_NONREPARENTING=1
 wmname LG3D
 
@@ -31,11 +29,10 @@ unset a
 ~/.scripts/resolution.sh
 
 # Wallpaper
-feh --no-fehbg --bg-fill '/home/brookie/Pictures/Wallpapers/Itachi_Uchiha.png'
+feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/Others/Brain.png'
 
 xfce4-clipman &
 compton --backend glx --paint-on-overlay --vsync opengl-swc &
 dunst &
-nm-applet &
 blueman-applet &
 megasync &
