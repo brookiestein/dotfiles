@@ -59,4 +59,6 @@ alias lla="ls -al"
 alias llah="ls -alhs"
 alias gowork="cd ~/MEGAsync/Workspace/Programming/" # Go to programming directory.
 alias gogh="cd ~/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
+alias gopro="cd ~/MEGAsync/Workspace/ProjectsCloned" # Go to cloned projects.
 alias music="youtube-dl -x --audio-format aac --audio-quality 9" # Download music from YouTube.
+alias vgaoff="xrandr --output VGA-1 --off" # Shutdown secondary monitor.
