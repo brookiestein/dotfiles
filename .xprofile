@@ -34,7 +34,16 @@ unset a
 feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/Others/Brain.png'
 
 xfce4-clipman &
-compton --backend glx --paint-on-overlay --vsync opengl-swc &
 dunst &
 blueman-applet &
 megasync &
+
+compton --backend glx --paint-on-overlay --vsync opengl-swc &
+command="syspowermanager --daemon --monitor"
+
+ge=`cat $HOME/.dmrc | tail -n 1 | cut -d '=' -f 2`
+if [ "$ge" == "dwm" ]; then
+        command="$command --lid --screenlocker=slock"
+fi
+
+$command
