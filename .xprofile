@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Line 5 and 6 are for that the programs written in Java,
+# Line 4 and 5 are for that the programs written in Java,
 # start without problems. (In theory)
 export _JAVA_AWT_WM_NONREPARENTING=1
 wmname LG3D
@@ -31,13 +30,14 @@ unset a
 ~/.scripts/disable_dpms
 
 # Wallpaper
-feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/Others/Brain.png'
+feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/PC/wallhaven-13vym3.jpg'
 
+slstatus &
 xfce4-clipman &
 dunst &
 blueman-applet &
 megasync &
-
+wpa_gui &
 compton --backend glx --paint-on-overlay --vsync opengl-swc &
 command="syspowermanager --daemon --monitor"
 
