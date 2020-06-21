@@ -14,11 +14,11 @@ if [[ $- != *i* ]] ; then
 fi
 
 # Put your fun stuff here.
-
-# Here start my personal configuration
-# Colors: In there order: Red, GREEN, Blue, White and the final
-colors=("\e[1;31m" "\e[1;32m" "\e[1;34m" "\e[1;37m" "\e[0m")
-# Text in ASCII when start a new session.
+red="\e[1;31m"
+green="\e[1;32m"
+blue="\e[1;34m"
+white="\e[1;37m"
+end="\e[0m"
 message="| ￣￣￣￣￣￣|
 | Los hackers |
 | NO son |
@@ -28,37 +28,42 @@ message="| ￣￣￣￣￣￣|
 (••) ||
 / 　 づ"
 
-number=$(echo $(($RANDOM % 3)))
-
+number=`echo $(($RANDOM % 3))`
 if [ $number -eq 0 ]; then
-        printf "${colors[1]}"
+        echo -en "$green"
         figlet "LORD BROOKIE"
-        printf "${colors[4]}"
+        echo -en "$end"
 elif [ $number -eq 1 ]; then
-        printf "${colors[2]}"
+        echo -en "$blue"
         cowsay "Hello, welcome again Lord Brookie!"
-        printf "${colors[4]}"
+        echo -en "$end"
 else
-        printf "${colors[3]}$message${colors[4]}\n"
+        echo -en "$white" "\b$message" "\b$end\n"
 fi
 
-# Configuration of powerline.
+# Powerline settings
 if [ -f `which powerline-daemon` ]; then
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . /usr/share/powerline/bash/powerline.sh
+        powerline-daemon -q
+        POWERLINE_BASH_CONTINUATION=1
+        POWERLINE_BASH_SELECT=1
+        . /usr/share/powerline/bash/powerline.sh
+else
+        echo -n "$red"
+        echo "An error occurred while the powerline configuration"
+        echo "was being charged."
+        echo -n "$end"
 fi
 
-# Alias
+# Aliases
 alias l="ls"
 alias la="ls -a"
 alias ll="ls -l"
-alias lh="ls -hs"
-alias lla="ls -al"
-alias llah="ls -alhs"
-alias gowork="cd ~/MEGAsync/Workspace/Programming/" # Go to programming directory.
+alias gowork="cd ~/MEGAsync/Workspace/Programming/" # Go to Programming directory.
 alias gogh="cd ~/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
-alias gopro="cd ~/MEGAsync/Workspace/ProjectsCloned" # Go to cloned projects.
 alias music="youtube-dl -x --audio-format aac --audio-quality 9" # Download music from YouTube.
-alias vgaoff="xrandr --output VGA-1 --off" # Shutdown secondary monitor.
+alias vgaoff="xrandr --output VGA-1 --off" # Shutdown the secondary monitor.
+# Common options to qemu.
+alias qemu64="qemu-system-x86_64 \
+-cpu host -soundhw hda -enable-kvm \
+-device e1000,netdev=network0,mac=52:55:00:d1:55:01 \
+-netdev tap,id=network0,ifname=tap0,script=no,downscript=no -vga std"

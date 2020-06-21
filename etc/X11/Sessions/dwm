@@ -1,0 +1,50 @@
+#!/bin/sh
+#DIR=${HOME}/.dwm
+#if [ -f "${DIR}"/dwmrc ]; then
+#	/bin/sh "${DIR}"/dwmrc &
+#else
+#	while true; do
+#		xsetroot -name "`date`"
+#		sleep 1
+#	done &
+#fi
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+wmname LG3D
+
+# Keyboard layout by default, see config.h for know some key bindings for change this
+setxkbmap -layout us -variant intl
+
+# For this to work you need to have acpi installed
+a=$(acpi --ac-adapter | cut -d ' ' -f 3)
+
+if [ $a = "on-line" ]; then
+        xbacklight -set 100
+else
+        xbacklight -set 50
+fi
+
+unset a
+
+# Disable the point stick
+# You also need to know the ID or name of your pointer stick if you have it.
+# xinput disable 11
+# xinput disable "AlpsPS/2 ALPS DualPoint Stick"
+
+# If there is a monitor connected by VGA (in my case) with a resolution of 1280x1024
+# configure this with a little script localized in:
+/home/brookie/.scripts/resolution
+# Disable DPMS
+/home/brookie/.scripts/disable_dpms
+
+# Wallpaper
+feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/PC/wallhaven-13vym3.jpg'
+
+slstatus &
+xfce4-clipman &
+dunst &
+blueman-applet &
+megasync &
+wpa_gui &
+
+exec /usr/bin/dwm

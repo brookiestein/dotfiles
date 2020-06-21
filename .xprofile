@@ -1,22 +1,22 @@
 #!/bin/bash
 # Line 4 and 5 are for that the programs written in Java,
 # start without problems. (In theory)
-export _JAVA_AWT_WM_NONREPARENTING=1
-wmname LG3D
+# export _JAVA_AWT_WM_NONREPARENTING=1
+# wmname LG3D
 
 # Keyboard layout by default, see config.h for know some key bindings for change this
-setxkbmap -layout us -variant intl
+# setxkbmap -layout us -variant intl
 
 # For this to work you need to have acpi installed
-a=$(acpi --ac-adapter | cut -d ' ' -f 3)
+# a=$(acpi --ac-adapter | cut -d ' ' -f 3)
 
-if [ $a = "on-line" ]; then
-        xbacklight -set 100
-else
-        xbacklight -set 50
-fi
+# if [ $a = "on-line" ]; then
+#         xbacklight -set 100
+# else
+#         xbacklight -set 50
+# fi
 
-unset a
+# unset a
 
 # Disable the point stick
 # You also need to know the ID or name of your pointer stick if you have it.
@@ -25,25 +25,25 @@ unset a
 
 # If there is a monitor connected by VGA (in my case) with a resolution of 1280x1024
 # configure this with a little script localized in:
-~/.scripts/resolution
+# ~/.scripts/resolution
 # Disable DPMS
-~/.scripts/disable_dpms
+# ~/.scripts/disable_dpms
 
 # Wallpaper
-feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/PC/wallhaven-13vym3.jpg'
+# feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/PC/wallhaven-13vym3.jpg'
 
-slstatus &
-xfce4-clipman &
-dunst &
-blueman-applet &
-megasync &
-wpa_gui &
+# slstatus &
+# xfce4-clipman &
+# dunst &
+# blueman-applet &
+# megasync &
+# wpa_gui &
 compton --backend glx --paint-on-overlay --vsync opengl-swc &
-command="syspowermanager --daemon --monitor"
+command="syspowermanager --daemon --file=/tmp/spm.log --monitor --verbose"
 
 ge=`cat $HOME/.dmrc | tail -n 1 | cut -d '=' -f 2`
 if [ "$ge" == "dwm" ]; then
-        command="$command --lid --screenlocker=slock"
+        command="$command --lid"
 fi
 
 $command
