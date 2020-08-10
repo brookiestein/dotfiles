@@ -62,7 +62,6 @@ alias gowork="cd ~/MEGAsync/Workspace/Programming/" # Go to Programming director
 alias gogh="cd ~/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
 alias music="youtube-dl -x --audio-format aac --audio-quality 9" # Download music from YouTube.
 alias vgaoff="xrandr --output VGA-1 --off" # Shutdown the secondary monitor.
-alias hibernate="slock &; spm --hibernate && exit 0" # Hibernate locking the screen
 # Common options to qemu.
 alias qemu64="qemu-system-x86_64 \
 -cpu host -soundhw hda -enable-kvm \

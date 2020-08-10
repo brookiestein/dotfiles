@@ -9,6 +9,8 @@
 #	done &
 #fi
 
+# Line 4 and 5 are for that the programs written in Java,
+# start without problems. (In theory)
 export _JAVA_AWT_WM_NONREPARENTING=1
 wmname LG3D
 
@@ -29,16 +31,16 @@ unset a
 # Disable the point stick
 # You also need to know the ID or name of your pointer stick if you have it.
 # xinput disable 11
-# xinput disable "AlpsPS/2 ALPS DualPoint Stick"
+#xinput disable "AlpsPS/2 ALPS DualPoint Stick"
 
 # If there is a monitor connected by VGA (in my case) with a resolution of 1280x1024
 # configure this with a little script localized in:
-/home/brookie/.scripts/resolution
+/home/brookie/.config/scripts/resolution.sh
 # Disable DPMS
-/home/brookie/.scripts/disable_dpms
+/home/brookie/.config/scripts/disable_dpms.sh
 
 # Wallpaper
-feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/PC/wallhaven-13vym3.jpg'
+feh --no-fehbg --bg-fill '/home/brookie/MEGAsync/Wallpapers/PC/unix_reborn.png'
 
 slstatus &
 xfce4-clipman &
