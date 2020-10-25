@@ -32,12 +32,12 @@ Plugin 'tpope/vim-commentary' " Support for multifunctionality in comments
 Plugin 'bfrg/vim-cpp-modern' " Support for syntax highlighting for C/C++
 Plugin 'mhinz/vim-startify' "When start only without specific file represents a beautiful text ascii ;-)
 Plugin 'itchyny/lightline.vim'
-Plugin 'dart-lang/dart-vim-plugin'
-Plugin 'thosakwe/vim-flutter'
+" Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'Raimondi/delimitMate' " Automatic close of quotes, patenthesis, brackets, etc.
 " Themes
-Plugin 'ayu-theme/ayu-vim'
+" Plugin 'ayu-theme/ayu-vim'
 Plugin 'connorholyday/vim-snazzy'
+Plugin 'jsit/toast.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -88,11 +88,12 @@ set t_Co=256 " 256 colors
 let ayucolor="dark" " for dark version of theme
 "let ayucolor="mirage" " for mirage version of theme
 "let ayucolor="light"
-colorscheme ayu
+colorscheme toast
 set background=dark
 set termguicolors " enable true colors support
+" Syntax highlight
 " Transparency
-" Uncomment if you want to have transparency
+" Uncomment if you want to have terminal transparency
 "hi! Normal ctermbg=NONE guibg=NONE
 
 " ============================
@@ -299,9 +300,6 @@ set listchars=tab:›\ ,trail:•,extends:#,nbsp:.
 "=====================================================
 autocmd FileType c setlocal tabstop=8 shiftwidth=8 expandtab
 autocmd FileType cpp setlocal tabstop=8 shiftwidth=8 expandtab
-
-let g:pymode_rope = 0
-
 "=====================================================
 "" TagBar settings
 "=====================================================
