@@ -11,7 +11,7 @@ horizontal_padding = 32
 frame_width = 2
 sort = no
 idle_threshold = 120
-font = rissole 8
+font = mononoki Nerd Font Mono 10
 line_height = 4
 markup = full
 format = %s\n%b
@@ -22,7 +22,6 @@ ignore_newline = no
 stack_duplicates = false
 hide_duplicate_count = yes
 show_indicators = no
-icon_position = on
 sticky_history = yes
 history_length = 20
 browser = /usr/bin/firefox -new-tab
@@ -33,7 +32,6 @@ class = Dunst
 [shortcuts]
 close = ctrl+space
 close_all = ctrl+shift+space
-history = ctrl+grave
 context = ctrl+shift+period
 
 [urgency_low]
