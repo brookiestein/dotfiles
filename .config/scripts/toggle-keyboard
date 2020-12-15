@@ -1,0 +1,8 @@
+#!/bin/bash
+
+c_layout="`setxkbmap -query | grep layout | awk '{print $2;}'`"
+if [ $c_layout == "us" ]; then
+        setxkbmap -layout latam
+else
+        setxkbmap -layout us -variant intl
+fi
