@@ -14,31 +14,31 @@ if [[ $- != *i* ]] ; then
 fi
 
 # Put your fun stuff here.
-red="\e[1;31m"
-green="\e[1;32m"
-blue="\e[1;34m"
-white="\e[1;37m"
-end="\e[0m"
-message="| ￣￣￣￣￣￣|
+RED="\e[1;31m"
+GREEN="\e[1;32m"
+BLUE="\e[1;34m"
+WHITE="\e[1;37m"
+NOCLOR="\e[0m"
+MESSAGE="|             |
 | Los hackers |
 | NO son |
 | ciberdelincuentes |
-| ＿＿＿＿＿＿＿＿ |
+|                  |
 (__/) ||
 (••) ||
-/ 　 づ"
+/      "
 
 number=`echo $(($RANDOM % 3))`
 if [ $number -eq 0 ]; then
-        echo -en "$green"
+        echo -en "$GREEN"
         figlet "LORD BROOKIE"
-        echo -en "$end"
+        echo -en "$NOCOLOR"
 elif [ $number -eq 1 ]; then
-        echo -en "$blue"
+        echo -en "$BLUE"
         cowsay "Hello, welcome again Lord Brookie!"
-        echo -en "$end"
+        echo -en "$NOCOLOR"
 else
-        echo -en "$white" "\b$message" "\b$end\n"
+        echo -e "${WHITE}${MESSAGE}${NOCOLOR}"
 fi
 
 # Powerline settings
@@ -48,22 +48,34 @@ if [ -f `which powerline-daemon` ]; then
         POWERLINE_BASH_SELECT=1
         . /usr/share/powerline/bash/powerline.sh
 else
-        echo -n "$red"
+        echo -n "$RED"
         echo "An error occurred while the powerline configuration"
         echo "was being charged."
-        echo -n "$end"
+        echo -n "$NOCOLOR"
 fi
 
+export PATH="${PATH}:${HOME}/.config/scripts"
+
 # Aliases
-alias l="ls"
-alias la="ls -a"
-alias ll="ls -l"
-alias gowork="cd ~/MEGAsync/Workspace/Programming/" # Go to Programming directory.
-alias gogh="cd ~/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
-alias music="youtube-dl -x --audio-format aac --audio-quality 9" # Download music from YouTube.
+# Gentoo-specific
+alias search="emerge --search"
+
+# System-agnostic
+alias ls="ls --color=auto --classify"
+alias la="ls --color=auto --almost-all"
+alias ll="ls --color=auto --author -l"
+alias cp="cp --verbose --interactive"
+alias rm="rm --verbose"
+alias mv="mv --verbose --interactive"
+alias diff="diff --color=auto"
+alias grep="grep --color=auto"
+alias untar="tar --verbose --preserve-permissions --extract --file"
+
+# Some useful aliases for daily working.
+alias gtw="cd ${HOME}/MEGAsync/Workspace/Programming/" # Go to Programming directory.
+alias gth="cd ${HOME}/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
 alias vgaoff="xrandr --output VGA-1 --off" # Shutdown the secondary monitor.
-# Common options to qemu.
-alias qemu64="qemu-system-x86_64 \
--cpu host -soundhw hda -enable-kvm \
--device e1000,netdev=network0,mac=52:55:00:d1:55:01 \
--netdev tap,id=network0,ifname=tap0,script=no,downscript=no -vga std"
+# Turn on the secondary monitor.
+# Notice that I can use this command as is, because I've added my scripts
+# directory to the PATH variable.
+alias vgaon="resolution"
