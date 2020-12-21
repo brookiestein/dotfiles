@@ -208,6 +208,7 @@ function chpwd {
 cd() {
 	\\builtin cd "$@" || \\builtin return $?
 	\chpwd "$@"
+        update_ps1 "$"
 }
 function cd_csh {
 	\\builtin typeset d t=${1/#\~/$DIRSTACKBASE}
@@ -727,15 +728,21 @@ fi
 
 unset RED GREEN BLUE WHITE NOCOLOR MESSAGE number
 
-# Very simple prompt
-export PS1='$(printf "%b" " " \
-        $(if [ "$PWD" == "$HOME" ]; then \
-                printf "~"; \
-        elif [ $(echo "$PWD" | grep "$USER") ]; then \
-                printf ~$(echo "$PWD" | sed "s/\/home\/$USER//g"); \
-        else \
-                printf "$PWD"; \
-        fi) \
-        " " \
-        $(printf "$")) \
-'
+# This function to work 'correctly', you need to pass it
+# either $ or #, for a normal user or the user root, respectively.
+# This function is called when you use the cd function, which is
+# in the 208 line.
+function update_ps1 {
+        local prompt="~"
+        if [ "$PWD" == "$HOME" ]; then
+                prompt="~"
+        elif [ `echo "$PWD" | grep -o "$USER"` ]; then
+                prompt="${prompt}${PWD:${#HOME}:${#PWD}}"
+        else
+                prompt="$PWD"
+        fi
+
+        export PS1=" $prompt $1 "
+}
+
+update_ps1 "$"
