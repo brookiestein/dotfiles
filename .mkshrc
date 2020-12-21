@@ -733,7 +733,11 @@ unset RED GREEN BLUE WHITE NOCOLOR MESSAGE number
 # This function is called when you use the cd function, which is
 # in the 208 line.
 function update_ps1 {
-        local prompt="~"
+        prompt="~"
+        suffix=$1
+        prompt_color="\033[33m"
+        suffix_color="\033[36m"
+        reset="\033[00m"
         if [ "$PWD" == "$HOME" ]; then
                 prompt="~"
         elif [ `echo "$PWD" | grep -o "$USER"` ]; then
@@ -742,7 +746,7 @@ function update_ps1 {
                 prompt="$PWD"
         fi
 
-        export PS1=" $prompt $1 "
+        export PS1=' $(echo -e "${prompt_color}${prompt} ${suffix_color}${suffix}${reset}") '
 }
 
 update_ps1 "$"
