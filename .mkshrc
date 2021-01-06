@@ -675,8 +675,12 @@ done
 
 \: place customisations above this line
 
+histdir="${HOME}/.config/mksh"
+[ ! -d $histdir ] && mkdir -p $histdir
+
 export PATH="${PATH}:${HOME}/.config/scripts"
-export HISTFILE=~/.config/mksh/histfile HISTSIZE=10000
+export HISTFILE=$histdir/histfile HISTSIZE=10000
+unset histfile
 
 # Aliases
 # System-agnostic
@@ -686,18 +690,26 @@ alias ll="ls --author -l"
 alias cp="cp --verbose --interactive"
 alias rm="rm --verbose"
 alias mv="mv --verbose --interactive"
+alias mkdir="mkdir --parent --verbose"
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 alias untar="tar --verbose --preserve-permissions --extract --file"
+# Bluetooth
+p="bluetoothctl"
+alias bton="$p power on"
+alias btoff="$p power off"
+unset p
 
 # Some useful aliases for daily working.
 alias gtw="cd ${HOME}/MEGAsync/Workspace/Programming/" # Go to Programming directory.
 alias gth="cd ${HOME}/MEGAsync/Workspace/Git/Hub/" # Go to GitHub directory.
-alias vgaoff="xrandr --output VGA-1 --off" # Shutdown the secondary monitor.
 # Turn on the secondary monitor.
 # Notice that I can use this command as is, because I've added my scripts
 # directory to the PATH variable before.
-alias vgaon="resolution"
+c="${HOME}/.config/scripts/resolution"
+alias vgaon="$c off"
+alias vgaoff="$c on"
+unset c
 
 RED="\e[1;31m"
 GREEN="\e[1;32m"
@@ -735,9 +747,11 @@ unset RED GREEN BLUE WHITE NOCOLOR MESSAGE number
 function update_ps1 {
         prompt="~"
         suffix=$1
-        prompt_color="\033[33m"
-        suffix_color="\033[36m"
-        reset="\033[00m"
+        usr_colour="\e[1;32m"
+        prompt_colour="\e[0;32m"
+        suffix_colour="\e[1;35m"
+        reset="\e[0m"
+
         if [ "$PWD" == "$HOME" ]; then
                 prompt="~"
         elif [ `echo "$PWD" | grep -o "$USER"` ]; then
@@ -746,7 +760,14 @@ function update_ps1 {
                 prompt="$PWD"
         fi
 
-        export PS1=' $(echo -e "${prompt_color}${prompt} ${suffix_color}${suffix}${reset}") '
+        export PS1=' $(echo -e "${usr_colour}${USER} ${suffix_colour}@ ${prompt_colour}${prompt} ${suffix_colour}${suffix}${reset}") '
 }
 
 update_ps1 "$"
+
+# Clear the screen by using CTRL + L (or ^L)
+# Notice that you can still use mksh's default, i.e. CTRL + ESC + L
+bind '^L=clear-screen'
+# I know mksh is not a borne shell, but dircolors does not have
+# an option for it, and -b works as well.
+eval $(dircolors -b /etc/DIR_COLORS)
