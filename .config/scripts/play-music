@@ -1,0 +1,24 @@
+#!/bin/sh
+
+if [ -z $1 ]
+then
+        echo "I need a directory to play music from, doh!"
+        exit 1
+elif [ ! -d $1 ]
+then
+        echo "Directory: '$1' actually is not a directory."
+        exit 1
+fi
+
+for i in $(seq `ls -l $1 | wc -l`)
+do
+        # To avoid reading the total resume that ls shows.
+        [ $i -eq 1 ] && continue
+
+        current_music="`ls -l $1 | head -n $i | tail -n 1 | awk '{print $9;}'`"
+        ext=${current_music:${#current_music}-4:${#current_music}}
+        current_music="${current_music:0:${#current_music}-4}"
+
+        notify-send "Playing music:" "$current_music" --expire-time=$(( 1000*10 ))
+        mpv --no-video "$1/${current_music}${ext}"
+done
