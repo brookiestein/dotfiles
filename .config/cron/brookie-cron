@@ -1,11 +1,3 @@
-# Global variables
-SHELL=/bin/bash
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
-MAILTO=root
-HOME=/
-
-# For details see man 4 crontabs
-
 # Example of job definition:
 # .---------------- minute (0 - 59)
 # |  .------------- hour (0 - 23)
@@ -13,12 +5,8 @@ HOME=/
 # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
 # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
 # |  |  |  |  |
-# *  *  *  *  * user-name  command to be executed
+# *  *  *  *  * command to be executed
 
-# A cada hora realizará una copia de seguridad de la carpeta Dropbox
-# a MEGAsync y OneDrive si han habido cambios y/o nuevos archivos en la primera.
-0 * * * * lines="$(cat /home/brookie/Logs/backup.log | wc -l)"; if [ $lines -gt 10 ]; then echo > /home/brookie/Logs/backup.log; fi
-0 * * * * rsync -dpqrt --ignore-existing --delete --log-file=/home/brookie/Logs/rsync-megasync.log /home/brookie/Dropbox/* /home/brookie/MEGAsync/
-0 * * * * rsync -dpqrt --ignore-existing --delete --log-file=/home/brookie/Logs/rsync-onedrive.log /home/brookie/Dropbox/* /home/brookie/OneDrive/
-0 * * * * echo "¡Copia de seguridad hecha en: $(date)!" >> /home/brookie/Logs/backup.log 2>&1
-
+# Make a system backup every month.
+# To see what does this script, visit the scripts section.
+* * 1 * * sh /home/brayan/.config/scripts/mkbackup

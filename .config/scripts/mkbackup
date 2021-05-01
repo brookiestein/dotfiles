@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# I use this script with dcron which does not allow specification of
+# environment variables, so this will help notify-send to correctly show
+# notifications.
+# It sounds me as a bad idea, because I'm bypassing dcron's security methods,
+# at least in theory, by doing this, but I want this script to notify me when
+# it is running, because it does a really hard task that will make my system
+# a little bit slow and, of course, I really want to know why my system is slow, doh!.
+export DISPLAY=:0
+
+function notify {
+        # I'm not sure why notify-send didn't work me as user root
+        # but that's the reason why I'm executing it with my user instead.
+        # This does not make me so comfortable, though.
+        su - -c "notify-send '$1' '$2'" brayan
+}
+
+if [ $USER != "root" ]
+then
+        notify "Not enough permissions" "You must run this script as user root to work correctly."
+        exit 1
+fi
+
+WORK_DIR="/home/brayan/Backups/Gentoo"
+CURRENT_BACKUP_FILE="${WORK_DIR}/current"
+[ ! -d $WORK_DIR ] && mkdir $WORK_DIR
+
+if [ ! -f $CURRENT_BACKUP_FILE ]
+then
+        touch $CURRENT_BACKUP_FILE
+        chmod 644 $CURRENT_BACKUP_FILE
+fi
+
+today="$(date +%F)"
+new="${WORK_DIR}/gentoo-backup-${today}.iso"
+old="$(cat $CURRENT_BACKUP_FILE)"
+
+notify "Making scheduled backup" "Your system may be a little bit slow while this is running.\n\
+Please, be patient."
+
+# Just make an iso image of the root partition.
+dd if=/dev/mapper/brookie-root of=$new bs=4M conv=fdatasync
+code=$?
+
+if [ $code -eq 0 ]
+then
+        notify "Success" "Today's backup, $today, has been created successfully!"
+        # Save only the newest backup, so delete the old one.
+        if [ -n $old -a $new != $old ]
+        then
+                rm -f ${WORK_DIR}/${old}
+        fi
+        echo -n $new > $CURRENT_BACKUP_FILE
+else
+        notify "Error" "An error while making the $today backup has occurred.\n\
+Please check out whether you have enough disk space and rerun it!"
+fi
+
+exit $code
