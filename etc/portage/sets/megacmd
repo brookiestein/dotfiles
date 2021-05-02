@@ -1,0 +1,5 @@
+dev-libs/crypto++
+dev-libs/libsodium
+net-dns/c-ares
+media-libs/libmediainfo
+media-libs/freeimage
