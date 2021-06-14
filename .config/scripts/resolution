@@ -1,49 +1,114 @@
 #!/bin/sh
 
-RED="\e[1;31m"
-ORANGE="\e[1;33m"
-RESET="\e[0m"
-let IS_CONNECTED=0
+primary="LVDS-1"
+place="right"
+rate="75"
 
-function set_wallpaper {
-        # Update wallpaper because of resolution's change ruin it.
-        grep feh ${HOME}/.xinitrc | sh
+wallpath="/home/brayan/Wallpapers/PC"
+wallname="Magician.png"
+
+monitors=$(xrandr | grep -En "[A-Z][A-Z][A-Z][A-Z]?-[1-9] connected" | cut -d ':' -f 2 | cut -d ' ' -f 1)
+monitors=${monitors[@]/${primary}}
+monitors_quantity=${#monitors[@]}
+
+cache_dir="${HOME}/.config/monkey"
+cache_file="monkey.txt"
+
+[ ! -d $cache_dir ] && mkdir -p $cache_dir
+[ ! -f ${cache_dir}/${cache_file} ] && touch ${cache_dir}/${cache_file}
+
+reconfigure_wallpaper() {
+        xwallpaper --stretch ${wallpath}/${wallname}
 }
 
-function verify {
-        if [ `xrandr | grep VGA | awk '{print $2;}'` == "connected" ]; then
-                IS_CONNECTED=1
-        fi
+set_mode() {
+        mode=$(head -n 1 /sys/devices/pci0000:00/0000:00:02.0/drm/card0/card0-${i}/modes)
 }
 
-function on {
-        verify
-        if [ $IS_CONNECTED -ne 0 ]; then
-                xrandr --output LVDS-1 --auto --primary --mode 1366x768 --rate 60 \
-                        --output VGA-1 --auto --left-of LVDS-1 \
-                        --mode 1280x1024 --rate 75
-                set_wallpaper
-        fi
+write_active_monitor() {
+        echo $1 >> ${cache_dir}/${cache_file}
 }
 
-function off {
-        verify
-        if [ $IS_CONNECTED -ne 0 ]; then
-                xrandr --output VGA-1 --off
-                set_wallpaper
-        fi
+delete_deactived_monitor() {
+        sed -i "s/$1//g" ${cache_dir}/${cache_file}
+        local monitors=$(cat ${cache_dir}/${cache_file})
+        rm ${cache_dir}/${cache_file}
+        touch ${cache_dir}/${cache_file}
+        for i in $monitors
+        do
+                [ ${i:0:1} = "#" ] && continue
+                echo $i >> ${cache_dir}/${cache_file}
+        done
 }
 
-function err {
-        printf "$ORANGE%s $RED%s$RESET\n" "[on/off]" "what do you want to do?"
+is_it_active() {
+        local active_monitors=$(cat ${cache_dir}/${cache_file})
+        for i in $active_monitors
+        do
+                if [ $i = $1 ]
+                then
+                        return 0
+                fi
+        done
+        return 1
 }
 
-[ $# -eq 0 ] && err && exit 1
-[ $1 == "on" ] && on && exit 0
-[ $1 == "off" ] && off && exit 0
+active_if_it_is_not() {
+        is_it_active $1
+        [ $? -eq 0 ] && return 1
+        set_mode $1
+        xrandr --output $primary --auto --primary --output $1 \
+                --auto --mode $mode --${place}-of $primary --rate $rate
+        write_active_monitor $1
+        return 0
+}
 
-printf "${RED}%s $RESET" "Arguments:"
-for i in $@; do
-        printf "${ORANGE}${i}, "
-done
-printf "\b ${RED}%s${RESET}\n" "are not recognised."
+direct_deactive() {
+        xrandr --output $1 --off
+        reconfigure_wallpaper
+        delete_deactived_monitor $1
+}
+
+check_if_it_has_been_unconnected() {
+        local status=$(cat /sys/devices/pci0000:00/0000:00:02.0/drm/card0/card0-${1}/status)
+        [ $status = "disconnected" ] && return 0
+        return 1
+}
+
+active() {
+        for i in $monitors
+        do
+                active_if_it_is_not $i
+                if [ $? -ne 0 ]
+                then
+                        check_if_it_has_been_unconnected $i
+                        [ $? -eq 0 ] && direct_deactive $i && reconfigure_wallpaper
+                else
+                        reconfigure_wallpaper
+                fi
+        done
+}
+
+deactive() {
+        local cached_monitors=$(wc -l < ${cache_dir}/${cache_file})
+        for ((i=1; i<=$cached_monitors; ++i))
+        do
+                local monitor=$(head -n $i ${cache_dir}/${cache_file} | tail -n 1)
+                [ -z $monitor ] && continue
+                xrandr | grep $monitor > /dev/null
+                if [ $? -ne 0 ]
+                then
+                        echo "Invalid monitor name, $monitor"
+                        continue
+                fi
+                check_if_it_has_been_unconnected $monitor
+                [ $? -eq 0 ] && direct_deactive $monitor && reconfigure_wallpaper
+        done
+}
+
+if [[ -z ${monitors[@]} || $monitors_quantity -eq 0 ]]
+then
+        deactive
+else
+        active
+fi
