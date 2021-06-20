@@ -1,11 +1,14 @@
 #!/bin/sh
 
+DISPLAY=:0
+export DISPLAY
+
 primary="LVDS-1"
 place="right"
 rate="75"
 
-wallpath="/home/brayan/Wallpapers/PC"
-wallname="Magician.png"
+wallpath="/home/brayan/Wallpapers/PC/"
+wallname="wallhaven-2evglg_3840x2160.png"
 
 monitors=$(xrandr | grep -En "[A-Z][A-Z][A-Z][A-Z]?-[1-9] connected" | cut -d ':' -f 2 | cut -d ' ' -f 1)
 monitors=${monitors[@]/${primary}}
@@ -36,7 +39,6 @@ delete_deactived_monitor() {
         touch ${cache_dir}/${cache_file}
         for i in $monitors
         do
-                [ ${i:0:1} = "#" ] && continue
                 echo $i >> ${cache_dir}/${cache_file}
         done
 }
@@ -69,7 +71,7 @@ direct_deactive() {
         delete_deactived_monitor $1
 }
 
-check_if_it_has_been_unconnected() {
+check_if_it_has_been_disconnected() {
         local status=$(cat /sys/devices/pci0000:00/0000:00:02.0/drm/card0/card0-${1}/status)
         [ $status = "disconnected" ] && return 0
         return 1
@@ -81,7 +83,7 @@ active() {
                 active_if_it_is_not $i
                 if [ $? -ne 0 ]
                 then
-                        check_if_it_has_been_unconnected $i
+                        check_if_it_has_been_disconnected $i
                         [ $? -eq 0 ] && direct_deactive $i && reconfigure_wallpaper
                 else
                         reconfigure_wallpaper
@@ -101,7 +103,7 @@ deactive() {
                         echo "Invalid monitor name, $monitor"
                         continue
                 fi
-                check_if_it_has_been_unconnected $monitor
+                check_if_it_has_been_disconnected $monitor
                 [ $? -eq 0 ] && direct_deactive $monitor && reconfigure_wallpaper
         done
 }
