@@ -1,0 +1,8 @@
+#!/bin/sh
+
+width=$(xdpyinfo | awk '/dimensions/{print $2}' | awk -F "x" '{print $1/4}')
+height=$(xdpyinfo | awk '/dimensions/{print $2}' | awk -F "x" '{print $2/4}')
+
+window_id=$(xdotool selectwindow)
+
+xdotool windowmove $window_id $width $height
