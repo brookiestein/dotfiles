@@ -15,5 +15,4 @@ ssh-agent -s | sed 's/echo/#echo/g' > ~/.ssh/agent.env
 chmod 600 ~/.ssh/agent.env
 . ~/.ssh/agent.env
 
-xrdb ~/.Xresources
 exec dbus-launch --exit-with-session /usr/local/bin/dwm
