@@ -15,4 +15,6 @@ ssh-agent -s | sed 's/echo/#echo/g' > ~/.ssh/agent.env
 chmod 600 ~/.ssh/agent.env
 . ~/.ssh/agent.env
 
+xrdb ~/.Xresources
+xset r rate 300 50 # In order to move faster while writing. Useful, e.g., in vim.
 exec dbus-launch --exit-with-session /usr/local/bin/dwm
