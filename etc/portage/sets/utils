@@ -1,0 +1,46 @@
+# Clipboard
+x11-misc/xsel
+# Wallpaper
+x11-misc/xwallpaper
+# For dwm
+x11-misc/wmname
+# For my eyes :P
+x11-misc/redshift
+# Notifications
+x11-misc/dunst
+# Compositor
+x11-misc/picom
+# Clipboard helper for clipmenu
+x11-misc/clipnotify
+# User common directories, such as ${HOME}/{Downloads,Desktop}, etc.
+x11-misc/xdg-user-dirs
+# To change keyboard layout.
+x11-apps/setxkbmap
+# To disable screensaver, etc. in dwm.
+x11-apps/xset
+# To configure monitors
+x11-apps/xrandr
+# To Enable, and disable, etc things, such as Touchpad, Keyboard, etc.
+x11-apps/xinput
+# Pdf reader
+app-text/zathura
+app-text/zathura-meta
+# Control brightness from the terminal
+sys-power/acpilight
+# Version control system
+dev-vcs/git
+# Quick notes
+x11-misc/xpad
+# For downloading YouTube videos
+net-misc/youtube-dl
+# Utilities for manipulating audio from the terminal
+media-sound/alsa-utils
+# Command line file explorer
+app-misc/ranger
+# For windows information. Useful to place windows at the center of the screen.
+x11-apps/xdpyinfo
+x11-misc/xdotool
+# Screenshotter
+media-gfx/scrot
+# Image viewer
+media-gfx/sxiv
