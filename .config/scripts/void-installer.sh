@@ -94,13 +94,13 @@ grub-mkconfig -o /boot/grub/grub.cfg
 xbps-reconfigure -fa
 
 # Graphic environment, web browser, and other programs I use:
-xbps-install xorg-minimal mate{,-extra,-tweak} firefox qbittorrent \
+xbps-install -y xorg-minimal mate{,-extra,-tweak} firefox qbittorrent \
         keepassxc flameshot exa git clang gcc make mpv libreoffice{,-i18n-es} \
         nodejs telegram-desktop redshift-gtk pavucontrol qemu virt-manager \
         xse{l,t} translate-shell neofetch htop blueman qtcreator mesa-dri
 
 # Libraries for suckless's projects
-xbps-install libXinerama-devel libXfixes-devel libXft-devel libXrandr-devel
+xbps-install -y libXinerama-devel libXfixes-devel libXft-devel libXrandr-devel
 
 # Services
 ln -sv /etc/sv/bluetoothd /var/service
