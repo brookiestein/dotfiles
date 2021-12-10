@@ -99,8 +99,9 @@ xbps-install -y xorg-minimal mate{,-extra,-tweak} firefox qbittorrent \
         nodejs telegram-desktop redshift-gtk pavucontrol qemu virt-manager \
         xse{l,t} translate-shell neofetch htop blueman qtcreator mesa-dri
 
-# Libraries for suckless's projects
-xbps-install -y libXinerama-devel libXfixes-devel libXft-devel libXrandr-devel
+# Libraries (for suckless's projects, for example)
+xbps-install -y libXinerama-devel libXfixes-devel libXft-devel libXrandr-devel \
+        pkg-config imlib2-devel gtk+3-devel automake
 
 # Services
 ln -sv /etc/sv/bluetoothd /var/service
