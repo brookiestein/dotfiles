@@ -94,10 +94,12 @@ grub-mkconfig -o /boot/grub/grub.cfg
 xbps-reconfigure -fa
 
 # Graphic environment, web browser, and other programs I use:
-xbps-install -y xorg-minimal mate{,-extra,-tweak} firefox qbittorrent \
-        keepassxc flameshot exa git clang gcc make mpv libreoffice{,-i18n-es} \
-        nodejs telegram-desktop redshift-gtk pavucontrol qemu virt-manager \
-        xse{l,t} translate-shell neofetch htop blueman qtcreator mesa-dri
+xbps-install -y xorg-minimal firefox qbittorrent keepassxc flameshot exa git \
+        clang gcc make mpv libreoffice{,-i18n-es} nodejs telegram-desktop \
+        redshift-gtk pavucontrol qemu virt-manager xse{l,t} translate-shell \
+        neofetch htop blueman qtcreator mesa-dri gdb cmake xrdb wmname ranger \
+        alsa-utils xwallpaper setxkbmap picom zathura zathura-pdf-poppler sxiv \
+        clipnotify scrot xdotool xdpyinfo youtube-dl xrandr
 
 # Libraries (for suckless's projects, for example)
 xbps-install -y libXinerama-devel libXfixes-devel libXft-devel libXrandr-devel \
