@@ -8,34 +8,13 @@
 # See the grub info page for documentation on possible variables and
 # their associated values.
 
-# GRUB_CMDLINE_LINUX explanation:
-# Into crypt_root write your encrypted device location.
-# Into real_root write your root location. E.g.: /dev/mapper/gentoo-root
-# Into resume write your swap partition location. E.g.: /dev/mapper/gentoo-swap
-# Notice that you can use UUIDs instead of "raw" locations.
-# This can be got using the blkid utilitiy.
-#
-# GRUB_BACKGROUND explanation:
-# If you want to use an image as background of your GRUB screen, uncomment GRUB_BACKGROUND
-# and add the path where is your wished image. For example, I usually make a directory into:
-# /boot/grub/ called backgrounds (/boot/grub/backgrounds/) and I put my image there.
-#
-# GRUB_DISTRIBUTOR explanation:
-# Sure you would like to change this value :-)
-#
-# GRUB_GFXMODE explanation:
-# That's my computer screen resolution. If you don't have that resolution, only adapt this
-# value either to your computer screen resolution or your wished screen resolution.
-
-GRUB_DISTRIBUTOR="Brookientoo"
-GRUB_TIMEOUT=3
-GRUB_PRELOAD_MODULES=lvm
-GRUB_ENABLE_CRYPTODISK=y
-GRUB_DEVICE=/dev/ram0
-GRUB_CMDLINE_LINUX="crypt_root= real_root= resume= rootfstype=ext4 dolvm quiet"
-GRUB_GFXMODE=1366x768
-GRUB_GFXPAYLOAD_LINUX=keep
-# GRUB_BACKGROUND=""
+GRUB_DISTRIBUTOR="Gentoo"
+GRUB_TIMEOUT=2
+GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd root=UUID= resume=UUID= rootfstype=ext4 quiet"
+GRUB_GFXMODE=1920x1080
+GRUB_GFXPAYLOAD_LINUX="keep"
+GRUB_BACKGROUND="/boot/grub/backgrounds/"
+GRUB_DISABLE_OS_PROBER=false
 
 # Default menu entry
 #GRUB_DEFAULT=0
@@ -84,6 +63,9 @@ GRUB_GFXPAYLOAD_LINUX=keep
 
 # Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to kernel
 #GRUB_DISABLE_LINUX_UUID=true
+
+# Comment if you don't want GRUB to pass "root=PARTUUID=xxx" parameter to kernel
+GRUB_DISABLE_LINUX_PARTUUID=false
 
 # Uncomment to disable generation of recovery mode menu entries
 #GRUB_DISABLE_RECOVERY=true
