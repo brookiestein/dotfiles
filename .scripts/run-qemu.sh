@@ -29,6 +29,11 @@ usage() {
     echo "Notice that you can combine all of the options, except -H."
 }
 
+if [ $# -eq 0 ]; then
+    usage
+    exit 0
+fi
+
 while getopts "c:Hh:n:pr:s:v" arg; do
     case ${arg} in
         c)
