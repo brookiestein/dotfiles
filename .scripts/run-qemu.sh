@@ -76,7 +76,7 @@ ARGS="-cpu host -smp ${SMP} \
 -device virtio-net,netdev=vmnic \
 -name ${NAME}"
 
-[ -n ${CDROM} ] && ARGS="${ARGS} -boot d -cdrom ${CDROM}" || ARGS="${ARGS} -boot c"
+[ -z ${CDROM} ] && ARGS="${ARGS} -boot c" || ARGS="${ARGS} -boot d -cdrom ${CDROM}"
 
 if [ $VERBOSE -eq 1 ]; then
     echo "Running with options:"
