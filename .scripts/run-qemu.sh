@@ -8,6 +8,8 @@ AMOUNT_OF_RAM=`free -h | awk '{print $2;}' | head -n 2 | tail -n 1 | cut -d 'G' 
 AMOUNT_OF_RAM="$((AMOUNT_OF_RAM/2))G"
 PRETEND=0
 VERBOSE=0
+NOCOLOR="\e[0m"
+RED="\e[1;31m"
 
 usage() {
     echo "$0 usage:"
@@ -56,6 +58,11 @@ while getopts "c:Hh:n:pr:s:v" arg; do
             AMOUNT_OF_RAM="${OPTARG}"
             ;;
         s)
+            if [[ $OPTARG != ?(-)+([[:digit:]]) ]]; then
+                echo -e "${RED}-s <number of cores>${NOCOLOR} must be a number."
+                exit 1
+            fi
+
             if [ $OPTARG == "half" ]; then
                 SMP=`nproc`
                 SMP=$((SMP/2))
