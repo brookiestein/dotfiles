@@ -58,15 +58,12 @@ while getopts "c:Hh:n:pr:s:v" arg; do
             AMOUNT_OF_RAM="${OPTARG}"
             ;;
         s)
-            if [[ $OPTARG != ?(-)+([[:digit:]]) ]]; then
-                echo -e "${RED}-s <number of cores>${NOCOLOR} must be a number."
-                exit 1
-            fi
-
             if [ $OPTARG == "half" ]; then
                 SMP=`nproc`
                 SMP=$((SMP/2))
-            else
+            elif [[ $OPTARG != ?(-)+([[:digit:]]) ]]; then
+                echo -e "${RED}-s <number of cores>${NOCOLOR} must be a number."
+                exit 1
                 SMP=$OPTARG
             fi
             ;;
