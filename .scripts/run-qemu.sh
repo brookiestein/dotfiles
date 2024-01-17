@@ -64,8 +64,8 @@ while getopts "c:Hh:n:pr:s:v" arg; do
             elif [[ $OPTARG != ?(-)+([[:digit:]]) ]]; then
                 echo -e "${RED}-s <number of cores>${NOCOLOR} must be a number."
                 exit 1
-                SMP=$OPTARG
             fi
+            SMP=$OPTARG
             ;;
         v)
             VERBOSE=1
