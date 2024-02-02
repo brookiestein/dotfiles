@@ -1,0 +1,4 @@
+sys-fs/btrfs-progs
+sys-fs/exfatprogs
+sys-fs/dosfstools
+sys-fs/ntfs3g
