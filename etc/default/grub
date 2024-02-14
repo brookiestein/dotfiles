@@ -10,7 +10,8 @@
 
 GRUB_DISTRIBUTOR="Gentoo"
 GRUB_TIMEOUT=2
-GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd root=UUID= resume=UUID= rootfstype=ext4 quiet"
+GRUB_ENABLE_CRYPTODISK="y"
+GRUB_CMDLINE_LINUX="init=/lib/systemd/systemd crypt_root=UUID= real_root=UUID= resume=UUID= resume_offset= rootfstype=btrfs quiet splash"
 GRUB_GFXMODE="1920x1080"
 GRUB_GFXPAYLOAD_LINUX="keep"
 GRUB_BACKGROUND="/boot/grub/backgrounds/"
