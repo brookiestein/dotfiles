@@ -102,7 +102,9 @@ source $ZSH/oh-my-zsh.sh
 
 export PATH="${PATH}:${HOME}/.scripts"
 
+alias cp="cp -v"
 alias mv="mv -v"
 alias rm="rm -v"
-alias cp="cp -v"
+alias rmdir="rmdir -v"
 alias mkdir="mkdir -pv"
+alias lla="ls -Al"

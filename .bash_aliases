@@ -1,0 +1,8 @@
+alias cp="cp -v"
+alias mv="mv -v"
+alias rm="rm -v"
+alias rmdir="rmdir -v"
+alias l="ls"
+alias ll="ls -l"
+alias la="ls -A"
+alias lla="ls -Al"
