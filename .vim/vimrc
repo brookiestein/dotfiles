@@ -4,6 +4,7 @@ source ~/.vim/configs/lightline.vim
 source ~/.vim/configs/nerdtree.vim
 source ~/.vim/configs/devicons.vim
 source ~/.vim/configs/startify.vim
+source ~/.vim/configs/coc.vim
 
 filetype plugin indent on
 
