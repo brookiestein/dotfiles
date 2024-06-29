@@ -31,6 +31,7 @@ Plugin 'bfrg/vim-cpp-modern' " Support for syntax highlighting for C/C++
 Plugin 'mhinz/vim-startify' "When start only without specific file represents a beautiful ascii text ;-)
 Plugin 'itchyny/lightline.vim'
 Plugin 'Raimondi/delimitMate' " Automatic close of quotes, patenthesis, brackets, etc.
+Plugin 'neoclide/coc.nvim' " Language completion support.
 " Themes
 Plugin 'connorholyday/vim-snazzy'
 Plugin 'jsit/toast.vim'
