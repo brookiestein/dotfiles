@@ -100,13 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias cp="cp -v"
-alias mv="mv -v"
-alias rm="rm -v"
-alias rmdir="rmdir -v"
-alias mkdir="mkdir -pv"
-alias lla="ls -Al"
-
 export PATH="${PATH}:${HOME}/.scripts"
 export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib64"
 export CMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}:/usr/local/lib64/cmake"
