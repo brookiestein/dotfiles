@@ -1,3 +1,5 @@
+# X11
+x11-base/xorg-server
 # Clipboard
 x11-misc/xsel
 # Wallpaper
@@ -12,6 +14,7 @@ x11-misc/dunst
 x11-misc/picom
 # Clipboard helper for clipmenu
 x11-misc/clipnotify
+x11-misc/clipmenu
 # User common directories, such as ${HOME}/{Downloads,Desktop}, etc.
 x11-misc/xdg-user-dirs
 # To change keyboard layout.
@@ -27,16 +30,12 @@ app-text/zathura
 app-text/zathura-meta
 # Control brightness from the terminal
 sys-power/acpilight
-# Version control system
-dev-vcs/git
-# Quick notes
-x11-misc/xpad
-# For downloading YouTube videos
-net-misc/youtube-dl
+# Media Player
+media-video/mpv
+# For streaming/downloading YouTube videos
+net-misc/yt-dlp
 # Utilities for manipulating audio from the terminal
 media-sound/alsa-utils
-# Command line file explorer
-app-misc/ranger
 # For windows information. Useful to place windows at the center of the screen.
 x11-apps/xdpyinfo
 x11-misc/xdotool
@@ -44,3 +43,21 @@ x11-misc/xdotool
 media-gfx/scrot
 # Image viewer
 media-gfx/sxiv
+# For printing
+net-print/cups-meta # Better if compiled with zeroconf USE flag.
+app-admin/system-config-printer
+# For PipeWire to emulate PulseAudio
+media-libs/libpulse
+# I use LUKS
+sys-fs/cryptsetup
+# Why not?
+sys-process/htop
+# Gentoo management
+app-eselect/eselect-repository
+app-portage/eix
+app-portage/genlop
+app-portage/gentoolkit
+app-portage/portagecfg # guru
+dev-util/pkgdev
+# Shell
+app-shells/bash-completion
