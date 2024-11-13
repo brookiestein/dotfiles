@@ -33,6 +33,9 @@
 		"battery",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
+        "network",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
 		"tray"
 	],
 
@@ -71,6 +74,19 @@
 		"tooltip": false,
         "interval": 1
 	},
+
+    "network": {
+        "interface": "wlp3s0",
+        "format": "{ifname}",
+        "format-wifi": "{essid}  ",
+        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
+        "format-disconnected": "", //An empty format will hide the module.
+        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "max-length": 50
+    },
 
 	"pulseaudio": {
 		"format": "{icon} {volume:2}%",

@@ -48,6 +48,18 @@ window#waybar {
 	padding: 0 3px;
 }
 
+#network,
+#network.linked,
+#network.wifi {
+	background: #1a1a1a;
+    color: #f8a7a7
+}
+
+#network.disabled,
+#network.disconnected {
+    color: #f9313b
+}
+
 #pulseaudio {
 	color: #268bd2;
 }
