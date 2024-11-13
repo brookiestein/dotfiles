@@ -14,13 +14,32 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
-set $lock_command 'swaylock -f -i /home/brayan/Wallpapers/finn_jake_marceline_princess_bubblegum_bmo_hd_adventure_time.jpg -s fill'
+set $menu bemenu-run --no-exec -c -H 26 -l -i -p "Run:" | xargs -r swaymsg exec --
+
+# Autostart
+exec gentoo-pipewire-launcher restart
+exec mako
+
+# Floating windows
+for_window [window_role = "pop-up"] floating enable
+for_window [window_role = "bubble"] floating enable
+for_window [window_role = "dialog"] floating enable
+for_window [window_type = "dialog"] floating enable
+for_window [window_role = "task_dialog"] floating enable
+for_window [window_type = "menu"] floating enable
+for_window [app_id = "floating"] floating enable
+for_window [app_id = "floating_update"] floating enable, resize set width 1000px height 600px
+for_window [class = "(?i)pinentry"] floating enable
+for_window [title = "Administrator privileges required"] floating enable
+# Firefox
+for_window [title = "About Mozilla Firefox"] floating enable
+for_window [window_role = "About"] floating enable
+for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/brayan/Wallpapers/2481744.jpg fill
 #
 # Example configuration:
 #
@@ -43,12 +62,17 @@ exec swayidle -w \
 
 ### Input configuration
 #
-   input "2:7:SynPS/2_Synaptics_TouchPad" {
-       dwt enabled
-       tap enabled
-       natural_scroll enabled
-       middle_emulation enabled
-   }
+    input "2:7:SynPS/2_Synaptics_TouchPad" {
+        dwt enabled
+        tap enabled
+        natural_scroll enabled
+        middle_emulation enabled
+    }
+
+    input * {
+        xkb_layout "us"
+        xkb_variant "intl"
+    }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
@@ -64,7 +88,7 @@ exec swayidle -w \
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+p exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -79,11 +103,18 @@ exec swayidle -w \
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 
+    # Programs
+    bindsym $mod+Shift+w exec firefox
+
     # Multimedia
     bindsym XF86AudioRaiseVolume exec 'wpctl set-volume @DEFAULT_SINK@ 0.05+'
     bindsym XF86AudioLowerVolume exec 'wpctl set-volume @DEFAULT_SINK@ 0.05-'
     bindsym XF86AudioMute exec 'wpctl set-mute @DEFAULT_SINK@ toggle'
     bindsym XF86AudioMicMute exec 'wpctl set-mute @DEFAULT_SOURCE@ toggle'
+
+    # Brightness control
+    bindsym XF86MonBrightnessUp exec 'xbacklight -inc 10'
+    bindsym XF86MonBrightnessDown exec 'xbacklight -dec 10'
 #
 # Moving around:
 #
