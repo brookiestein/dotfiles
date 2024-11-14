@@ -18,7 +18,8 @@ set $menu bemenu-run --no-exec -c -H 26 -l -i -p "Run:" | xargs -r swaymsg exec 
 
 # Autostart
 exec gentoo-pipewire-launcher restart
-exec mako
+exec dunst
+exec "PID=$(eval `ssh-agent -s` | awk '{print $3;}') && export SSH_AGENT_PID=${PID}"
 
 # Floating windows
 for_window [window_role = "pop-up"] floating enable
@@ -105,6 +106,8 @@ exec swayidle -w \
 
     # Programs
     bindsym $mod+Shift+w exec firefox
+    bindsym $mod+t exec telegram-desktop
+    bindsym $mod+Shift+d exec discord
 
     # Multimedia
     bindsym XF86AudioRaiseVolume exec 'wpctl set-volume @DEFAULT_SINK@ 0.05+'
@@ -233,17 +236,17 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-	position top
-	status_command 'slstatus -s'
+	status_command waybar
+    mode invisible
 
-    	colors {
-        	statusline #ffffff
-        	background #3c3836
+    colors {
+        statusline #ffffff
+        background #3c3836
         
-        	# Outline, Background, Foreground
-        	inactive_workspace #282828 #282828 #928374
-        	focused_workspace #83a598 #458588 #eddbb2
-    	}
+        # Outline, Background, Foreground
+        inactive_workspace #282828 #282828 #928374
+        focused_workspace #83a598 #458588 #eddbb2
+    }
 }
 
 include /etc/sway/config.d/*
