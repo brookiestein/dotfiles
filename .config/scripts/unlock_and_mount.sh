@@ -78,7 +78,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-mount "/dev/mapper/${name}" /mnt
+mount "/dev/mapper/${name}" "${mountpoint}"
 if [ $? -eq 0 ]; then
     echo "Device: ${device}, identified as: ${name} was successfully mounted at ${mountpoint}."
 else
