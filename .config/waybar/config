@@ -55,12 +55,10 @@
 		"format": "",
 		"tooltip": false
 	},
-
 	"sway/workspaces": {
 		"disable-scroll": true,
 		"format": "{name}"
 	},
-
 	"clock#1": {
 		"format": "{:%a}",
 		"tooltip": false
@@ -74,24 +72,22 @@
 		"tooltip": false,
         "interval": 1
 	},
-
     "network": {
         "interface": "wlp3s0",
-        "format": "{ifname}",
-        "format-wifi": "{essid}  ",
+        "format": "{signalStrength}%  ",
+        "format-wifi": "{signalStrength}%  ",
         "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-        "format-disconnected": "", //An empty format will hide the module.
+        "format-disconnected": "󰤨", //An empty format will hide the module.
         "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+        "tooltip-format-wifi": "{ipaddr}/{cidr} ",
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
-
 	"pulseaudio": {
-		"format": "{icon} {volume:2}%",
+		"format": "{icon} {volume:2}%/{format_source}",
 		"format-bluetooth": "{icon}  {volume}%",
-		"format-muted": "MUTE",
+		"format-muted": "{icon} MUTE/{format_source}",
 		"format-icons": {
 			"headphones": "",
 			"default": [
@@ -99,13 +95,14 @@
 				""
 			]
 		},
+        "format-source-muted": "MUTE",
 		"scroll-step": 5,
 		"on-click": "pamixer -t",
 		"on-click-right": "pavucontrol"
 	},
 	"memory": {
 		"interval": 5,
-		"format": "Mem {}%"
+        "format": "{used:0.1f}G/{total:0.1f}G {0}%",
 	},
 	"cpu": {
 		"interval": 1,

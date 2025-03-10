@@ -14,10 +14,10 @@ set $term alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu bemenu-run --no-exec -c -H 26 -l -i -p "Run:" | xargs -r swaymsg exec --
+set $menu bemenu-run --no-exec -c -H 26 -l 10 -i -w -p "Run:" | xargs -r swaymsg exec --
 
 # Autostart
-exec gentoo-pipewire-launcher restart
+# exec gentoo-pipewire-launcher restart
 exec dunst
 exec "PID=$(eval `ssh-agent -s` | awk '{print $3;}') && export SSH_AGENT_PID=${PID}"
 
@@ -40,7 +40,7 @@ for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, s
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/brayan/Wallpapers/2481744.jpg fill
+output * bg /home/brayan/Wallpapers/360290.jpg fill
 #
 # Example configuration:
 #
@@ -56,6 +56,21 @@ exec swayidle -w \
           timeout 900 'swaylock -f -i /home/brayan/Wallpapers/finn_jake_marceline_princess_bubblegum_bmo_hd_adventure_time.jpg -s fill' \
           timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
           before-sleep 'swaylock -f -i /home/brayan/Wallpapers/finn_jake_marceline_princess_bubblegum_bmo_hd_adventure_time.jpg -s fill'
+
+#
+# Screen capture
+#
+set $ps1 Print
+set $ps2 Control+Print
+set $ps3 Alt+Print
+set $ps4 Alt+Control+Print
+set $psf $(xdg-user-dir PICTURES)/ps_$(date +"%Y%m%d%H%M%S").png
+
+bindsym $ps1 exec grim - | wl-copy
+bindsym $ps2 exec grim -g "$(slurp)" - | wl-copy
+bindsym $ps3 exec grim $psf
+bindsym $ps4 exec grim -g "$(slurp)" $psf
+bindsym $mod+Ctrl+l exec 'swaylock -f -i "/home/brayan/Wallpapers/finn_jake_marceline_princess_bubblegum_bmo_hd_adventure_time.jpg" -s fill --ignore-empty-password --show-failed-attempts'
 #
 # This will lock your screen after 900 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -242,7 +257,7 @@ bar {
     colors {
         statusline #ffffff
         background #3c3836
-        
+
         # Outline, Background, Foreground
         inactive_workspace #282828 #282828 #928374
         focused_workspace #83a598 #458588 #eddbb2
