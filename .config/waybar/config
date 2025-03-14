@@ -27,6 +27,9 @@
 		"cpu",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
+		"backlight",
+		"custom/left-arrow-light",
+		"custom/left-arrow-dark",
 		"battery",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
@@ -100,7 +103,7 @@
 	},
 	"cpu": {
 		"interval": 1,
-		"format": "  {usage:2}%",
+		"format": "󰻠 {usage:2}%",
 		"states": {
             "idle": 0,
             "normal": 10,
@@ -108,6 +111,13 @@
             "critical": 75
         }
 	},
+	"backlight": {
+        "device": "intel_backlight",
+        "format": "{percent}% {icon}",
+    	"format-icons": [" ", " "],
+		"on-scroll-up": "xbacklight -inc 10",
+		"on-scroll-down": "xbacklight -dec 10"
+    },
 	"battery": {
 		"states": {
 			"good": 95,
