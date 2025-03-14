@@ -82,3 +82,18 @@ window#waybar {
 	padding: 0 10px;
 }
 
+#cpu.idle {
+  color: grey;
+}
+
+#cpu.normal {
+  color: green;
+}
+
+#cpu.warning {
+  color: yellow;
+}
+
+#cpu.critical {
+  color: red;
+}

@@ -19,6 +19,7 @@ set $menu bemenu-run --no-exec -c -H 26 -l 10 -i -w -p "Run:" | xargs -r swaymsg
 # Autostart
 # exec gentoo-pipewire-launcher restart
 exec dunst
+seat seat0 xcursor_theme Adwaita 16
 # exec "PID=$(eval `ssh-agent -s` | awk '{print $3;}') && export SSH_AGENT_PID=${PID}"
 
 # Floating windows
