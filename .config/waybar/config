@@ -101,12 +101,12 @@
 	"cpu": {
 		"interval": 1,
 		"format": "  {usage:2}%",
-        		"states": {
-            	  "idle": 0,
-            	    "normal": 10,
-            	      "warning": 30,
-            	       "critical": 75
-            }
+		"states": {
+            "idle": 0,
+            "normal": 10,
+            "warning": 30,
+            "critical": 75
+        }
 	},
 	"battery": {
 		"states": {
