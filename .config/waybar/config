@@ -98,7 +98,7 @@
 	},
 	"memory": {
 		"interval": 5,
-        "format": " {used:0.1f}G ({0}%)",
+        "format": " {0}%",
 	"tooltip-format": "RAM Usage: {used:0.1f}G/{total:0.1f}G {0}%"
 	},
 	"cpu": {
