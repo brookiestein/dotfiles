@@ -10,6 +10,12 @@
  tab-stop-list (number-sequence 4 200 4)
  tab-width 4
  indent-line-function 'insert-tab)
+;; Autocomplete parenthesis
+(electric-pair-mode t)
+;; Autoindent on new line
+(defun set-newline-and-indent ()
+  (local-set-key (kbd "RET") 'newline-and-indent))
+(add-hook 'c-mode-hook 'set-newline-and-indent)
 ;; Melpa
 (setq package-archives
 	  '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -28,16 +34,3 @@
   (load-theme 'timu-spacegrey t))
 
 (use-package typescript-mode)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(projectile)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

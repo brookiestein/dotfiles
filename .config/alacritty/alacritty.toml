@@ -4,12 +4,12 @@ general.live_config_reload = true
 term = "xterm-256color"
 
 [window]
-dimensions.columns = 132
-dimensions.lines = 28
+dimensions = { columns = 135, lines = 33 }
 decorations = "Full"
 startup_mode = "Windowed"
 title = "Brayan's Alacritty"
 dynamic_title = true
+decorations_theme_variant = "Dark"
 
 [font]
 normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
@@ -23,7 +23,7 @@ primary.background = "#232627"
 
 [cursor]
 style = { shape = "Beam", blinking = "Always" }
+blink_interval = 500
 
 [scrolling]
 history = 65535
-multiplier = 3
