@@ -17,7 +17,24 @@
   :config
   (load-theme 'timu-spacegrey t))
 
+;; To do web dev like the chads do.
 (use-package typescript-mode)
+
+;; company-mode
+(use-package company
+  :ensure t)
+
+(company-mode 1)
+(add-hook 'after-init-hook 'global-company-mode)
+(with-eval-after-load 'company
+  (define-key company-active-map
+			  (kbd "TAB")
+			  #'company-complete-common-or-cycle)
+  (define-key company-active-map
+			  (kbd "<backtab>")
+			  (lambda ()
+					 (interactive)
+					 (company-complete-common-or-cycle -1))))
 
 ;; Disable backup files.
 (setf make-backup-files nil)
