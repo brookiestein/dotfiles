@@ -132,6 +132,7 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 bindsym $mod+Shift+w exec firefox
 bindsym $mod+Ctrl+c exec google-chrome-stable
 bindsym $mod+Shift+t exec telegram-desktop
+bindsym $mod+e exec emacs
 
 # Multimedia
 bindsym XF86AudioRaiseVolume exec 'wpctl set-volume @DEFAULT_SINK@ 0.05+'
@@ -205,7 +206,7 @@ bindsym $mod+v splitv
 # Switch the current container between different layout styles
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+t layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
