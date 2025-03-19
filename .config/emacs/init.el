@@ -36,6 +36,14 @@
 					 (interactive)
 					 (company-complete-common-or-cycle -1))))
 
+(use-package org
+  :ensure t
+  :config
+  (global-set-key (kbd "C-c l") #'org-store-link)
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  (global-set-key (kbd "C-c c") #'org-capture)
+)
+
 ;; Disable backup files.
 (setf make-backup-files nil)
 ;; Show line numbers.
