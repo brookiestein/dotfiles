@@ -1,0 +1,5 @@
+gui-apps/waybar network tray wifi
+# required by dev-libs/libayatana-appindicator-0.5.93::gentoo
+# required by gui-apps/waybar-0.11.0-r1::gentoo[tray]
+# required by @sway (argument)
+>=dev-libs/libdbusmenu-16.04.0-r2 gtk3

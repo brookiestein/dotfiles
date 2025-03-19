@@ -1,0 +1,2 @@
+# required by x11-libs/libdrm-2.4.124::gentoo[video_cards_amdgpu]
+>=x11-libs/libdrm-2.4.124 video_cards_radeon

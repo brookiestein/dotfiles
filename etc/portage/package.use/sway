@@ -1,0 +1,4 @@
+gui-wm/sway tray wallpapers
+# required by gui-wm/sway-1.10.1::gentoo[wallpapers]
+# required by @sway (argument)
+>=gui-apps/swaybg-1.2.1 gdk-pixbuf

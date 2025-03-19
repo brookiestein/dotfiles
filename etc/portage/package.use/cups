@@ -1,0 +1,3 @@
+net-print/cups-meta zeroconf
+net-print/cups-browsed zeroconf
+net-print/cups zeroconf
