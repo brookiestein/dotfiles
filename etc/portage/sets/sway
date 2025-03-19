@@ -5,3 +5,5 @@ gui-apps/waybar
 x11-misc/dunst
 gui-apps/slurp
 gui-apps/grim
+dev-libs/bemenu
+gui-libs/xdg-desktop-portal-wlr
