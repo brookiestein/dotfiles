@@ -25,6 +25,7 @@ window#waybar {
 #pulseaudio,
 #memory,
 #cpu,
+#backlight,
 #battery,
 #disk,
 #tray {
