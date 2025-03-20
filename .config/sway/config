@@ -41,6 +41,11 @@ for_window [title = "About Mozilla Firefox"] floating enable
 for_window [window_role = "About"] floating enable
 for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
 
+default_border none
+default_floating_border none
+titlebar_padding 1
+titlebar_border_thickness 0
+
 # Open windows workspace-specific
 assign [app_id="firefox"] 1:󰈹
 assign [class="Google-chrome"] 2:

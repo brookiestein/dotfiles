@@ -7,3 +7,5 @@ gui-apps/slurp
 gui-apps/grim
 dev-libs/bemenu
 gui-libs/xdg-desktop-portal-wlr
+sys-auth/rtkit
+sys-power/acpilight
