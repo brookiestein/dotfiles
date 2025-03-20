@@ -23,7 +23,6 @@ exec /usr/libexec/xdg-desktop-portal -r
 exec /usr/libexec/xdg-desktop-portal-wlr
 seat seat0 xcursor_theme Adwaita 16
 exec dunst
-exec blueman-manager
 
 # Floating windows
 for_window [window_role = "pop-up"] floating enable
@@ -45,6 +44,8 @@ default_border none
 default_floating_border none
 titlebar_padding 1
 titlebar_border_thickness 0
+
+gaps inner 10
 
 # Open windows workspace-specific
 assign [app_id="firefox"] 1:󰈹
