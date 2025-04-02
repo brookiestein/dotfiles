@@ -100,14 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="${PATH}:${HOME}/.scripts"
-export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib64"
-export CMAKE_PREFIX_PATH="${CMAKE_PREFIX_PATH}:/usr/local/lib64/cmake"
-export PKG_CONFIG_PATH="/usr/local/share/pkgconfig"
-# Enable screensharing
-export MOZ_ENABLE_WAYLAND=1
-export XDG_CURRENT_DESKTOP=sway
-
 alias cp="cp -v"
 alias mv="mv -v"
 alias rm="rm -v"

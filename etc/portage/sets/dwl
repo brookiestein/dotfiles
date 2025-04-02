@@ -1,0 +1,16 @@
+gui-apps/grim
+gui-apps/slurp
+gui-apps/swayidle
+gui-apps/swaylock
+gui-apps/waybar
+gui-apps/wbg
+gui-apps/wlr-randr
+gui-apps/wmenu
+gui-libs/xdg-desktop-portal-wlr
+gui-libs/wlroots
+media-libs/fcft
+media-sound/alsa-utils
+sys-auth/rtkit
+sys-power/acpilight
+x11-misc/dunst
+x11-terms/alacritty
