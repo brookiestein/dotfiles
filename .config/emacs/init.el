@@ -48,24 +48,26 @@
   :ensure t)
 (setenv "TERM" "xterm-256color")
 (defun my/vterm-in-current-frame ()
-  "Run `multi-vterm` in the currently selected frame."
+  "Run `vterm` in the currently selected frame."
   (interactive)
   (let ((frame (selected-frame)))
     (run-at-time
-     "0.2 sec" nil
+     "0.5 sec" nil
      (lambda ()
        (when (display-graphic-p frame)
          (with-selected-frame frame
            (condition-case err
-               (multi-vterm)
+               (progn
+                 (multi-vterm)
+                 (select-window (get-buffer-window (current-buffer)))))
              (error
-              (message "Failed to launch multi-vterm: %s" err)))))))
-    nil)) ;; Avoid returning the timer object
+              (message "Failed to launch vterm: %s" err)))))))
+  nil) ;; Return nil to suppress timer object output
 ;; Open a terminal buffer
 (global-set-key (kbd "C-c RET") 'multi-vterm)
 (setq vterm-copy-exclude-prompt t)
 (setq vterm-ignore-blink-cursor nil)
-(setq vterm-max-scrollback 65535)
+(setq vterm-max-scrollback 100000)
 (define-key vterm-mode-map (kbd "C-q") #'vterm-send-next-key)
 ;; multi-vterm
 (use-package multi-vterm
@@ -93,7 +95,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-;; Customize fonts
+;; Customize fonts and set theme.
 (defun my/apply-gui-config (frame)
   (with-selected-frame frame
     (load-theme 'timu-spacegrey t)
