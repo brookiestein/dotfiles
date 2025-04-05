@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 ;; Melpa
 (setq package-archives
 	  '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -13,9 +14,7 @@
 
 ;; Packages
 (use-package timu-spacegrey-theme
-  :ensure t
-  :config
-  (load-theme 'timu-spacegrey t))
+  :ensure t)
 
 ;; To do web dev like the chads do.
 (use-package typescript-mode)
@@ -44,12 +43,40 @@
   (global-set-key (kbd "C-c c") #'org-capture)
 )
 
+;; vterm
+(use-package vterm
+  :ensure t)
+(setenv "TERM" "xterm-256color")
+(defun my/vterm-in-current-frame ()
+  "Run `multi-vterm` in the currently selected frame."
+  (interactive)
+  (let ((frame (selected-frame)))
+    (run-at-time
+     "0.2 sec" nil
+     (lambda ()
+       (when (display-graphic-p frame)
+         (with-selected-frame frame
+           (condition-case err
+               (multi-vterm)
+             (error
+              (message "Failed to launch multi-vterm: %s" err)))))))
+    nil)) ;; Avoid returning the timer object
+;; Open a terminal buffer
+(global-set-key (kbd "C-c RET") 'multi-vterm)
+(setq vterm-copy-exclude-prompt t)
+(setq vterm-ignore-blink-cursor nil)
+(setq vterm-max-scrollback 65535)
+(define-key vterm-mode-map (kbd "C-q") #'vterm-send-next-key)
+;; multi-vterm
+(use-package multi-vterm
+  :ensure t)
+(setq multi-vterm-dedicated-window-height-percent 50)
 ;; Disable backup files.
 (setf make-backup-files nil)
 ;; Show line numbers.
 (global-display-line-numbers-mode 1)
 ;; Highlight current line
-(hl-line-mode t)
+(global-hl-line-mode t)
 ;; Turn on cursor blinking
 (blink-cursor-mode t)
 ;; Save cursor position
@@ -67,7 +94,13 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 ;; Customize fonts
-(set-frame-font "Jetbrains Mono Nerd Font 12")
+(defun my/apply-gui-config (frame)
+  (with-selected-frame frame
+    (load-theme 'timu-spacegrey t)
+    (set-frame-font "Jetbrains Mono Nerd Font 12" nil t)))
+(if (daemonp)
+    (add-hook 'after-make-frame-functions #'my/apply-gui-config)
+  (my/apply-gui-config (selected-frame)))
 ;; Set indentation
 (setq-default
  indent-tabs-mode t
@@ -84,8 +117,6 @@
 (setq c-default-style "k&r")
 ;; Find files case-insensitive.
 (setq read-file-name-completion-ignore-case t)
-;; Open a terminal buffer
-(global-set-key (kbd "C-c RET") 'shell)
 ;; Move customization variables to a separate file, so it doesn't get that messy, and load it.
 (setq custom-file (locate-user-emacs-file "custom-vars.el"))
 (load custom-file 'noerror 'nomessage)
