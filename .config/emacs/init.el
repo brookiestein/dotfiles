@@ -73,6 +73,34 @@
 (use-package multi-vterm
   :ensure t)
 (setq multi-vterm-dedicated-window-height-percent 50)
+
+;; emms
+(use-package emms
+  :ensure nil
+  :init
+  (add-hook 'emms-player-started-hook 'emms-show)
+  :config
+  (setq emms-show-format "Playing: %s")
+  (setq emms-player-list '(emms-player-mpv)
+		emms-info-functions '(emms-info-native))
+  (setq emms-source-file-default-directory "~/Music/DtMF/")
+  (emms-all)
+  :bind
+  (("C-c w m e" . emms)
+   ("C-c w m s" . emms-stop)
+   ("<XF86AudioPrev>" . emms-previous)
+   ("<XF86AudioNext>" . emms-next)
+   ("<XF86AudioPlay>" . emms-pause)
+   ("<XF86AudioPause>" . emms-pause)))
+
+(defun sudo-find-file (file-name)
+  "Like find file, but opens the file as root."
+  (interactive "FSudo Find File: ")
+  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
+    (find-file tramp-file-name)))
+
+(global-set-key (kbd "C-c q f") 'sudo-find-file)
+
 ;; Disable backup files.
 (setf make-backup-files nil)
 ;; Show line numbers.
