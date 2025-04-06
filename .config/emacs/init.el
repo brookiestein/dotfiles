@@ -93,6 +93,15 @@
    ("<XF86AudioPlay>" . emms-pause)
    ("<XF86AudioPause>" . emms-pause)))
 
+;; ERC
+(defun log-into-erc ()
+  (interactive)
+  (let
+	  ((password-cache nil))
+  (erc :server "irc.libera.chat" :port 6667 :nick "brookiestein" :password "")))
+(setq erc-autojoin-channels-alist '(("libera.chat" "#gentoo" "#gentoo-chat")))
+(global-set-key (kbd "C-c i") 'log-into-erc)
+
 (defun sudo-find-file (file-name)
   "Like find file, but opens the file as root."
   (interactive "FSudo Find File: ")
