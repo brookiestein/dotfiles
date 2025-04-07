@@ -110,6 +110,15 @@
 
 (global-set-key (kbd "C-c q f") 'sudo-find-file)
 
+;; telega
+(use-package telega
+  :ensure t
+  :config
+  (setq telega-directory "~/.config/telega")
+  (setq telega-use-images t)
+  (setq telega-emoji-use-images t))
+(global-set-key (kbd "C-c t") 'telega)
+
 ;; Disable backup files.
 (setf make-backup-files nil)
 ;; Show line numbers.
