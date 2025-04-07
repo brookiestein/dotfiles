@@ -80,18 +80,46 @@
   :init
   (add-hook 'emms-player-started-hook 'emms-show)
   :config
+  (require 'emms-setup)
+  (emms-all) ;; sets up all the standard modules
+  (require 'emms-player-mpv) ;; use mpv backend
+
   (setq emms-show-format "Playing: %s")
   (setq emms-player-list '(emms-player-mpv)
-		emms-info-functions '(emms-info-native))
-  (setq emms-source-file-default-directory "~/Music/DtMF/")
-  (emms-all)
+        emms-info-functions '(emms-info-native)
+        emms-source-file-default-directory "~/Music/")
+
+  (setq emms-source-file-extensions '("mp3" "ogg" "flac" "wav" "m4a"))
+
+  ;; Load your music recursively
+  (defun my/emms-load-music ()
+    ;; Recursively add all music files from the default directory.
+    (interactive)
+    (emms-add-directory-tree emms-source-file-default-directory))
+
+  (defun my/emms-notify-current-song ()
+  ;; Send a desktop notification with the current song info.
+  (let ((track (emms-playlist-current-selected-track)))
+    (when track
+      (let ((title (emms-track-get track 'info-title))
+            (artist (emms-track-get track 'info-artist)))
+        (start-process "emms-notify" nil "notify-send"
+					   "-u" "low" "-t" "5000"
+                       "Now Playing"
+                       (if (and artist title)
+                           (format "%s - %s" artist title)
+                         (emms-track-description track)))))))
+
+  (add-hook 'emms-player-started-hook #'my/emms-notify-current-song)
+
   :bind
   (("C-c w m e" . emms)
    ("C-c w m s" . emms-stop)
+   ("C-c w m l" . my/emms-load-music))) ;; First load all songs from the default directory. This is needed before starting emms.
    ("<XF86AudioPrev>" . emms-previous)
    ("<XF86AudioNext>" . emms-next)
    ("<XF86AudioPlay>" . emms-pause)
-   ("<XF86AudioPause>" . emms-pause)))
+   ("<XF86AudioPause>" . emms-pause)
 
 ;; ERC
 (defun log-into-erc ()
@@ -103,11 +131,10 @@
 (global-set-key (kbd "C-c i") 'log-into-erc)
 
 (defun sudo-find-file (file-name)
-  "Like find file, but opens the file as root."
+  ;; Like find file, but opens the file as root.
   (interactive "FSudo Find File: ")
   (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
-
 (global-set-key (kbd "C-c q f") 'sudo-find-file)
 
 ;; telega
