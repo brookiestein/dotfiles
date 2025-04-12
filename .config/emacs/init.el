@@ -115,11 +115,11 @@
   :bind
   (("C-c w m e" . emms)
    ("C-c w m s" . emms-stop)
-   ("C-c w m l" . my/emms-load-music))) ;; First load all songs from the default directory. This is needed before starting emms.
+   ("C-c w m l" . my/emms-load-music) ;; First load all songs from the default directory. This is needed before starting emms.
    ("<XF86AudioPrev>" . emms-previous)
    ("<XF86AudioNext>" . emms-next)
    ("<XF86AudioPlay>" . emms-pause)
-   ("<XF86AudioPause>" . emms-pause)
+   ("<XF86AudioPause>" . emms-pause)))
 
 ;; ERC
 (defun log-into-erc ()
@@ -130,12 +130,12 @@
 (setq erc-autojoin-channels-alist '(("libera.chat" "#gentoo" "#gentoo-chat")))
 (global-set-key (kbd "C-c i") 'log-into-erc)
 
-(defun sudo-find-file (file-name)
+(defun doas-find-file (file-name)
   ;; Like find file, but opens the file as root.
-  (interactive "FSudo Find File: ")
-  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
+  (interactive "FDoas Find File: ")
+  (let ((tramp-file-name (concat "/doas::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
-(global-set-key (kbd "C-c q f") 'sudo-find-file)
+(global-set-key (kbd "C-c q f") 'doas-find-file)
 
 ;; telega
 (use-package telega
