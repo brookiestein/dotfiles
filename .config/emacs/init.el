@@ -13,8 +13,9 @@
   (setf use-package-always-ensure t))
 
 ;; Packages
-(use-package timu-spacegrey-theme
-  :ensure t)
+(use-package catppuccin-theme
+  :ensure t
+  :config (setq catppuccin-flavor 'mocha))
 
 ;; To do web dev like the chads do.
 (use-package typescript-mode)
@@ -35,6 +36,7 @@
 					 (interactive)
 					 (company-complete-common-or-cycle -1))))
 
+;; Org mode
 (use-package org
   :ensure t
   :config
@@ -43,12 +45,20 @@
   (global-set-key (kbd "C-c c") #'org-capture)
 )
 
+;; Markdown mode
+(use-package markdown-mode
+  :ensure t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init (setq markdown-command "multimarkdown")
+  :bind (:map markdown-mode-map
+          ("C-c C-e" . markdown-do)))
+
 ;; vterm
 (use-package vterm
   :ensure t)
 (setenv "TERM" "xterm-256color")
 (defun my/vterm-in-current-frame ()
-  "Run `vterm` in the currently selected frame."
+  "Run `vterm` in the currently selected frame. Useful to open emacsclient directly in vterm."
   (interactive)
   (let ((frame (selected-frame)))
     (run-at-time
@@ -76,7 +86,7 @@
 
 ;; emms
 (use-package emms
-  :ensure nil
+  :ensure t
   :init
   (add-hook 'emms-player-started-hook 'emms-show)
   :config
@@ -171,7 +181,7 @@
 ;; Customize fonts and set theme.
 (defun my/apply-gui-config (frame)
   (with-selected-frame frame
-    (load-theme 'timu-spacegrey t)
+    (load-theme 'catppuccin t)
     (set-frame-font "Jetbrains Mono Nerd Font 12" nil t)))
 (if (daemonp)
     (add-hook 'after-make-frame-functions #'my/apply-gui-config)
