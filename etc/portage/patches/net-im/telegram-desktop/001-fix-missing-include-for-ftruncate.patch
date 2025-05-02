@@ -1,0 +1,12 @@
+diff --color -ru tdesktop-5.12.3-full/Telegram/lib_webview/webview/webview_data_stream_memory.cpp tdesktop-5.12.3-full-patched/Telegram/lib_webview/webview/webview_data_stream_memory.cpp
+--- tdesktop-5.12.3-full/Telegram/lib_webview/webview/webview_data_stream_memory.cpp	2025-02-26 07:53:05.000000000 -0400
++++ tdesktop-5.12.3-full-patched/Telegram/lib_webview/webview/webview_data_stream_memory.cpp	2025-05-02 08:13:07.780982554 -0400
+@@ -10,6 +10,8 @@
+ #include <sys/mman.h>
+ #endif // !Q_OS_WIN && !Q_OS_MAC
+ 
++#include <unistd.h> // For ftruncate and close.
++
+ namespace Webview {
+ 
+ DataStreamFromMemory::DataStreamFromMemory(
