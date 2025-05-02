@@ -1,1 +1,1 @@
-app-editors/emacs mailutils
+>=app-editors/emacs-30.1 dynamic-loading mailutils

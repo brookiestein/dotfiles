@@ -1,0 +1,4 @@
+>=www-client/firefox-137.0.2 hwaccel openh264 -telemetry
+# required by www-client/firefox-138.0::gentoo[system-libvpx]
+# required by firefox (argument)
+>=media-libs/libvpx-1.14.1 postproc

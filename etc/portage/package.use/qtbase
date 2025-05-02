@@ -1,0 +1,2 @@
+# I sometimes develop Qt programs that use the MySQL/MariaDB DB engine.
+>=dev-qt/qtbase-6.8.3 mysql

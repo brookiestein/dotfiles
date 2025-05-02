@@ -1,0 +1,7 @@
+# required by kde-frameworks/kio-6.13.0::gentoo
+# required by kde-plasma/libplasma-6.3.4::gentoo
+# required by kde-plasma/polkit-kde-agent-6.3.4::gentoo
+# required by kde-frameworks/kauth-6.13.0::gentoo[policykit]
+>=dev-qt/qtbase-6.8.3-r1 libproxy
+# required by dev-qt/qtwayland-5.15.16-r1::gentoo
+>=dev-qt/qtgui-5.15.16 egl
