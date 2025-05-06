@@ -1,0 +1,7 @@
+/* -*- mode: js; js-indent-level: 4; indent-tabs-mode: nil -*- */
+
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.udisks2.filesystem-mount" && subject.user == "brayan") {
+        return polkit.Result.YES;
+    }
+});

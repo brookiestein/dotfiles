@@ -1,3 +1,5 @@
 dev-debug/gdb
+dev-libs/libxlsxwriter
 dev-qt/qtmultimedia
 dev-qt/qt-docs
+media-libs/raylib
