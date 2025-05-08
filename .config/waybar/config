@@ -1,9 +1,7 @@
 // -*- mode: json -*-
-
 {
 	"layer": "top",
 	"position": "top",
-
 	"modules-left": [
 		"hyprland/workspaces",
 		"custom/right-arrow-dark"
@@ -38,7 +36,6 @@
 		"custom/left-arrow-dark",
 		"tray"
 	],
-
 	"custom/left-arrow-dark": {
 		"format": "",
 		"tooltip": false
@@ -71,17 +68,19 @@
 			"5": "",
 			"6": "",
 			"7": "",
+			"8": "",
 			"active": "",
 			"default": ""
 		}
 	},
 	"clock#1": {
 		"format": "{:%a %F}",
-		"tooltip": false
+		"tooltip-format": "{:%A, %B %d %Y}",
+		"on-click": "alacritty -e bash -c \"cal; read -r -n 1 -d '\n' -p 'Press any key to close...' ;\""
 	},
 	"clock#2": {
 		"format": "{:%T}",
-		"tooltip": false,
+		"tooltip-format": "{:%r}",
         "interval": 1
 	},
     "network": {
@@ -94,11 +93,12 @@
         "tooltip-format-wifi": "{essid} {ipaddr}/{cidr}  ",
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50
+        "max-length": 50,
+		"on-click": "notify-send 'Hello' 'World'"
     },
 	"pulseaudio": {
 		"format": "{icon}{volume:2}%/{format_source}",
-		"format-bluetooth": "{icon}  {volume}%",
+		"format-bluetooth": "{icon}{volume}%",
 		"format-muted": "{icon} MUTE/{format_source}",
 		"on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
 		"on-click-middle": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
@@ -125,7 +125,8 @@
             "normal": 10,
             "warning": 30,
             "critical": 75
-        }
+        },
+		"on-click": "alacritty -e htop || notify-send 'Error' 'Alacrritty or htop is not installed.'"
 	},
 	"backlight": {
         "device": "intel_backlight",
