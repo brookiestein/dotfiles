@@ -94,12 +94,12 @@
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50,
-		"on-click": "notify-send 'Hello' 'World'"
+		"on-click": "iwmenu -l custom --launcher-command 'wofi --show dmenu'"
     },
 	"pulseaudio": {
-		"format": "{icon}{volume:2}%/{format_source}",
-		"format-bluetooth": "{icon}{volume}%",
-		"format-muted": "{icon} MUTE/{format_source}",
+		"format": "{icon}{volume:2}%/{format_source}",
+		"format-bluetooth": "{icon}{volume}%/{format_source}",
+		"format-muted": "{icon}MUTED/{format_source}",
 		"on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
 		"on-click-middle": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
 		"format-icons": {
@@ -109,7 +109,7 @@
 				" "
 			]
 		},
-        "format-source-muted": "MUTE",
+        "format-source-muted": "MUTED",
 		"scroll-step": 5
 	},
 	"memory": {
