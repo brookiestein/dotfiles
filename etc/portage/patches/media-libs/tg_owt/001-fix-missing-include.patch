@@ -1,0 +1,11 @@
+diff --color -ru tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/audio_coding/neteq/reorder_optimizer.cc tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e-patched/src/modules/audio_coding/neteq/reorder_optimizer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/audio_coding/neteq/reorder_optimizer.cc	2024-12-03 09:23:36.000000000 -0400
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e-patched/src/modules/audio_coding/neteq/reorder_optimizer.cc	2025-05-06 08:25:21.639078471 -0400
+@@ -11,6 +11,7 @@
+ #include "modules/audio_coding/neteq/reorder_optimizer.h"
+ 
+ #include <algorithm>
++#include <cstdint>
+ #include <limits>
+ #include <vector>
+ 

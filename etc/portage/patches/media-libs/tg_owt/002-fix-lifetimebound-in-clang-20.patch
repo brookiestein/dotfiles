@@ -1,0 +1,15 @@
+diff --color -ru tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/candidate.h tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e-clang20/src/api/candidate.h
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/candidate.h	2024-12-03 09:23:36.000000000 -0400
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e-clang20/src/api/candidate.h	2025-05-20 23:11:29.741059326 -0400
+@@ -105,7 +105,11 @@
+   // cricket::LOCAL_PORT_TYPE). The type should really be an enum rather than a
+   // string, but until we make that change the lifetime attribute helps us lock
+   // things down. See also the `Port` class.
++#ifdef __clang__
++  void set_type(absl::string_view type) {
++#else
+   void set_type(absl::string_view type ABSL_ATTRIBUTE_LIFETIME_BOUND) {
++#endif
+     Assign(type_, type);
+   }
+ 
