@@ -1,0 +1,14 @@
+diff --color -ru libnvme-1.14/examples/mi-mctp-csi-test.c libnvme-1.14-patched/examples/mi-mctp-csi-test.c
+--- libnvme-1.14/examples/mi-mctp-csi-test.c	2025-05-20 06:16:33.000000000 -0400
++++ libnvme-1.14-patched/examples/mi-mctp-csi-test.c	2025-05-27 08:17:22.372973654 -0400
+@@ -21,7 +21,10 @@
+ 
+ #include <ccan/array_size/array_size.h>
+ #include <ccan/endian/endian.h>
++
++#ifdef __GLIBC__
+ #include <bits/pthreadtypes.h>
++#endif // In musl, for example, should be enough with just pthread.h
+ 
+ void fhexdump(FILE *fp, const unsigned char *buf, int len)
+ {
