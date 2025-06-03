@@ -1,0 +1,10 @@
+set autolist
+set color
+set correct = cmd
+set histfile = ~/.tcsh_history
+set fignore = (.0 \~)
+set nobeep
+set notify
+set promptchars = ($ \#)
+set prompt = "%{\e[32;1m%} %n %{\e[37;1m%}(on %m) %{\e[31;1m%}@ %{\e[34;1m%}[%~] %# \n %{\e[31;1m%}>%{\e[00m%} "
+set savehist
