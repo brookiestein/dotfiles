@@ -1,18 +1,18 @@
 gui-apps/grim
 gui-apps/hypridle
+gui-apps/hyprlock
 gui-apps/hyprpaper
+gui-apps/hyprsunset
+gui-apps/mako
 gui-apps/qt6ct
 gui-apps/slurp
-gui-apps/swaylock # 'till I'm able to build hyprlock...
 gui-apps/waybar
 gui-apps/wofi
 gui-apps/wl-clipboard
 gui-libs/xdg-desktop-portal-hyprland
 gui-wm/hyprland
-net-wireless/iwmenu
 media-sound/alsa-utils
 sys-apps/xdg-desktop-portal-gtk
 sys-auth/hyprpolkitagent
-sys-power/acpilight
-x11-misc/dunst
+x11-misc/xdg-user-dirs
 x11-terms/alacritty

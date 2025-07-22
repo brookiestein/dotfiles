@@ -1,0 +1,17 @@
+# Remove files that shall not be installed from this list.
+amd-ucode/microcode_amd.bin
+amd-ucode/microcode_amd_fam19h.bin
+amd-ucode/README
+amdgpu/gc_11_0_2_imu.bin
+amdgpu/gc_11_0_2_pfp.bin
+amdgpu/psp_13_0_7_ta.bin
+amdgpu/gc_11_0_2_mec.bin
+amdgpu/gc_11_0_2_mes1.bin
+amdgpu/smu_13_0_7.bin
+amdgpu/gc_11_0_2_me.bin
+amdgpu/dcn_3_2_1_dmcub.bin
+amdgpu/psp_13_0_7_sos.bin
+amdgpu/vcn_4_0_4.bin
+amdgpu/gc_11_0_2_rlc.bin
+amdgpu/gc_11_0_2_mes_2.bin
+amdgpu/sdma_6_0_2.bin
