@@ -25,12 +25,6 @@
 		"cpu",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
-		"backlight",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"battery",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
         "network",
 		"custom/left-arrow-light",
 		"custom/left-arrow-dark",
@@ -51,10 +45,6 @@
 	"custom/right-arrow-light": {
 		"format": "",
 		"tooltip": false
-	},
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"format": "{name}"
 	},
 	"hyprland/workspaces": {
      	"format": "{icon}",
@@ -83,19 +73,6 @@
 		"tooltip-format": "{:%r}",
         "interval": 1
 	},
-    "network": {
-        "interface": "wlan0",
-        "format": " {signalStrength}% ",
-        "format-wifi": " {signalStrength}% ",
-        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-        "format-disconnected": "󰤨", //An empty format will hide the module.
-        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-        "tooltip-format-wifi": "{essid} {ipaddr}/{cidr}  ",
-        "tooltip-format-ethernet": "{ifname} ",
-        "tooltip-format-disconnected": "Disconnected",
-        "max-length": 50,
-		"on-click": "iwmenu -l custom --launcher-command 'wofi --show dmenu'"
-    },
 	"pulseaudio": {
 		"format": "{icon}{volume:2}%/{format_source}",
 		"format-bluetooth": "{icon}{volume}%/{format_source}",
@@ -114,7 +91,7 @@
 	},
 	"memory": {
 		"interval": 5,
-        "format": " {0}%",
+        "format": " {used:0.1f}G/{total:0.1f}G {0}%",
 		"tooltip-format": "RAM Usage: {used:0.1f}G/{total:0.1f}G {0}%"
 	},
 	"cpu": {
@@ -127,28 +104,6 @@
             "critical": 75
         },
 		"on-click": "alacritty -e htop || notify-send 'Error' 'Alacrritty or htop is not installed.'"
-	},
-	"backlight": {
-        "device": "intel_backlight",
-        "format": "{icon}{percent}%",
-    	"format-icons": [" ", " "],
-		"on-scroll-up": "xbacklight -inc 10",
-		"on-scroll-down": "xbacklight -dec 10"
-    },
-	"battery": {
-		"states": {
-			"good": 95,
-			"warning": 30,
-			"critical": 15
-		},
-		"format": "{icon} {capacity}%",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		]
 	},
 	"tray": {
 		"icon-size": 20

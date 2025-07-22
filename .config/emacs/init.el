@@ -17,9 +17,6 @@
   :ensure t
   :config (setq catppuccin-flavor 'mocha))
 
-;; To do web dev like the chads do.
-(use-package typescript-mode)
-
 ;; company-mode
 (use-package company
   :ensure t)
@@ -131,30 +128,12 @@
    ("<XF86AudioPlay>" . emms-pause)
    ("<XF86AudioPause>" . emms-pause)))
 
-;; ERC
-(defun log-into-erc ()
-  (interactive)
-  (let
-	  ((password-cache nil))
-  (erc :server "irc.libera.chat" :port 6667 :nick "brookiestein" :password "")))
-(setq erc-autojoin-channels-alist '(("libera.chat" "#gentoo" "#gentoo-chat")))
-(global-set-key (kbd "C-c i") 'log-into-erc)
-
-(defun doas-find-file (file-name)
+(defun sudo-find-file (file-name)
   ;; Like find file, but opens the file as root.
-  (interactive "FDoas Find File: ")
-  (let ((tramp-file-name (concat "/doas::" (expand-file-name file-name))))
+  (interactive "FSudo Find File: ")
+  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
-(global-set-key (kbd "C-c q f") 'doas-find-file)
-
-;; telega
-(use-package telega
-  :ensure t
-  :config
-  (setq telega-directory "~/.config/telega")
-  (setq telega-use-images t)
-  (setq telega-emoji-use-images t))
-(global-set-key (kbd "C-c t") 'telega)
+(global-set-key (kbd "C-c q f") 'sudo-find-file)
 
 ;; Disable backup files.
 (setf make-backup-files nil)
