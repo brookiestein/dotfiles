@@ -1,0 +1,3 @@
+>=net-misc/networkmanager-1.52.1 connection-sharing iwd -ppp -wext
+# required by net-misc/networkmanager-1.52.1::gentoo[connection-sharing]
+>=net-misc/networkmanager-1.52.1 iptables

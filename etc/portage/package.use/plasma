@@ -1,0 +1,16 @@
+kde-plasma/plasma-meta -X
+# required by kde-plasma/plasma-meta-6.4.3::gentoo
+# required by plasma-meta (argument)
+>=kde-plasma/kwin-6.4.3 lock
+# required by kde-frameworks/kio-6.16.0::gentoo
+# required by kde-plasma/kactivitymanagerd-6.4.3::gentoo
+# required by kde-plasma/plasma-workspace-6.4.3::gentoo
+# required by kde-plasma/plasma-desktop-6.4.3::gentoo
+# required by kde-plasma/plasma-meta-6.4.3::gentoo
+# required by plasma-meta (argument)
+>=dev-qt/qtbase-6.9.1-r2 libproxy
+# required by kde-plasma/kwin-6.4.3::gentoo
+# required by kde-plasma/plasma-desktop-6.4.3::gentoo
+# required by kde-plasma/plasma-meta-6.4.3::gentoo
+# required by plasma-meta (argument)
+>=x11-base/xwayland-24.1.8 libei
