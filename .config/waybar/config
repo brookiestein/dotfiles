@@ -1,111 +1,148 @@
-// -*- mode: json -*-
 {
-	"layer": "top",
-	"position": "top",
-	"modules-left": [
-		"hyprland/workspaces",
-		"custom/right-arrow-dark"
-	],
-	"modules-center": [
-		"custom/left-arrow-dark",
-		"clock#1",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"clock#2",
-		"custom/right-arrow-dark"
-	],
-	"modules-right": [
-		"custom/left-arrow-dark",
-		"pulseaudio",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
+    "layer": "top",
+    "position": "top",
+    "height": 36,
+    "spacing": 4,
+    "exclusive": true,
+    "passthrough": false,
+    "fixed-center": true,
+
+    "modules-left": [
+		"network",
+		"custom/separator",
 		"memory",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"cpu",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-        "network",
-		"custom/left-arrow-light",
-		"custom/left-arrow-dark",
-		"tray"
+		"custom/separator",
+		"cpu"
 	],
-	"custom/left-arrow-dark": {
-		"format": "",
-		"tooltip": false
+	
+    "modules-center": [
+		"hyprland/workspaces"
+	],
+	
+    "modules-right": [
+		"tray",
+		"custom/separator",
+        "pulseaudio",
+		"custom/separator",
+        "pulseaudio#microphone",
+		"custom/separator",
+		"backlight",
+		"custom/separator",
+		"battery",
+		"custom/separator",
+        "custom/clock#date",
+        "custom/clock",
+		"custom/separator",
+		"custom/power",
+    ],
+
+	"network": {
+		"format-wifi": "  {essid} ({signalStrength}%)",
+		"family": "ipv4_6",
+		"tooltip-format-wifi": " {ipaddr}/{cidr} via {gwaddr}",
+		"tooltip-format-ethernet": "{ifname}  ",
+		"tooltip-format-disconnected": "Disconnected",
+		"max-length": 50,
 	},
-	"custom/left-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-dark": {
-		"format": "",
-		"tooltip": false
-	},
-	"custom/right-arrow-light": {
-		"format": "",
-		"tooltip": false
-	},
-	"hyprland/workspaces": {
-     	"format": "{icon}",
-     	"on-scroll-up": "hyprctl dispatch workspace e+1",
-     	"on-scroll-down": "hyprctl dispatch workspace e-1",
-		"format-icons": {
-			"1": "",
-			"2": "",
-			"3": "",
-			"4": "",
-			"5": "",
-			"6": "",
-			"7": "",
-			"8": "",
-			"active": "",
-			"default": ""
-		}
-	},
-	"clock#1": {
-		"format": "{:%a %F}",
-		"tooltip-format": "{:%A, %B %d %Y}",
-		"on-click": "alacritty -e bash -c \"cal; read -r -n 1 -d '\n' -p 'Press any key to close...' ;\""
-	},
-	"clock#2": {
-		"format": "{:%T}",
-		"tooltip-format": "{:%r}",
-        "interval": 1
-	},
-	"pulseaudio": {
-		"format": "{icon}{volume:2}%/{format_source}",
-		"format-bluetooth": "{icon}{volume}%/{format_source}",
-		"format-muted": "{icon}MUTED/{format_source}",
-		"on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
-		"on-click-middle": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
-		"format-icons": {
-			"headphones": "",
-			"default": [
-				"",
-				" "
-			]
-		},
-        "format-source-muted": "MUTED",
-		"scroll-step": 5
-	},
-	"memory": {
-		"interval": 5,
-        "format": " {used:0.1f}G/{total:0.1f}G {0}%",
-		"tooltip-format": "RAM Usage: {used:0.1f}G/{total:0.1f}G {0}%"
-	},
+	
 	"cpu": {
 		"interval": 1,
 		"format": "󰻠 {usage:2}%",
 		"states": {
-            "idle": 0,
-            "normal": 10,
-            "warning": 30,
-            "critical": 75
-        },
-		"on-click": "alacritty -e htop || notify-send 'Error' 'Alacrritty or htop is not installed.'"
+			"idle": 0,
+			"normal": 10,
+			"warning": 30,
+			"critical": 75
+		}
 	},
-	"tray": {
-		"icon-size": 20
-	}
+
+	"memory": {
+		"interval": 5,
+		"format": " {0}%",
+		"tooltip-format": "{used:0.1f}G used of {total:0.1f}G"
+	},
+
+	"hyprland/workspaces": {
+		"on-scroll-up": "hyprctl dispatch workspace e+1 &>/dev/null",
+		"on-scroll-down": "hyprctl dispatch workspace e-1 &>/dev/null"
+	},
+	
+    "tray": {
+        "show-passive-items": true,
+        "spacing": 10,
+    },
+
+    "custom/clock": {
+		"exec": "date +'%T'",
+		"interval": 1
+    },
+
+    "custom/clock#date": {
+		"exec": "date +'%a %F'",
+		"interval": 1
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "  muted",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": "󰂑",
+            "headset": "󰂑",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": [" ", " ", " "],
+        },
+        "on-click-middle": "pamixer -t",
+        "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
+		"tooltip-format": "{source_desc} | {volume}%"
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "  muted",
+        "on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
+        "on-click-middle": "~/.config/hypr/scripts/volume.sh --toggle-mic",
+        "on-scroll-up": "wpctl ",
+        "on-scroll-down": "",
+        "tooltip-format": "{source_desc} | {source_volume}%",
+    },
+
+	"backlight": {
+		"device": "intel_backlight",
+		"format": "{icon}{percent}%",
+		"format-icons": [" ", " "],
+		"on-scroll-up": "xbacklight -inc 10",
+		"on-scroll-down": "xbacklight -dec 10"
+	},
+
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 15
+		},
+
+		"format": "{icon} {capacity}%",
+		"format-icons": [
+			"",
+			"",
+			"",
+			"",
+			""
+		]
+	},
+	
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false,
+    },
+
+    "custom/power": {
+        "tooltip": false,
+        "on-click": "spm &",
+        "format": "⏻ ",
+    },
 }
