@@ -1,6 +1,5 @@
 colorscheme unokai
 syntax on
-
 filetype plugin indent on
 
 " General configurations
@@ -33,6 +32,13 @@ set cindent
 " =======================
 set ttyfast
 
+" =======================
+" Mappings
+" =======================
+let mapleader = ","
+" Fast saving
+nmap <leader>w :w!<cr>
+
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 set cmdheight=1
@@ -52,8 +58,6 @@ set exrc " Enable usage of additional .vimrc files from working directory
 set secure " Prohibit .vimrc files to execute shell, create files, etc.
 set autoread " Set to auto read when a file is changed from the outside
 au FocusGained,BufEnter * checktime
-" Fast saving
-nmap <leader>w :w!<cr>
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
 
@@ -97,7 +101,6 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 map <leader>pp :setlocal paste!<cr>
 
 " Settings for programming languages
-"
 "=====================================================
 " C/C++ config
 "=====================================================
