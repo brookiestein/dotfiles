@@ -1,3 +1,6 @@
 # required by net-im/telegram-desktop-5.16.2-r1::gentoo
 # required by telegram-desktop (argument)
 >=media-video/ffmpeg-7.1.1-r2 opus vpx
+# required by media-video/obs-studio-31.1.2::gentoo
+# required by obs-studio (argument)
+>=media-video/ffmpeg-7.1.1-r2 x264
