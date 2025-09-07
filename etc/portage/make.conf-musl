@@ -7,7 +7,7 @@ CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
-RUSTFLAGS="-C target-cpu=znver2"
+RUSTFLAGS="${RUSTFLAGS} -C target-cpu=znver2 -Clinker-plugin-lto"
 
 # WARNING: Changing your CHOST is not something that should be done lightly.
 # Please consult https://wiki.gentoo.org/wiki/Changing_the_CHOST_variable before changing.
@@ -34,10 +34,13 @@ VIDEO_CARDS="amdgpu radeonsi"
 # License accepted by default:
 ACCEPT_LICENSE="-* @FREE"
 
+# Let's live in the cutting edge :P
+ACCEPT_KEYWORDS="~amd64"
+
 # Portage's default options.
 EMERGE_DEFAULT_OPTS="${EMERGE_DEFAULT_OPTS} --ask --ask-enter-invalid
-                --jobs=4 --load-average=15.90 --verbose \
-                --verbose-conflicts --keep-going=y"
+--jobs=4 --load-average=15.90 --verbose \
+--verbose-conflicts --keep-going=y"
 
 # My CPU's supported flags (AMD Ryzen 7 PRO 4750U):
 CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3"
@@ -54,8 +57,8 @@ QEMU_USER_TARGETS="i386 x86_64"
 # Mirrors:
 GENTOO_MIRRORS="https://mirrors.rit.edu/gentoo/ https://gentoo.osuosl.org/"
 
-USE="${USE} X aac alsa bluetooth cairo cups dbus elogind icu jpeg jpeg2k gif gpm gtk gui modules-sign ogg opengl pdf pipewire \
-	png pulseaudio qml qt6 screencast secureboot spell sound sound-server svg text udev usb udisks v4l vulkan wayland xft"
+USE="${USE} X aac alsa bluetooth cairo cups dbus elogind icu jpeg jpeg2k gif gpm gtk gui libnotify modules-sign ogg opengl pdf \
+pipewire png pulseaudio qml qt6 screencast secureboot spell sound sound-server svg text udev usb udisks v4l vulkan wayland xft"
 
 MODULES_SIGN_KEY="/mnt/kernel_signing/kernel_key.pem"
 MODULES_SIGN_HASH="sha512"
