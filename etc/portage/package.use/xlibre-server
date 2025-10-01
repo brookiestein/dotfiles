@@ -1,0 +1,4 @@
+# required by x11-base/xorg-server-25.0.0.11::xlibre
+# required by x11-drivers/xf86-input-libinput-1.5.0::gentoo
+# required by x11-base/xlibre-drivers-25.0.0.0::xlibre[input_devices_libinput]
+>=x11-base/xlibre-server-25.0.0.11 -xvfb

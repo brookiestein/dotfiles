@@ -1,0 +1,2 @@
+# Avoid installing a lot of Ruby packages lol.
+>=x11-misc/picom-12.5 -doc
