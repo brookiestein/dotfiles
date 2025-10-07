@@ -100,11 +100,11 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias cp="cp -v"
-alias mv="mv -v"
-alias rm="rm -v"
-alias rmdir="rmdir -v"
-alias mkdir="mkdir -pv"
+alias cp="cp --verbose"
+alias mkdir="mkdir --parent --verbose"
+alias mv="mv --verbose"
+alias rm="rm --verbose"
+alias rmdir="rmdir --verbose"
 
 vterm_printf() {
     if [ -n "$TMUX" ] \
