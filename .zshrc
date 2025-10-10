@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+mkdir -p "$HOME/.cache/zsh"
+export ZSH_COMPDUMP="$HOME/.cache/zsh/.zcompdump"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -105,6 +108,7 @@ alias mkdir="mkdir --parent --verbose"
 alias mv="mv --verbose"
 alias rm="rm --verbose"
 alias rmdir="rmdir --verbose"
+alias run0="run0 --background="
 
 vterm_printf() {
     if [ -n "$TMUX" ] \
