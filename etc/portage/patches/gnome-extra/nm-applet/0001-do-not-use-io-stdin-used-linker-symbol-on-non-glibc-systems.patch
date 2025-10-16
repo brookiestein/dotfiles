@@ -1,0 +1,140 @@
+From f04622ed3949dbda9e599fa3036bacffb556dfb7 Mon Sep 17 00:00:00 2001
+From: Pepper Gray <111446242+peppergrayxyz@users.noreply.github.com>
+Date: Thu, 2 Oct 2025 20:52:48 +0200
+Subject: [PATCH] linker: conditional use of symbol '_IO_stdin_used' The linker
+ unconditonally uses the symbol '_IO_stdin_used' which causes an error when
+ linking with lld/musl. '_IO_stdin_used' is a glibc symbol and not present
+ there.
+
+The solution is to check if the symbol is present and only use it then. A check is added  and linker-script-binary.ver is generated in accordance.
+
+Fixes: #197
+Signed-off-by: Pepper Gray <hello@peppergray.xyz>
+---
+ .gitignore                                      |  1 +
+ Makefile.am                                     |  8 +++++---
+ configure.ac                                    | 15 +++++++++++++++
+ ...pt-binary.ver => linker-script-binary.ver.in |  2 +-
+ meson.build                                     | 17 ++++++++++++++++-
+ 5 files changed, 38 insertions(+), 5 deletions(-)
+ rename linker-script-binary.ver => linker-script-binary.ver.in (52%)
+
+diff --git a/Makefile.am b/Makefile.am
+index 5375e9147..077a31673 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -412,7 +412,7 @@ $(src_connection_editor_nm_connection_editor_OBJECTS): $(connection_editor_h_gen
+ EXTRA_src_connection_editor_nm_connection_editor_DEPENDENCIES = linker-script-binary.ver
+ 
+ src_connection_editor_nm_connection_editor_LDFLAGS = \
+-	-Wl,--version-script="$(srcdir)/linker-script-binary.ver"
++	-Wl,--version-script="$(top_builddir)/linker-script-binary.ver"
+ 
+ 
+ EXTRA_DIST += \
+@@ -543,7 +543,7 @@ $(src_nm_applet_OBJECTS): $(nm_applet_h_gen)
+ EXTRA_src_nm_applet_DEPENDENCIES = linker-script-binary.ver
+ 
+ src_nm_applet_LDFLAGS = \
+-	-Wl,--version-script="$(srcdir)/linker-script-binary.ver"
++	-Wl,--version-script="$(top_builddir)/linker-script-binary.ver"
+ 
+ 
+ EXTRA_DIST += \
+@@ -587,7 +587,7 @@ check-local: $(check_local)
+ TESTS += $(check_programs)
+ 
+ EXTRA_DIST += \
+-	linker-script-binary.ver \
++	linker-script-binary.ver.in \
+ 	CONTRIBUTING \
+ 	Makefile.glib \
+ 	autogen.sh \
+@@ -598,6 +598,8 @@ EXTRA_DIST += \
+ 	\
+ 	po/meson.build
+ 
++CLEANFILES += \
++	linker-script-binary.ver
+ 
+ autostartdir = $(sysconfdir)/xdg/autostart
+ autostart_in_files = nm-applet.desktop.in
+diff --git a/configure.ac b/configure.ac
+index c8453a442..13e2a25fd 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -161,6 +161,20 @@ else
+ fi
+ AC_DEFINE_UNQUOTED(NM_MORE_ASSERTS, $more_asserts, [Define if more asserts are enabled])
+ 
++dnl Check for _IO_stdin_used
++AC_LANG([C])
++AC_MSG_CHECKING([for _IO_stdin_used])
++AC_LINK_IFELSE(
++  [AC_LANG_PROGRAM(
++     [[extern int _IO_stdin_used;]],
++     [[return (int)(long)&_IO_stdin_used;]]
++   )],
++  [IO_STDIN_USED_LINE='  _IO_stdin_used;'
++   AC_MSG_RESULT([yes])],
++  [IO_STDIN_USED_LINE=''
++   AC_MSG_RESULT([no])])
++
++AC_SUBST([IO_STDIN_USED_LINE])
+ 
+ AC_CONFIG_FILES([
+ Makefile
+@@ -168,6 +182,7 @@ man/nm-applet.1
+ man/nm-connection-editor.1
+ org.gnome.nm-applet.gschema.xml
+ po/Makefile.in
++linker-script-binary.ver
+ ])
+ AC_OUTPUT
+ 
+diff --git a/linker-script-binary.ver b/linker-script-binary.ver.in
+similarity index 52%
+rename from linker-script-binary.ver
+rename to linker-script-binary.ver.in
+index a2780c090..487084ba6 100644
+--- a/linker-script-binary.ver
++++ b/linker-script-binary.ver.in
+@@ -1,6 +1,6 @@
+ {
+ global:
+-	_IO_stdin_used;
++	@IO_STDIN_USED_LINE@
+ local:
+ 	*;
+ };
+diff --git a/meson.build b/meson.build
+index be9042bcc..88ef7fcb0 100644
+--- a/meson.build
++++ b/meson.build
+@@ -102,7 +102,22 @@ endif
+ add_project_arguments(common_flags, language: 'c')
+ add_project_link_arguments(common_ldflags, language: 'c')
+ 
+-linker_script_ver = join_paths(meson.source_root(), 'linker-script-binary.ver')
++# symbols
++has_io_stdin_used = cc.links('''
++  extern int _IO_stdin_used;
++  int main(void) {
++    return (int)(long)&_IO_stdin_used;
++  }
++''')
++
++linker_conf = configuration_data()
++linker_conf.set('IO_STDIN_USED_LINE', has_io_stdin_used ? '_IO_stdin_used;' : '')
++
++linker_script_ver = configure_file(
++  input: 'linker-script-binary.ver.in',
++  output: 'linker-script-binary.ver',
++  configuration: linker_conf,
++)
+ 
+ gio_dep = dependency('gio-2.0', version: '>= 2.40')
+ gmodule_export_dep = dependency('gmodule-export-2.0')
+-- 
+GitLab
+
