@@ -1,0 +1,6 @@
+# required by media-video/ffmpeg-8.0::gentoo
+# required by media-libs/opencv-4.12.0-r2::gentoo[ffmpeg]
+# required by kde-plasma/spectacle-6.5.2::gentoo
+# required by kde-plasma/plasma-meta-6.5.2::gentoo
+# required by plasma-meta (argument)
+>=media-libs/libsdl2-2.32.8 gles2

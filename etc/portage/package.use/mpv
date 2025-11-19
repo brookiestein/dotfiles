@@ -1,0 +1,4 @@
+# Ilya Tumaykin <itumaykin+gentoo@gmail.com> (2017-02-02)
+# Override default +sdl from desktop profile and disable sdl outputs.
+# These outputs are for systems without a proper audio/video support.
+media-video/mpv -sdl

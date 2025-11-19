@@ -1,0 +1,3 @@
+# required by dev-games/godot-4.5.1::gentoo
+# required by godot (argument)
+>=media-libs/freetype-2.14.1-r1 brotli
