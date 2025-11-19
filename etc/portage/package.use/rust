@@ -1,3 +1,3 @@
->=dev-lang/rust-1.84.1-r1 clippy rust-analyzer rustfmt
+>=dev-lang/rust-1.84.1-r1 clippy rust-analyzer rustfmt system-llvm
 # required by dev-lang/rust-1.84.1-r1::gentoo[rust-analyzer]
 >=dev-lang/rust-1.84.1-r1 rust-src

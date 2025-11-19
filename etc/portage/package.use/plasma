@@ -14,3 +14,7 @@ kde-plasma/plasma-meta -X
 # required by kde-plasma/plasma-meta-6.4.3::gentoo
 # required by plasma-meta (argument)
 >=x11-base/xwayland-24.1.8 libei
+# required by kde-plasma/kscreen-6.5.2::gentoo
+# required by kde-plasma/plasma-meta-6.5.2::gentoo
+# required by plasma-meta (argument)
+>=kde-frameworks/kimageformats-6.20.0 avif
