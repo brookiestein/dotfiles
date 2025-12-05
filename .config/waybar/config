@@ -32,6 +32,8 @@
 		"custom/separator",
 		"clock",
 		"custom/separator",
+		"power-profiles-daemon",
+		"custom/separator",
 		"custom/power",
     ],
 
@@ -49,17 +51,21 @@
 		"interval": 1,
 		"format": "󰻠 {usage:2}%",
 		"states": {
-			"idle": 0,
 			"normal": 10,
-			"warning": 30,
-			"critical": 75
+			"warning": 40,
+			"critical": 80
 		}
 	},
 
 	"memory": {
 		"interval": 5,
 		"format": " {0}%",
-		"tooltip-format": "{used:0.1f}G used of {total:0.1f}G"
+		"tooltip-format": "{used:0.1f}G used of {total:0.1f}G",
+		"states": {
+			"normal": 10,
+			"warning": 40,
+			"critical": 80
+		}
 	},
 
 	"hyprland/workspaces": {
@@ -100,7 +106,7 @@
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "  muted",
+        "format-muted": " ",
         "format-icons": {
             "headphone": " ",
             "hands-free": "󰂑",
@@ -118,9 +124,8 @@
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "format-source": " {volume}%",
-        "format-source-muted": "  muted",
+        "format-source-muted": " ",
         "on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle",
-        "on-click-middle": "~/.config/hypr/scripts/volume.sh --toggle-mic",
         "on-scroll-up": "wpctl ",
         "on-scroll-down": "",
         "tooltip-format": "{source_desc} | {source_volume}%",
@@ -135,12 +140,15 @@
 	},
 
 	"battery": {
+		"bat": "BAT0",
+		"interval": 60,
 		"states": {
 			"good": 95,
 			"warning": 30,
 			"critical": 15
 		},
 
+		"format-charging": " {capacity}%",
 		"format": "{icon} {capacity}%",
 		"format-icons": [
 			"",
@@ -157,8 +165,21 @@
     },
 
     "custom/power": {
-        "tooltip": false,
+        "tooltip": true,
+		"tooltip-format": "Launch System Power Manager",
         "on-click": "spm &",
         "format": "⏻ ",
     },
+
+	"power-profiles-daemon": {
+  		"format": "{icon}",
+  		"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+  		"tooltip": true,
+  		"format-icons": {
+    		"default": "",
+    		"performance": "",
+    		"balanced": " ",
+    		"power-saver": " "
+  		}
+	}
 }
