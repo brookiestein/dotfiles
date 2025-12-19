@@ -7,7 +7,7 @@ CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 FCFLAGS="${COMMON_FLAGS}"
 FFLAGS="${COMMON_FLAGS}"
-RUSTFLAGS="${RUSTFLAGS} -C target-cpu=znver2 -Clinker-plugin-lto"
+RUSTFLAGS="${RUSTFLAGS} -C target-cpu=znver2"
 
 # WARNING: Changing your CHOST is not something that should be done lightly.
 # Please consult https://wiki.gentoo.org/wiki/Changing_the_CHOST_variable before changing.
@@ -57,8 +57,9 @@ QEMU_USER_TARGETS="i386 x86_64"
 # Mirrors:
 GENTOO_MIRRORS="https://mirrors.rit.edu/gentoo/ https://gentoo.osuosl.org/"
 
-USE="${USE} X aac alsa bluetooth cairo cups dbus elogind icu jpeg jpeg2k gif gpm gtk gui libnotify modules-sign ogg opengl pdf \
-pipewire png pulseaudio qml qt6 screencast secureboot spell sound sound-server svg text udev usb udisks v4l vulkan wayland xft"
+USE="${USE} X aac alsa bluetooth cairo cups dbus flac elogind gif gmp gpm gtk gui harfbuzz icu jpeg jpeg2k jpegxl libnotify modules-sign mp3 mp4 mpeg \
+ogg opengl opus pdf pipewire png policykit pulseaudio qml qt6 screencast secureboot sdl spell sound sound-server svg text tiff truetype udev udisks \
+unicode upower usb vulkan v4l wayland xcb xft xv xvid x264 x265"
 
 MODULES_SIGN_KEY="/mnt/kernel_signing/kernel_key.pem"
 MODULES_SIGN_HASH="sha512"
