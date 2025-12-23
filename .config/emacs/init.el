@@ -128,12 +128,12 @@
    ("<XF86AudioPlay>" . emms-pause)
    ("<XF86AudioPause>" . emms-pause)))
 
-(defun sudo-find-file (file-name)
+(defun doas-find-file (file-name)
   ;; Like find file, but opens the file as root.
-  (interactive "FSudo Find File: ")
-  (let ((tramp-file-name (concat "/sudo::" (expand-file-name file-name))))
+  (interactive "FDoas Find File: ")
+  (let ((tramp-file-name (concat "/doas::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
-(global-set-key (kbd "C-c q f") 'sudo-find-file)
+(global-set-key (kbd "C-c q f") 'doas-find-file)
 
 ;; Disable backup files.
 (setf make-backup-files nil)
@@ -145,6 +145,12 @@
 (blink-cursor-mode t)
 ;; Save cursor position
 (save-place-mode 1)
+;; Ensure newline at EOF
+(setq require-final-newline t)
+;; Delete trailing spaces
+(setq delete-trailing-lines nil)
+(add-hook 'before-save-hook
+		  'delete-trailing-whitespace)
 ;; Recent edited files
 (recentf-mode 1)
 (global-set-key (kbd "C-c r") 'recentf-open-files)
