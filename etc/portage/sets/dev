@@ -1,5 +1,7 @@
-dev-debug/gdb
+dev-cpp/nlohmann_json
+dev-libs/libsodium
 dev-libs/libxlsxwriter
 dev-qt/qtmultimedia
 dev-qt/qt-docs
+llvm-core/lldb
 media-libs/raylib
