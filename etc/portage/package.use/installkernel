@@ -1,1 +1,6 @@
-sys-kernel/installkernel dracut systemd-boot uki
+sys-kernel/installkernel dracut uki
+# required by sys-kernel/installkernel-60::gentoo[dracut,uki,-systemd-boot]
+# required by installkernel (argument)
+>=sys-apps/systemd-utils-256.17 boot
+# required by sys-apps/systemd-utils-256.17::gentoo[boot]
+>=sys-apps/systemd-utils-256.17 kernel-install
