@@ -1,0 +1,2 @@
+# I don't need a GUI for this. Not sure if I'll need it in the future, but don't build it with that support for now.
+net-dns/avahi -gtk -qt6

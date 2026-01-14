@@ -1,0 +1,28 @@
+>=dev-cpp/gtkmm-4.20.0 gtk-doc
+# required by dev-cpp/pangomm-2.56.1::gentoo
+# required by dev-cpp/gtkmm-4.20.0::gentoo
+# required by gtkmm (argument)
+>=dev-cpp/glibmm-2.84.0 gtk-doc
+# required by dev-cpp/pangomm-2.56.1::gentoo
+# required by dev-cpp/gtkmm-4.20.0::gentoo
+# required by gtkmm (argument)
+>=dev-cpp/cairomm-1.18.0 gtk-doc
+# required by dev-cpp/gtkmm-4.20.0::gentoo
+# required by gtkmm (argument)
+>=dev-cpp/pangomm-2.56.1 gtk-doc
+# required by dev-cpp/pangomm-2.56.1::gentoo[gtk-doc]
+# required by dev-cpp/gtkmm-4.20.0::gentoo
+# required by gtkmm (argument)
+>=app-text/doxygen-1.15.0-r2 dot
+# required by media-gfx/graphviz-14.1.1::gentoo
+# required by app-text/doxygen-1.15.0-r2::gentoo[dot]
+# required by dev-cpp/glibmm-2.84.0::gentoo[gtk-doc]
+# required by dev-cpp/pangomm-2.56.1::gentoo
+# required by dev-cpp/gtkmm-4.20.0::gentoo
+# required by gtkmm (argument)
+>=media-libs/gd-2.3.3-r4 fontconfig
+# required by dev-cpp/cairomm-1.18.0::gentoo
+# required by dev-cpp/pangomm-2.56.1::gentoo
+# required by dev-cpp/gtkmm-4.20.0::gentoo
+# required by gtkmm (argument)
+>=dev-libs/libsigc++-3.8.0 gtk-doc
