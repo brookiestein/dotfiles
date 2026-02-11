@@ -33,6 +33,11 @@
 					 (interactive)
 					 (company-complete-common-or-cycle -1))))
 
+;; CMake mode
+(use-package cmake-mode
+  :ensure t
+  :config (setq cmake-tab-width 4))
+
 ;; Org mode
 (use-package org
   :ensure t
@@ -80,6 +85,10 @@
 (use-package multi-vterm
   :ensure t)
 (setq multi-vterm-dedicated-window-height-percent 50)
+(add-hook 'buffer-list-update-hook
+		  (lambda ()
+			(when (string-equal (buffer-name) "vterm")
+			  (vterm-reset-cursor-point))))
 
 ;; emms
 (use-package emms
@@ -135,10 +144,15 @@
     (find-file tramp-file-name)))
 (global-set-key (kbd "C-c q f") 'doas-find-file)
 
+;; Make scroll smoother.
+(pixel-scroll-precision-mode 1)
+(setq pixel-scroll-precision-large-scroll-height 5.0)
 ;; Disable backup files.
 (setf make-backup-files nil)
 ;; Show line numbers.
 (global-display-line-numbers-mode 1)
+;; Show column numbers.
+(setq column-number-mode t)
 ;; Highlight current line
 (global-hl-line-mode t)
 ;; Turn on cursor blinking
