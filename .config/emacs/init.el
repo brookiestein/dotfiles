@@ -144,6 +144,20 @@
     (find-file tramp-file-name)))
 (global-set-key (kbd "C-c q f") 'doas-find-file)
 
+;; PDF tools
+(use-package pdf-tools
+  :ensure t
+  :config
+  (pdf-tools-install)
+  (setq-default pdf-view-display-size 'fit-width)
+  (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
+  (add-hook 'pdf-view-mode-hook #'pdf-view-roll-minor-mode))
+;; Remember page when killing a pdf.
+(use-package pdf-view-restore
+  :ensure t
+  :config
+  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode))
+
 ;; Make scroll smoother.
 (pixel-scroll-precision-mode 1)
 (setq pixel-scroll-precision-large-scroll-height 5.0)

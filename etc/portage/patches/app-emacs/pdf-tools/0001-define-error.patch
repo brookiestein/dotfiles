@@ -1,0 +1,21 @@
+diff --color -ru a/server/epdfinfo.h b/server/epdfinfo.h
+--- a/server/epdfinfo.h	2026-01-01 05:47:52.000000000 -0400
++++ b/server/epdfinfo.h	2026-02-11 11:28:33.929897745 -0400
+@@ -99,7 +99,7 @@
+ #  define png_jmpbuf(png_ptr) ((png_ptr)->jmpbuf)
+ #endif
+ 
+-#ifndef HAVE_ERROR_H
++//#ifndef HAVE_ERROR_H
+ #  define error(status, errno, fmt, args...)                    \
+   do {                                                          \
+     int error = (errno);                                        \
+@@ -110,7 +110,7 @@
+     fprintf (stderr, "\n");                                     \
+     exit (status);                                              \
+   } while (0)
+-#endif
++//#endif
+ 
+ #define internal_error(fmt, args...)                            \
+   error (2, 0, "internal error in %s: " fmt, __func__, ## args)
