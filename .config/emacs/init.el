@@ -89,13 +89,16 @@
 
 ;; All the icons.
 (use-package all-the-icons
-  :if (display-graphic-p))
+  :if (or (display-graphic-p) (daemonp)))
 (use-package all-the-icons-dired
-  :if (display-graphic-p)
+  :after dired
+  :hook (dired-mode . my/all-the-icons-dired-maybe)
   :config
-  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+  (defun my/all-the-icons-dired-maybe ()
+    (when (display-graphic-p)
+      (all-the-icons-dired-mode 1))))
 (use-package all-the-icons-ibuffer
-  :if (display-graphic-p))
+  :if (or (display-graphic-p) (daemonp)))
 
 ;; Org mode
 (use-package org
@@ -103,8 +106,7 @@
   :config
   (global-set-key (kbd "C-c l") #'org-store-link)
   (global-set-key (kbd "C-c a") #'org-agenda)
-  (global-set-key (kbd "C-c c") #'org-capture)
-)
+  (global-set-key (kbd "C-c c") #'org-capture))
 
 ;; Markdown mode
 (use-package markdown-mode
@@ -148,53 +150,6 @@
 		  (lambda ()
 			(when (string-equal (buffer-name) "vterm")
 			  (vterm-reset-cursor-point))))
-
-;; emms
-(use-package emms
-  :ensure t
-  :init
-  (add-hook 'emms-player-started-hook 'emms-show)
-  :config
-  (require 'emms-setup)
-  (emms-all) ;; sets up all the standard modules
-  (require 'emms-player-mpv) ;; use mpv backend
-
-  (setq emms-show-format "Playing: %s")
-  (setq emms-player-list '(emms-player-mpv)
-        emms-info-functions '(emms-info-native)
-        emms-source-file-default-directory "~/Music/")
-
-  (setq emms-source-file-extensions '("mp3" "ogg" "flac" "wav" "m4a"))
-
-  ;; Load your music recursively
-  (defun my/emms-load-music ()
-    ;; Recursively add all music files from the default directory.
-    (interactive)
-    (emms-add-directory-tree emms-source-file-default-directory))
-
-  (defun my/emms-notify-current-song ()
-  ;; Send a desktop notification with the current song info.
-  (let ((track (emms-playlist-current-selected-track)))
-    (when track
-      (let ((title (emms-track-get track 'info-title))
-            (artist (emms-track-get track 'info-artist)))
-        (start-process "emms-notify" nil "notify-send"
-					   "-u" "low" "-t" "5000"
-                       "Now Playing"
-                       (if (and artist title)
-                           (format "%s - %s" artist title)
-                         (emms-track-description track)))))))
-
-  (add-hook 'emms-player-started-hook #'my/emms-notify-current-song)
-
-  :bind
-  (("C-c w m e" . emms)
-   ("C-c w m s" . emms-stop)
-   ("C-c w m l" . my/emms-load-music) ;; First load all songs from the default directory. This is needed before starting emms.
-   ("<XF86AudioPrev>" . emms-previous)
-   ("<XF86AudioNext>" . emms-next)
-   ("<XF86AudioPlay>" . emms-pause)
-   ("<XF86AudioPause>" . emms-pause)))
 
 (defun elevated-find-file (file-name)
   ;; Like find file, but opens the file as root.
