@@ -13,13 +13,36 @@
   (setf use-package-always-ensure t))
 
 ;; Packages
+;; - Themes
+;;   - Catppuccin
 (use-package catppuccin-theme
   :ensure t
   :config (setq catppuccin-flavor 'mocha))
+;;   - Doom
+(use-package doom-themes
+  :ensure t)
 
 ;; company-mode
 (use-package company
   :ensure t)
+
+;; LSP mode
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook ((c-mode c++-mode) . lsp-deferred)
+  :init)
+(use-package lsp-ui
+  :ensure t
+  :after lsp-mode
+  :commands lsp-ui-mode)
+(use-package lsp-clangd
+  :ensure nil
+  :after lsp-mode
+  :custom
+  (lsp-clients-clangd-args
+   '("--header-insertion-decorators=0"
+	 "--compile-commands-dir=build")))
 
 (company-mode 1)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -32,11 +55,6 @@
 			  (lambda ()
 					 (interactive)
 					 (company-complete-common-or-cycle -1))))
-
-;; CMake mode
-(use-package cmake-mode
-  :ensure t
-  :config (setq cmake-tab-width 4))
 
 ;; Org mode
 (use-package org
@@ -137,12 +155,12 @@
    ("<XF86AudioPlay>" . emms-pause)
    ("<XF86AudioPause>" . emms-pause)))
 
-(defun doas-find-file (file-name)
+(defun elevated-find-file (file-name)
   ;; Like find file, but opens the file as root.
-  (interactive "FDoas Find File: ")
+  (interactive "FElevated Find File: ")
   (let ((tramp-file-name (concat "/doas::" (expand-file-name file-name))))
     (find-file tramp-file-name)))
-(global-set-key (kbd "C-c q f") 'doas-find-file)
+(global-set-key (kbd "C-c q f") 'elevated-find-file)
 
 ;; PDF tools
 (use-package pdf-tools
@@ -194,7 +212,7 @@
 ;; Customize fonts and set theme.
 (defun my/apply-gui-config (frame)
   (with-selected-frame frame
-    (load-theme 'catppuccin t)
+    (load-theme 'doom-palenight t)
     (set-frame-font "Jetbrains Mono Nerd Font 12" nil t)))
 (if (daemonp)
     (add-hook 'after-make-frame-functions #'my/apply-gui-config)
@@ -211,6 +229,7 @@
 (defun set-newline-and-indent ()
   (local-set-key (kbd "RET") 'newline-and-indent))
 (add-hook 'c-mode-hook 'set-newline-and-indent)
+(add-hook 'c++-mode-hook 'set-newline-and-indent)
 ;; C/C++ coding style
 (setq c-default-style "k&r")
 ;; Find files case-insensitive.
