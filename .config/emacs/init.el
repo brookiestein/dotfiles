@@ -2,7 +2,7 @@
 ;; Melpa
 (setq package-archives
 	  '(("gnu" . "https://elpa.gnu.org/packages/")
-		("melpha" . "https://melpa.org/packages/")))
+		("melpa" . "https://melpa.org/packages/")))
 
 (eval-when-compile
   (require 'package)
@@ -24,28 +24,18 @@
 
 ;; company-mode
 (use-package company
-  :ensure t)
-
-;; LSP mode
-(use-package lsp-mode
   :ensure t
-  :commands (lsp lsp-deferred)
-  :hook ((c-mode c++-mode) . lsp-deferred)
-  :init)
-(use-package lsp-ui
-  :ensure t
-  :after lsp-mode
-  :commands lsp-ui-mode)
-(use-package lsp-clangd
-  :ensure nil
-  :after lsp-mode
-  :custom
-  (lsp-clients-clangd-args
-   '("--header-insertion-decorators=0"
-	 "--compile-commands-dir=build")))
-
-(company-mode 1)
-(add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+  (setq company-show-numbers t)
+  ;; To prevent default down-casing.
+  ;; https://emacs.stackexchange.com/questions/10837/how-to-make-company-mode-be-case-sensitive-on-plain-text
+  (setq company-dabbrev-downcase nil)
+  ;; 2023-01-13 From a Reddit post on mixed case issue.
+  (setq company-dabbrev-ignore-case nil)
+  (setq company-dabbrev-code-ignore-case nil)
+  (add-hook 'after-init-hook 'global-company-mode))
 (with-eval-after-load 'company
   (define-key company-active-map
 			  (kbd "TAB")
@@ -55,6 +45,57 @@
 			  (lambda ()
 					 (interactive)
 					 (company-complete-common-or-cycle -1))))
+
+;; My C++ workflow.
+(defun my/c-c++-style ()
+  ;; Set indentation
+  (setq-local
+   indent-tabs-mode nil
+   tab-width 4
+   c-basic-offset 4)
+  (c-set-offset 'block-close 0)
+  (c-set-offset 'substatement-open 0)
+  ;; Autocomplete parenthesis
+  (electric-pair-mode t)
+  ;; Don't reindent when pressing RET.
+  (electric-indent-local-mode -1)
+  (electric-layout-local-mode -1)
+  ;; C/C++ coding style
+  (setq c-default-style "k&r"))
+(add-hook 'c-mode-common-hook #'my/c-c++-style)
+
+;; Eglot
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+			   '((c-mode c++-mode) . ("clangd" "--compile-commands-dir=build"))))
+(defun my/c-c++-eglot-setup ()
+  (eglot-ensure)
+  (add-hook 'before-save-hook
+			(lambda ()
+			  (when (eglot-current-server)
+				(eglot-format-buffer)))
+			nil t))
+(add-hook 'c-mode-hook #'my/c-c++-eglot-setup)
+(add-hook 'c++-mode-hook #'my/c-c++-eglot-setup)
+
+(defun my/cmake-build ()
+  (interactive)
+  (compile "cmake --build build"))
+(defun my/cmake-configure ()
+  (interactive)
+  (compile "cmake -G Ninja -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON"))
+(global-set-key (kbd "<f5>") #'my/cmake-build)
+(global-set-key (kbd "<f6>") #'my/cmake-configure)
+
+;; All the icons.
+(use-package all-the-icons
+  :if (display-graphic-p))
+(use-package all-the-icons-dired
+  :if (display-graphic-p)
+  :config
+  (add-hook 'dired-mode-hook 'all-the-icons-dired-mode))
+(use-package all-the-icons-ibuffer
+  :if (display-graphic-p))
 
 ;; Org mode
 (use-package org
@@ -217,21 +258,6 @@
 (if (daemonp)
     (add-hook 'after-make-frame-functions #'my/apply-gui-config)
   (my/apply-gui-config (selected-frame)))
-;; Set indentation
-(setq-default
- indent-tabs-mode t
- tab-stop-list (number-sequence 4 200 4)
- tab-width 4
- indent-line-function 'insert-tab)
-;; Autocomplete parenthesis
-(electric-pair-mode t)
-;; Autoindent on new line
-(defun set-newline-and-indent ()
-  (local-set-key (kbd "RET") 'newline-and-indent))
-(add-hook 'c-mode-hook 'set-newline-and-indent)
-(add-hook 'c++-mode-hook 'set-newline-and-indent)
-;; C/C++ coding style
-(setq c-default-style "k&r")
 ;; Find files case-insensitive.
 (setq read-file-name-completion-ignore-case t)
 ;; Move customization variables to a separate file, so it doesn't get that messy, and load it.
