@@ -60,6 +60,8 @@
   ;; Don't reindent when pressing RET.
   (electric-indent-local-mode -1)
   (electric-layout-local-mode -1)
+  ; Make RET do newline + indent (without enabling electric-indent)
+  (local-set-key (kbd "RET") #'newline-and-indent)
   ;; C/C++ coding style
   (setq c-default-style "k&r"))
 (add-hook 'c-mode-common-hook #'my/c-c++-style)
@@ -164,6 +166,8 @@
   :config
   (pdf-tools-install)
   (setq-default pdf-view-display-size 'fit-width)
+  (setq pdf-view-continuous t)
+  (setq pdf-view-resize-factor 1.1)
   (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
   (add-hook 'pdf-view-mode-hook #'pdf-view-roll-minor-mode))
 ;; Remember page when killing a pdf.
