@@ -14,17 +14,17 @@
 		"custom/separator",
 		"cpu"
 	],
-	
+
     "modules-center": [
-		"hyprland/workspaces"
+		"niri/workspaces"
 	],
-	
+
     "modules-right": [
 		"tray",
 		"custom/separator",
-        "pulseaudio",
+        	"pulseaudio",
 		"custom/separator",
-        "pulseaudio#microphone",
+        	"pulseaudio#microphone",
 		"custom/separator",
 		"backlight",
 		"custom/separator",
@@ -35,7 +35,7 @@
 		"power-profiles-daemon",
 		"custom/separator",
 		"custom/power",
-    ],
+    	],
 
 	"network": {
 		"family": "ipv4",
@@ -46,7 +46,7 @@
 		"tooltip-format-disconnected": "Disconnected",
 		"max-length": 50,
 	},
-	
+
 	"cpu": {
 		"interval": 1,
 		"format": "󰻠 {usage:2}%",
@@ -68,40 +68,15 @@
 		}
 	},
 
-	"hyprland/workspaces": {
-		"on-scroll-up": "hyprctl dispatch workspace e+1 &>/dev/null",
-		"on-scroll-down": "hyprctl dispatch workspace e-1 &>/dev/null"
-	},
-	
-    "tray": {
-        "show-passive-items": true,
-        "spacing": 10,
-    },
+    	"tray": {
+        	"show-passive-items": true,
+        	"spacing": 10,
+    	},
 
 	"clock": {
 		"interval": 1,
-		"format": "{:%A %F %T}",
-		"tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-			"mode": "year",
-            "mode-mon-col": 3,
-            "weeks-pos": "right",
-            "on-scroll": 1,
-            "format": {
-				"months": "<span color='#ffead3'><b>{}</b></span>",
-                "days": "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
-            }
-        },
-        "actions": {
-			"on-click-right": "mode",
-            "on-scroll-up": "tz_up",
-            "on-scroll-down": "tz_down",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        }
+		"format": "{:%a %F %T}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>"
 	},
 
     "pulseaudio": {
@@ -158,7 +133,7 @@
 			""
 		]
 	},
-	
+
     "custom/separator": {
         "format": "|",
         "tooltip": false,
