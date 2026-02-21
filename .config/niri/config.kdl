@@ -169,7 +169,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        active-color "#7F00FF"
 
         // Color of the ring on inactive monitors.
         //
@@ -335,9 +335,10 @@ window-rule {
     open-floating true
 }
 
-// Open Firefox maximized
+// Open maximized
 window-rule {
     match app-id="firefox"
+    match app-id="emacs"
     open-maximized true
 }
 
@@ -381,6 +382,7 @@ binds {
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+E hotkey-overlay-title="Open file explorer: Emacs dired" { spawn "emacsclient" "-n" "-c" "~/"; }
     Mod+S hotkey-overlay-title="Open System Power Manager: spm" { spawn "spm"; }
+    Mod+X hotkey-overlay-title="Open my favorite operating system :): Emacs" { spawn "emacsclient" "-n" "-c"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
