@@ -140,6 +140,7 @@
   nil) ;; Return nil to suppress timer object output
 ;; Open a terminal buffer
 (global-set-key (kbd "C-c RET") 'multi-vterm)
+(global-set-key (kbd "C-c 4 RET") 'vterm-other-window)
 (setq vterm-copy-exclude-prompt t)
 (setq vterm-ignore-blink-cursor nil)
 (setq vterm-max-scrollback 100000)
@@ -175,6 +176,15 @@
   :ensure t
   :config
   (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode))
+
+;; Consult. For now I'll just use consult-buffer.
+;; Maybe I find some interesting uses of this package in the future.
+(use-package consult
+  :ensure t
+  :config
+  (global-set-key (kbd "C-x b") 'consult-buffer) ;; Remap Emacs' default buffer-list in favor of consult-buffer.
+  (global-set-key (kbd "C-x 4 b") 'consult-buffer-other-window) ;; Same.
+  (global-set-key (kbd "C-x g") 'consult-goto-line))
 
 ;; Make scroll smoother.
 (pixel-scroll-precision-mode 1)
