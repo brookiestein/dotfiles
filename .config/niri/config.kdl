@@ -23,6 +23,9 @@ input {
             // localectl set-x11-keymap.
         }
 
+	repeat-delay 300
+	repeat-rate 50
+
         // Enable numlock on startup, omitting this setting disables it.
         numlock
     }
@@ -270,12 +273,20 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
-spawn-at-startup "waybar"
-spawn-at-startup "emacs --daemon"
-spawn-at-startup "gentoo-pipewire-launcher restart"
-spawn-at-startup "gsettings set org.gnome.desktop.interface gtk-theme Flat-Remix-GTK-Violet-Dark"
-spawn-at-startup "gsettings set org.gnome.desktop.interface icon-theme Flat-Remix-Violet-Dark"
+spawn-at-startup "ashell"
 spawn-at-startup "mako"
+spawn-at-startup "emacs" "--daemon"
+spawn-at-startup "gentoo-pipewire-launcher" "restart"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "Juno-palenight"
+spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Flat-Remix-Violet-Dark"
+spawn-at-startup "awww-daemon"
+spawn-at-startup "hypridle"
+
+environment {
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "qt6ct"
+    MOZ_DISABLE_GMP_SANDBOX "1" // Workaround to play DRM content in my musl setup.
+}
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -325,20 +336,21 @@ window-rule {
     default-column-width {}
 }
 
-// Open the Firefox picture-in-picture player as floating by default.
+// Open floating.
 window-rule {
-    // This app-id regular expression will work for both:
-    // - host Firefox (app-id is "firefox")
-    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    // Firefox
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     match app-id=r#"firefox$"# title="(Library|About)"
+    // Power Profiles Daemon GUI
+    match app-id="com.github.brookiestein.powerprofilesdaemongui"
+    // The setting
     open-floating true
 }
 
 // Open maximized
 window-rule {
     match app-id="firefox"
-    match app-id="emacs"
+    match app-id="Emacs|emacs"
     open-maximized true
 }
 
@@ -379,7 +391,10 @@ binds {
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+Shift+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
     Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Ctrl+P hotkey-overlay-title="Run Power Profiles Daemon GUI" { spawn "powerprofilesgui"; }
+    Mod+Alt+P hotkey-overlay-title="Get active power profile" { spawn "powerprofilesgui" "-a"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    Mod+Shift+W hotkey-overlay-title="Run web browser: Firefox" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Open file explorer: Emacs dired" { spawn "emacsclient" "-n" "-c" "~/"; }
     Mod+S hotkey-overlay-title="Open System Power Manager: spm" { spawn "spm"; }
     Mod+X hotkey-overlay-title="Open my favorite operating system :): Emacs" { spawn "emacsclient" "-n" "-c"; }
@@ -387,7 +402,7 @@ binds {
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
     // For example, this is a standard bind to toggle the screen reader (orca).
-    Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
+    // Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
     // Example volume keys mappings for PipeWire & WirePlumber.
     // The allow-when-locked=true property makes them work even when the session is locked.
