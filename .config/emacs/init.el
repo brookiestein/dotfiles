@@ -46,6 +46,9 @@
 					 (interactive)
 					 (company-complete-common-or-cycle -1))))
 
+(use-package cmake-mode
+  :ensure t)
+
 ;; My C++ workflow.
 (defun my/c-c++-style ()
   ;; Set indentation
@@ -154,11 +157,21 @@
 			(when (string-equal (buffer-name) "vterm")
 			  (vterm-reset-cursor-point))))
 
-(defun elevated-find-file (file-name)
-  ;; Like find file, but opens the file as root.
-  (interactive "FElevated Find File: ")
-  (let ((tramp-file-name (concat "/doas::" (expand-file-name file-name))))
-    (find-file tramp-file-name)))
+(with-eval-after-load 'tramp
+  (tramp-enable-method "run0"))
+
+;; Like find file, but opens the file as root.
+(defun elevated-find-file (method file-name)
+  (interactive
+   (list
+    (completing-read
+     "Method (doas|run0|sudo): "
+     '("doas" "run0" "sudo")
+     nil
+     t)
+    (read-file-name "Elevated Find File: ")))
+  (find-file (format "/%s::%s" method (expand-file-name file-name))))
+
 (global-set-key (kbd "C-c q f") 'elevated-find-file)
 
 ;; PDF tools
