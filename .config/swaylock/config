@@ -1,0 +1,7 @@
+image=/home/brayan/Wallpapers/wallhaven-zpy8wg_1920x1080.png
+scaling=center
+ignore-empty-password
+show-failed-attempts
+daemonize
+show-keyboard-layout
+indicator-caps-lock

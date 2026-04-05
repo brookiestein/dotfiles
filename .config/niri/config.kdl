@@ -276,11 +276,10 @@ layout {
 spawn-at-startup "ashell"
 spawn-at-startup "mako"
 spawn-at-startup "emacs" "--daemon"
-spawn-at-startup "gentoo-pipewire-launcher" "restart"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "gtk-theme" "Juno-palenight"
 spawn-at-startup "gsettings" "set" "org.gnome.desktop.interface" "icon-theme" "Flat-Remix-Violet-Dark"
-spawn-at-startup "awww-daemon"
-spawn-at-startup "hypridle"
+spawn-at-startup "wbg" "/home/brayan/Wallpapers/hollow-knight.jpg"
+spawn-at-startup "swayidle" "-w" "timeout" "900" "swaylock; 'niri msg action power-off-monitors'" "resume" "'niri msg action power-on-monitors'"
 
 environment {
     QT_QPA_PLATFORM "wayland"
@@ -389,11 +388,11 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Shift+Return hotkey-overlay-title="Open a Terminal: Alacritty" { spawn "alacritty"; }
+    Mod+Shift+Return hotkey-overlay-title="Emacs: Open a Terminal" { spawn "emacsclient" "-n" "-c" "-e" "(my/vterm-in-current-frame)"; }
     Mod+P hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+Ctrl+P hotkey-overlay-title="Run Power Profiles Daemon GUI" { spawn "powerprofilesgui"; }
     Mod+Alt+P hotkey-overlay-title="Get active power profile" { spawn "powerprofilesgui" "-a"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+Shift+W hotkey-overlay-title="Run web browser: Firefox" { spawn "firefox"; }
     Mod+E hotkey-overlay-title="Open file explorer: Emacs dired" { spawn "emacsclient" "-n" "-c" "~/"; }
     Mod+S hotkey-overlay-title="Open System Power Manager: spm" { spawn "spm"; }
