@@ -108,6 +108,7 @@ alias mkdir="mkdir --parent --verbose"
 alias mv="mv --verbose"
 alias rm="rm --verbose"
 alias rmdir="rmdir --verbose"
+alias run0="run0 --background="
 
 vterm_printf() {
     if [ -n "$TMUX" ] \
@@ -131,4 +132,5 @@ autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd (){ print -Pn "\e]2;%m:%2~\a" }
 
 export LESSHISTFILE="~/.local/share/.lesshst"
-export MOZ_DISABLE_GMP_SANDBOX=1
+export NVCCFLAGS="--ccbin=/usr/x86_64-pc-linux-gnu/gcc-bin/14"
+export NVCC_CCBIN="/usr/x86_64-pc-linux-gnu/gcc-bin/14"
