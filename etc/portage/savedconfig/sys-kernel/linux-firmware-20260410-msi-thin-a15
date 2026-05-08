@@ -1,19 +1,20 @@
 # Remove files that shall not be installed from this list.
-amd-ucode/microcode_amd_fam19h.bin
 amd-ucode/README
+amd-ucode/microcode_amd_fam19h.bin
 amd-ucode/microcode_amd.bin
-amdgpu/yellow_carp_pfp.bin
 amdgpu/yellow_carp_vcn.bin
-amdgpu/yellow_carp_ta.bin
 amdgpu/yellow_carp_ce.bin
-amdgpu/yellow_carp_mec.bin
+amdgpu/yellow_carp_ta.bin
+amdgpu/yellow_carp_pfp.bin
 amdgpu/yellow_carp_sdma.bin
-amdgpu/yellow_carp_toc.bin
+amdgpu/yellow_carp_mec.bin
 amdgpu/yellow_carp_mec2.bin
-amdgpu/yellow_carp_me.bin
+amdgpu/yellow_carp_toc.bin
 amdgpu/yellow_carp_dmcub.bin
+amdgpu/yellow_carp_me.bin
 amdgpu/yellow_carp_rlc.bin
 intel/ibt-20-1-3.sfi
 intel/ibt-20-1-3.ddc
-mediatek/WIFI_RAM_CODE_MT7922_1.bin
+mediatek/BT_RAM_CODE_MT7922_1_1_hdr.bin
 mediatek/WIFI_MT7922_patch_mcu_1_1_hdr.bin
+mediatek/WIFI_RAM_CODE_MT7922_1.bin
