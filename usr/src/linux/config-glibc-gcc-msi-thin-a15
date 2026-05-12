@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 6.18.26-gentoo Kernel Configuration
+# Linux/x86 6.18.29-gentoo Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo 16.1.0 p1) 16.1.0"
 CONFIG_CC_IS_GCC=y
@@ -1400,7 +1400,8 @@ CONFIG_NF_CT_PROTO_UDPLITE=y
 CONFIG_NF_CONNTRACK_FTP=y
 # CONFIG_NF_CONNTRACK_H323 is not set
 CONFIG_NF_CONNTRACK_IRC=y
-# CONFIG_NF_CONNTRACK_NETBIOS_NS is not set
+CONFIG_NF_CONNTRACK_BROADCAST=y
+CONFIG_NF_CONNTRACK_NETBIOS_NS=y
 # CONFIG_NF_CONNTRACK_SNMP is not set
 # CONFIG_NF_CONNTRACK_PPTP is not set
 # CONFIG_NF_CONNTRACK_SANE is not set
@@ -2018,7 +2019,7 @@ CONFIG_PREVENT_FIRMWARE_BUILD=y
 # Firmware loader
 #
 CONFIG_FW_LOADER=y
-CONFIG_EXTRA_FIRMWARE="amd-ucode/microcode_amd_fam19h.bin regulatory.db regulatory.db.p7s intel/ibt-20-1-3.ddc intel/ibt-20-1-3.sfi mediatek/WIFI_RAM_CODE_MT7922_1.bin mediatek/WIFI_MT7922_patch_mcu_1_1_hdr.bin mediatek/BT_RAM_CODE_MT7922_1_1_hdr.bin"
+CONFIG_EXTRA_FIRMWARE="amd-ucode/microcode_amd_fam19h.bin regulatory.db regulatory.db.p7s mediatek/WIFI_RAM_CODE_MT7922_1.bin mediatek/WIFI_MT7922_patch_mcu_1_1_hdr.bin mediatek/BT_RAM_CODE_MT7922_1_1_hdr.bin"
 CONFIG_EXTRA_FIRMWARE_DIR="/lib/firmware"
 # CONFIG_FW_LOADER_USER_HELPER is not set
 # CONFIG_FW_LOADER_COMPRESS is not set
@@ -5644,9 +5645,11 @@ CONFIG_VIRTIO_DMA_SHARED_BUFFER=y
 # CONFIG_VIRTIO_DEBUG is not set
 # CONFIG_VIRTIO_RTC is not set
 # CONFIG_VDPA is not set
+CONFIG_VHOST_IOTLB=y
 CONFIG_VHOST_TASK=y
+CONFIG_VHOST=y
 CONFIG_VHOST_MENU=y
-# CONFIG_VHOST_NET is not set
+CONFIG_VHOST_NET=y
 # CONFIG_VHOST_CROSS_ENDIAN_LEGACY is not set
 CONFIG_VHOST_ENABLE_FORK_OWNER_CONTROL=y
 
