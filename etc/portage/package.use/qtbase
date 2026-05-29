@@ -1,2 +1,2 @@
-# I sometimes develop Qt programs that use the MySQL/MariaDB DB engine.
->=dev-qt/qtbase-6.8.3 mysql
+# I sometimes develop Qt programs that use the MySQL/MariaDB and PostgreSQL DB engines.
+>=dev-qt/qtbase-6.8.3 mysql postgres
