@@ -7,7 +7,7 @@ hl.monitor({
 })
 
 hl.monitor({
-    output = "HDMI-A-1",
+    output = "desc:Acer Technologies KG272K L 14360080F4200",
     mode = "preferred",
     position = "auto",
     scale = 1.25
@@ -29,6 +29,14 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "wayland")
+hl.env("AQ_NO_MODIFIERS", "1")
+hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
+
+hl.config({
+    cursor = {
+      no_hardware_cursors = true
+    }
+})
 
 -- AUTOSTART --
 hl.on("hyprland.start", function ()
@@ -38,6 +46,7 @@ hl.on("hyprland.start", function ()
 	hl.exec_cmd("hyprctl setcursor Adwaita 24")
 	hl.exec_cmd("mako")
 	hl.exec_cmd("waybar")
+	hl.exec_cmd("gentoo-pipewire-launcher restart")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme Flat-Remix-GTK-Violet-Dark")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface icon-theme Flat-Remix-Violet-Dark")
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -159,8 +168,10 @@ hl.config({
 -- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
 hl.config({
     scrolling = {
-        fullscreen_on_one_column = true,
-    },
+      fullscreen_on_one_column = true,
+      column_width = 0.9,
+      direction = "right"
+    }
 })
 
 hl.config({
@@ -219,6 +230,9 @@ hl.bind(mainMod .. " + mouse_up",   hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(),   { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
+hl.bind(mainMod .. " + period", hl.dsp.layout("move +col"))
+hl.bind(mainMod .. " + comma", hl.dsp.layout("swapcol l"))
+
 -- MULTIMEDIA KEYBINDINGS --
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
@@ -259,4 +273,11 @@ hl.window_rule({
 
     move  = "20 monitor_h-120",
     float = true,
+})
+
+hl.window_rule({
+    match = {
+      class = "*telegram*"
+    },
+    float = true
 })
