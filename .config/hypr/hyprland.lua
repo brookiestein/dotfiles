@@ -9,8 +9,15 @@ hl.monitor({
 hl.monitor({
     output = "desc:Acer Technologies KG272K L 14360080F4200",
     mode = "preferred",
-    position = "auto",
+    position = "1920x0",
     scale = 1.25
+})
+
+hl.monitor({
+    output = "desc:Dell Inc. DELL E2724HS 1B67G04",
+    mode = "preferred",
+    position = "auto",
+    scale = 1.0
 })
 
 -- PROGRAMS --
@@ -30,7 +37,6 @@ hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "wayland")
 hl.env("AQ_NO_MODIFIERS", "1")
-hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
 
 hl.config({
     cursor = {
@@ -178,6 +184,7 @@ hl.config({
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo   = true,
+	initial_workspace_tracking = 0
     },
 })
 
