@@ -92,6 +92,25 @@
 (global-set-key (kbd "<f5>") #'my/cmake-build)
 (global-set-key (kbd "<f6>") #'my/cmake-configure)
 
+;; Lua mode
+(use-package lua-mode
+  :ensure t
+  :mode "\\.lua\\'"
+  :interpreter "lua"
+  :config
+  (setq lua-indent-level 2))
+
+(use-package lsp-mode
+  :ensure t
+  :hook (lua-mode . lsp-deferred)
+  :commands (lsp lsp-deferred)
+  :config
+  (setq lsp-keymap-prefix "C-c l"))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
 ;; All the icons.
 (use-package all-the-icons
   :if (or (display-graphic-p) (daemonp)))
