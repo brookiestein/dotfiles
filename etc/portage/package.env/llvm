@@ -1,0 +1,2 @@
+llvm-core/llvm lto.conf
+llvm-core/clang lto.conf

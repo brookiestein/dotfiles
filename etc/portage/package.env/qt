@@ -1,0 +1,2 @@
+dev-qt/qtbase lto.conf
+dev-qt/qtdeclarative lto.conf
