@@ -131,3 +131,20 @@ window#waybar.empty #window {
 tooltip {
     border-radius: 8px;
 }
+
+#mpd {
+    padding: 0 12px;
+    color: #cdd6f4;
+}
+
+#mpd.disconnected {
+    color: #f38ba8;
+}
+
+#mpd.stopped {
+    color: #6c7086;
+}
+
+#mpd.paused {
+    color: #f9e2af;
+}

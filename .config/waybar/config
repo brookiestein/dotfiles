@@ -1,3 +1,4 @@
+// -*- mode: js-json; js-indent-level: 4; -*-
 {
     "layer": "top",
     "position": "top",
@@ -8,76 +9,101 @@
     "fixed-center": true,
 
     "modules-left": [
-		"network",
-		"custom/separator",
-		"memory",
-		"custom/separator",
-		"cpu"
-	],
+	"network",
+	"custom/separator",
+	"memory",
+	"custom/separator",
+	"cpu",
+	"custom/separator",
+	"mpd"
+    ],
 
     "modules-center": [
-		"niri/workspaces"
-	],
+	"hyprland/workspaces"
+    ],
 
     "modules-right": [
-		"tray",
-		"custom/separator",
-        	"pulseaudio",
-		"custom/separator",
-        	"pulseaudio#microphone",
-		"custom/separator",
-		"backlight",
-		"custom/separator",
-		"battery",
-		"custom/separator",
-		"clock",
-		"custom/separator",
-		"power-profiles-daemon",
-		"custom/separator",
-		"custom/power",
-    	],
+	"tray",
+	"custom/separator",
+        "pulseaudio",
+	"custom/separator",
+        "pulseaudio#microphone",
+	"custom/separator",
+	"backlight",
+	"custom/separator",
+	"battery",
+	"custom/separator",
+	"clock",
+	"custom/separator",
+	"power-profiles-daemon",
+	"custom/separator",
+	"custom/power",
+    ],
 
-	"network": {
-		"family": "ipv4",
-		"format-wifi": "  {essid} ({signalStrength}%)",
-		"format-ethernet": "  {ipaddr}",
-		"tooltip-format-wifi": "  {ipaddr}/{cidr} via {gwaddr}",
-		"tooltip-format-ethernet": "  {ipaddr}/{cidr} via {gwaddr}",
-		"tooltip-format-disconnected": "Disconnected",
-		"max-length": 50,
+    "network": {
+	"family": "ipv4",
+	"format-wifi": "  {essid} ({signalStrength}%)",
+	"format-ethernet": "  {ipaddr}",
+	"tooltip-format-wifi": "  {ipaddr}/{cidr} via {gwaddr}",
+	"tooltip-format-ethernet": "  {ipaddr}/{cidr} via {gwaddr}",
+	"tooltip-format-disconnected": "Disconnected",
+	"max-length": 50,
+    },
+
+    "cpu": {
+	"interval": 1,
+	"format": "󰻠 {usage:2}%",
+	"states": {
+	    "normal": 10,
+	    "warning": 40,
+	    "critical": 80
+	}
+    },
+
+    "mpd": {
+	"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) #{songPosition} of {queueLength} {volume}%",
+	"format-disconnected": "Disconnected 󰝛",
+	"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}No music playing ",
+	"unknown-tag": "N/A",
+	"interval": 5,
+	"consume-icons": {
+	    "on": "<span color=\"#f53c3c\"></span> ",
+	    "off": " "
 	},
-
-	"cpu": {
-		"interval": 1,
-		"format": "󰻠 {usage:2}%",
-		"states": {
-			"normal": 10,
-			"warning": 40,
-			"critical": 80
-		}
+	"repeat-icons": {
+	    "on": " "
 	},
-
-	"memory": {
-		"interval": 5,
-		"format": " {0}%",
-		"tooltip-format": "{used:0.1f}G used of {total:0.1f}G",
-		"states": {
-			"normal": 10,
-			"warning": 40,
-			"critical": 80
-		}
+	"single-icons": {
+	    "on": "1 "
 	},
-
-    	"tray": {
-        	"show-passive-items": true,
-        	"spacing": 10,
-    	},
-
-	"clock": {
-		"interval": 1,
-		"format": "{:%a %F %T}",
-		"tooltip-format": "<tt><small>{calendar}</small></tt>"
+	"state-icons": {
+	    "paused": "",
+	    "playing": ""
 	},
+	"tooltip-format": "MPD (connected)",
+	"tooltip-format-disconnected": "MPD (disconnected)",
+	"on-click": "mpc toggle",
+	"on-click-right": "mpc stop",
+	"on-scroll-up": "mpc volume +2",
+	"on-scroll-down": "mpc volume -2",
+	"max-length": 60
+    },
+
+    "memory": {
+	"interval": 5,
+	"format": " {0}%",
+	"tooltip-format": "{used:0.1f}G used of {total:0.1f}G",
+	"states": {
+	    "normal": 10,
+	    "warning": 40,
+	    "critical": 80
+	}
+    },
+
+    "tray": {
+        "show-passive-items": true,
+        "spacing": 10,
+    },
 
     "pulseaudio": {
         "format": "{icon} {volume}%",
@@ -90,10 +116,10 @@
             "portable": "",
             "car": "",
             "default": [" ", " ", " "],
-        },
+    	},
         "on-click-middle": "pamixer -t",
         "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
-		"tooltip-format": "{source_desc} | {volume}%"
+	"tooltip-format": "{source_desc} | {volume}%"
     },
 
     "pulseaudio#microphone": {
@@ -106,55 +132,61 @@
         "tooltip-format": "{source_desc} | {source_volume}%",
     },
 
-	"backlight": {
-		"device": "intel_backlight",
-		"format": "{icon}{percent}%",
-		"format-icons": [" ", " "],
-		"on-scroll-up": "xbacklight -inc 10",
-		"on-scroll-down": "xbacklight -dec 10"
+    "backlight": {
+	"device": "intel_backlight",
+	"format": "{icon}{percent}%",
+	"format-icons": [" ", " "],
+	"on-scroll-up": "xbacklight -inc 10",
+	"on-scroll-down": "xbacklight -dec 10"
+    },
+
+    "battery": {
+	"bat": "BAT1",
+	"interval": 60,
+	"states": {
+	    "good": 95,
+	    "warning": 30,
+	    "critical": 15
 	},
 
-	"battery": {
-		"bat": "BAT0",
-		"interval": 60,
-		"states": {
-			"good": 95,
-			"warning": 30,
-			"critical": 15
-		},
-
-		"format-charging": " {capacity}%",
-		"format": "{icon} {capacity}%",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		]
-	},
+	"format-charging": " {capacity}%",
+	"format": "{icon} {capacity}%",
+	"format-icons": [
+	    "",
+	    "",
+	    "",
+	    "",
+	    ""
+	]
+    },
 
     "custom/separator": {
         "format": "|",
         "tooltip": false,
     },
 
+    "clock": {
+	"interval": 1,
+	"format": "{:%a %F %T}",
+	"tooltip-format": "<tt><small>{calendar}</small></tt>"
+    },
+
     "custom/power": {
         "tooltip": true,
-		"tooltip-format": "Launch System Power Manager",
+	"tooltip-format": "Launch System Power Manager",
         "on-click": "spm &",
         "format": "⏻ ",
     },
 
-	"power-profiles-daemon": {
-  		"format": "{icon}",
-  		"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-  		"tooltip": true,
-  		"format-icons": {
-    		"default": "",
-    		"performance": "",
-    		"balanced": " ",
-    		"power-saver": " "
-  		}
-	}
+    "power-profiles-daemon": {
+  	"format": "{icon}",
+  	"tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+  	"tooltip": true,
+  	"format-icons": {
+    	    "default": "",
+    	    "performance": "",
+    	    "balanced": " ",
+    	    "power-saver": " "
+  	}
+    }
 }
