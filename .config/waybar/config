@@ -61,29 +61,35 @@
     },
 
     "mpd": {
-	"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) #{songPosition} of {queueLength} {volume}%",
+	"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{album} 󰎆 - {title} 󰥔 ({elapsedTime:%M:%S}/{totalTime:%M:%S}) 󰎈 {songPosition} of {queueLength}",
 	"format-disconnected": "Disconnected 󰝛",
-	"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}No music playing ",
+	"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}No music playing 󰝛",
 	"unknown-tag": "N/A",
 	"interval": 5,
 	"consume-icons": {
-	    "on": "<span color=\"#f53c3c\"></span> ",
+	    "on": "<span color=\"#f53c3c\">󰮯</span> ",
 	    "off": " "
 	},
+	"random-icons": {
+	    "on": " ",
+	    "off": ""
+	},
 	"repeat-icons": {
-	    "on": " "
+	    "on": "󰑖 ",
+	    "off": ""
 	},
 	"single-icons": {
-	    "on": "1 "
+	    "on": "󰑘 "
 	},
 	"state-icons": {
-	    "paused": "",
-	    "playing": ""
+	    "paused": "",
+	    "playing": ""
 	},
-	"tooltip-format": "MPD (connected)",
-	"tooltip-format-disconnected": "MPD (disconnected)",
+	"tooltip-format": "MPD (connected) 󰎆",
+	"tooltip-format-disconnected": "MPD (disconnected) 󰝛",
 	"on-click": "mpc toggle",
-	"on-click-right": "mpc stop",
+	"on-click-right": "mpc next",
+	"on-click-middle": "mpc stop",
 	"on-scroll-up": "mpc volume +2",
 	"on-scroll-down": "mpc volume -2",
 	"max-length": 60
