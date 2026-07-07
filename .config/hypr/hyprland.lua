@@ -29,10 +29,10 @@ hl.monitor({
 
 -- PROGRAMS --
 local cppIDE = "qtcreator"
-local fileManager = "dolphin"
+local fileManager = "emacsclient " .. os.getenv("HOME")
 local menu = "hyprlauncher"
 local screenLocker = "hyprlock"
-local terminal = "alacritty"
+local terminal = "emacsclient -n -c -e '(my/vterm-in-current-frame)'"
 local textEdtor = "emacsclient -nc"
 local webBrowser = "firefox"
 local webBrowserPrivate = "firefox --private-window"
@@ -43,13 +43,7 @@ hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 hl.env("XDG_CURRENT_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 hl.env("XDG_SESSION_DESKTOP", "wayland")
-hl.env("AQ_NO_MODIFIERS", "1")
-
-hl.config({
-    cursor = {
-      no_hardware_cursors = true
-    }
-})
+hl.env("SSH_AUTH_SOCK", os.getenv("XDG_RUNTIME_DIR") .. "/ssh-agent.socket")
 
 -- AUTOSTART --
 hl.on("hyprland.start", function ()
@@ -59,7 +53,6 @@ hl.on("hyprland.start", function ()
 	hl.exec_cmd("hyprctl setcursor Adwaita 24")
 	hl.exec_cmd("mako")
 	hl.exec_cmd("waybar")
-	hl.exec_cmd("gentoo-pipewire-launcher restart")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme Flat-Remix-GTK-Violet-Dark")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface icon-theme Flat-Remix-Violet-Dark")
 	hl.exec_cmd("xdg-desktop-portal-hyprland")
@@ -290,7 +283,8 @@ hl.window_rule({
 
 hl.window_rule({
     match = {
-      class = "*telegram*"
+        class = "firefox",
+	title = "Library|About Mozilla Firefox"
     },
     float = true
 })
