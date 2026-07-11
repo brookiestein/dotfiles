@@ -53,7 +53,7 @@ hl.on("hyprland.start", function ()
 	hl.exec_cmd("hyprctl setcursor Adwaita 24")
 	hl.exec_cmd("mako")
 	hl.exec_cmd("waybar")
-	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme Flat-Remix-GTK-Violet-Dark")
+	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme Juno-palenight")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface icon-theme Flat-Remix-Violet-Dark")
 	hl.exec_cmd("xdg-desktop-portal-hyprland")
 	hl.exec_cmd("/usr/libexec/hyprpolkitagent")
@@ -213,6 +213,9 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(textEdtor))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(cppIDE))
+hl.bind("PRINT", hl.dsp.exec_cmd("hyprshot -m output"))
+hl.bind("SHIFT + PRINT", hl.dsp.exec_cmd("hyprshot -m output --clipboard-only"))
+hl.bind(mainMod .. " + PRINT", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -248,7 +251,7 @@ hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("xbacklight -inc 10"),          
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("xbacklight -dec 10"),                	       	   { locked = true, repeating = true })
 
 -- RULES --
-local suppressMaximizeRule = hl.window_rule({
+hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
     name  = "suppress-maximize-events",
     match = { class = ".*" },
