@@ -1,9 +1,14 @@
+dev-debug/gdb
+dev-cpp/catch # required by citron.
+dev-cpp/drogon
 dev-cpp/gtkmm
 dev-cpp/nlohmann_json
+dev-libs/libpqxx
 dev-libs/libsodium
 dev-libs/libxlsxwriter
+dev-libs/qxlsx
 dev-qt/qtmultimedia
+dev-qt/qtnetworkauth
 dev-qt/qt-docs
+dev-util/bear
 llvm-core/lldb
-media-libs/raylib
-x11-libs/wxGTK
