@@ -6,9 +6,11 @@ dev-cpp/nlohmann_json
 dev-libs/libpqxx
 dev-libs/libsodium
 dev-libs/libxlsxwriter
+dev-libs/rapidjson # required by cemu.
 dev-libs/qxlsx
 dev-qt/qtmultimedia
 dev-qt/qtnetworkauth
 dev-qt/qt-docs
 dev-util/bear
 llvm-core/lldb
+x11-libs/wxGTK
