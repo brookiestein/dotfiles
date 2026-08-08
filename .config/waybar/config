@@ -15,11 +15,11 @@
 	"custom/separator",
 	"cpu",
 	"custom/separator",
-	"mpd"
+	"hyprland/workspaces"
     ],
 
     "modules-center": [
-	"hyprland/workspaces"
+	"mpd"
     ],
 
     "modules-right": [
@@ -61,7 +61,7 @@
     },
 
     "mpd": {
-	"format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{album} 󰎆 - {title} 󰥔 ({elapsedTime:%M:%S}/{totalTime:%M:%S}) 󰎈 {songPosition} of {queueLength}",
+	"format": "󰎆 {title} 󰥔 ({elapsedTime:%M:%S}/{totalTime:%M:%S}) 󰎈 {songPosition} of {queueLength} {stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}",
 	"format-disconnected": "Disconnected 󰝛",
 	"format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}No music playing 󰝛",
 	"unknown-tag": "N/A",
