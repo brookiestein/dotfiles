@@ -3,7 +3,9 @@ hl.monitor({
     output = "eDP-1",
     mode = "preferred",
     position = "0x0",
-    scale = 1.0
+    scale = 1.0,
+    bitdepth = 10,
+    cm = "auto"
 })
 
 hl.monitor({
@@ -32,7 +34,7 @@ local cppIDE = "qtcreator"
 local fileManager = "emacsclient " .. os.getenv("HOME")
 local menu = "hyprlauncher"
 local screenLocker = "hyprlock"
-local terminal = "emacsclient -n -c -e '(my/vterm-in-current-frame)'"
+local terminal = "alacritty"
 local textEdtor = "emacsclient -nc"
 local webBrowser = "firefox"
 local webBrowserPrivate = "firefox --private-window"
