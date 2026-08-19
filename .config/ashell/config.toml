@@ -5,7 +5,7 @@ outputs = { Targets = ["eDP-1"] }
 [modules]
 left = [ "Workspaces" ]
 center = [ "WindowTitle" ]
-right = [ "SystemInfo", "Settings", "Clock", "Privacy", "Tray" ]
+right = [ "SystemInfo", "Settings", "Tempo", "Privacy", "Tray" ]
 
 [workspaces]
 visibility_mode = "MonitorSpecific"
@@ -47,8 +47,13 @@ indicators = ["IdleInhibitor", "PowerProfile", "Audio", "Bluetooth", "Network", 
 remove_airplane_btn = true
 remove_idle_btn = true
 
-[clock]
-format = "%a %d %b %T"
+[tempo]
+formats = [
+    "%T",
+    "%a %d %b, %Y"
+]
+weather_location = { City = "" }
+wather_indicator = "Icon"
 
 [appearance]
 style = "Islands"
