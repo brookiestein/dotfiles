@@ -1,10 +1,15 @@
 [Unit]
-Description=SSH key agent
+Description=OpenSSH authentication agent
+Documentation=man:ssh-agent(1)
 
 [Service]
 Type=simple
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
-ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+ExecStartPre=/usr/bin/rm -f %t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -D -a %t/ssh-agent.socket
+ExecStopPost=/usr/bin/rm -f %t/ssh-agent.socket
+Restart=on-failure
+RestartSec=1
 
 [Install]
 WantedBy=default.target
