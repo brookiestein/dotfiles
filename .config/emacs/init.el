@@ -218,6 +218,8 @@
   (global-set-key (kbd "C-x 4 b") 'consult-buffer-other-window) ;; Same.
   (global-set-key (kbd "C-x g") 'consult-goto-line))
 
+;; I like POSIX directory sorting.
+(setenv "LC_COLLATE" "C")
 ;; Make scroll smoother.
 (pixel-scroll-precision-mode 1)
 (setq pixel-scroll-precision-large-scroll-height 5.0)
