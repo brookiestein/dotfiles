@@ -55,7 +55,7 @@ hl.on("hyprland.start", function ()
 	hl.exec_cmd("hyprctl setcursor Adwaita 24")
 	hl.exec_cmd("mako")
 	hl.exec_cmd("waybar")
-	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme Juno-palenight")
+	hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme Mint-Y-Dark-Purple")
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface icon-theme Flat-Remix-Violet-Dark")
 	hl.exec_cmd("xdg-desktop-portal-hyprland")
 	hl.exec_cmd("/usr/libexec/hyprpolkitagent")
@@ -99,7 +99,7 @@ hl.config({
         -- Please see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Tearing/ before you turn this on
         allow_tearing = false,
 
-        layout = "dwindle",
+        layout = "scrolling",
     },
 
     decoration = {
@@ -140,44 +140,35 @@ hl.curve("quick",          { type = "bezier", points = { {0.15, 0},    {0.1, 1} 
 -- Default springs
 hl.curve("easy",           { type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 })
 
-hl.animation({ leaf = "global",        enabled = true,  speed = 10,   bezier = "default" })
-hl.animation({ leaf = "border",        enabled = true,  speed = 5.39, bezier = "easeOutQuint" })
-hl.animation({ leaf = "windows",       enabled = true,  speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 4.1,  spring = "easy",         style = "popin 87%" })
-hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 1.49, bezier = "linear",       style = "popin 87%" })
-hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 1.73, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 1.46, bezier = "almostLinear" })
-hl.animation({ leaf = "fade",          enabled = true,  speed = 3.03, bezier = "quick" })
-hl.animation({ leaf = "layers",        enabled = true,  speed = 3.81, bezier = "easeOutQuint" })
-hl.animation({ leaf = "layersIn",      enabled = true,  speed = 4,    bezier = "easeOutQuint", style = "fade" })
-hl.animation({ leaf = "layersOut",     enabled = true,  speed = 1.5,  bezier = "linear",       style = "fade" })
-hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 1.79, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 1.39, bezier = "almostLinear" })
-hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 1.21, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.94, bezier = "almostLinear", style = "fade" })
-hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 7,    bezier = "quick" })
+hl.animation({ leaf = "global",        enabled = true,  speed = 5,    bezier = "default" })
+hl.animation({ leaf = "border",        enabled = true,  speed = 2.7,  bezier = "easeOutQuint" })
+hl.animation({ leaf = "windows",       enabled = true,  speed = 2.4,  spring = "easy" })
+hl.animation({ leaf = "windowsIn",     enabled = true,  speed = 2.1,  spring = "easy",         style = "popin 87%" })
+hl.animation({ leaf = "windowsOut",    enabled = true,  speed = 0.7,  bezier = "linear",       style = "popin 87%" })
+hl.animation({ leaf = "fadeIn",        enabled = true,  speed = 0.9,  bezier = "almostLinear" })
+hl.animation({ leaf = "fadeOut",       enabled = true,  speed = 0.7,  bezier = "almostLinear" })
+hl.animation({ leaf = "fade",          enabled = true,  speed = 1.5,  bezier = "quick" })
+hl.animation({ leaf = "layers",        enabled = true,  speed = 1.9,  bezier = "easeOutQuint" })
+hl.animation({ leaf = "layersIn",      enabled = true,  speed = 2.0,  bezier = "easeOutQuint", style = "fade" })
+hl.animation({ leaf = "layersOut",     enabled = true,  speed = 0.8,  bezier = "linear",       style = "fade" })
+hl.animation({ leaf = "fadeLayersIn",  enabled = true,  speed = 0.9,  bezier = "almostLinear" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true,  speed = 0.7,  bezier = "almostLinear" })
+hl.animation({ leaf = "workspaces",    enabled = true,  speed = 1.0,  bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesIn",  enabled = true,  speed = 0.6,  bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "workspacesOut", enabled = true,  speed = 1.0,  bezier = "almostLinear", style = "fade" })
+hl.animation({ leaf = "zoomFactor",    enabled = true,  speed = 3.5,  bezier = "quick" })
 
--- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+-- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
+-- LAYOUTS
 hl.config({
     dwindle = {
         preserve_split = true, -- You probably want this
     },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
-hl.config({
     master = {
         new_status = "slave",
     },
-})
-
--- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
-hl.config({
     scrolling = {
-      fullscreen_on_one_column = true,
-      column_width = 0.9,
-      direction = "right"
+      column_width = 1.0
     }
 })
 
