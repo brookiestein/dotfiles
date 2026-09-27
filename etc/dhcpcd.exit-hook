@@ -1,0 +1,9 @@
+case "${interface}" in
+    eno1|wlan0)
+        case "${reason}" in
+	    BOUND|RENEW|REBIND|REBOOT|STATIC|INFORM)
+	        /usr/local/sbin/proton-autovpn-event >/dev/null 2>&1 &
+		;;
+	esac
+	;;
+esac
