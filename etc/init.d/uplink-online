@@ -1,0 +1,44 @@
+#!/sbin/openrc-run
+
+description="Wait for a usable physical uplink"
+
+: "${interfaces:=eno1 wlan0}"
+: "${timeout:=60}"
+
+depend() {
+    need nftables
+    need dhcpcd
+    after iwd
+}
+
+start() {
+    if [ -z "${interfaces}" ]; then
+        eerror "No interface configured in /etc/conf.d/uplink-online"
+	return 1
+    fi
+
+    ebegin "Waiting for ${interfaces} to become routable"
+
+    remaining="${timeout}"
+
+    while [ "${remaining}" -gt 0 ]; do
+        for interface in ${interfaces}; do
+	    # Ignore interfaces that don't currently exist.
+	    [ -e "/sys/class/net/${interface}" ] || continue
+
+	    if ip -4 addr show dev "${interface}" scope global 2>/dev/null | grep -q 'inet ' \
+	      && ip -4 route show default dev "${interface}" 2>/dev/null | grep -q '^default '; then
+	        einfo "${interface} is ready"
+		eend 0
+		return 0
+	    fi
+	done
+
+	sleep 1
+	remaining=$((remaining - 1))
+    done
+
+    eend 1 "No configured physical uplink became usable"
+
+    return 1
+}
