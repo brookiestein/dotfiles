@@ -1,0 +1,38 @@
+# -*- mode: sh; sh-basic-offset: 4; indent-tabs-mode: nil; -*-
+#!/bin/sh
+
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+AUTO_VPN="yes"
+VPN_SERVICE="wg-quick.wg-"
+
+[ -r /etc/conf.d/proton-autovpn ] && . /etc/conf.d/proton-autovpn
+
+[ "${AUTO_VPN}" = "yes" ] || exit 0
+
+uplink_ready() {
+    for interface in eno1 wlan0; do
+        if ip -4 addr show dev "${interface}" scope global 2>/dev/null | grep -q 'inet ' \
+                 && ip -4 route show default dev "${interface}" 2>/dev/null | grep -q '^default '; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+lockdir="/run/proton-autovpn.lock"
+
+mkdir "${lockdir}" 2>/dev/null || exit 0
+
+trap 'rmdir "${lockdir}"' EXIT HUP INT TERM
+
+uplink_ready || exit 0
+
+if [ -n "$(wg show interfaces 2>/dev/null)" ]; then
+    exit 0
+fi
+
+logger -t proton-autovpn "Physical uplink ready; starting ${VPN_SERVICE}"
+
+rc-service "${VPN_SERVICE}" start
