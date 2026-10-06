@@ -1,0 +1,11 @@
+diff --color -ru a/src/CommandLine.cxx b/src/CommandLine.cxx
+--- a/src/CommandLine.cxx	2026-05-15 01:46:52.000000000 -0400
++++ b/src/CommandLine.cxx	2026-10-05 08:09:18.220494750 -0400
+@@ -55,6 +55,7 @@
+ #include "archive/ArchivePlugin.hxx"
+ #endif
+ 
++#include <cstdlib>
+ #include <fmt/core.h>
+ 
+ namespace {

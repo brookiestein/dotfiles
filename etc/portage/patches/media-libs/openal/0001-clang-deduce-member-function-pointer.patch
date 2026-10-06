@@ -1,0 +1,30 @@
+diff --color -ru a/alc/alc.cpp b/alc/alc.cpp
+--- a/alc/alc.cpp	2026-05-11 22:21:07.000000000 -0400
++++ b/alc/alc.cpp	2026-10-05 14:31:51.317391868 -0400
+@@ -1780,9 +1780,9 @@
+         /* Free all wet buffers. Any in use will be reallocated with an updated
+          * configuration in aluInitEffectPanning.
+          */
+-        std::ranges::for_each(context->mEffectSlotClusters
+-            | std::views::transform(&ContextBase::EffectSlotCluster::operator*)
+-            | std::views::join, [](EffectSlotBase &slot)
++	std::ranges::for_each(context->mEffectSlotClusters
++	    | std::views::transform([] (auto &cluster) -> auto & { return *cluster; })
++	    | std::views::join, [](EffectSlotBase &slot)
+         {
+             slot.mWetBuffer.clear();
+             slot.mWetBuffer.shrink_to_fit();
+diff --color -ru a/alc/backends/pipewire.cpp b/alc/backends/pipewire.cpp
+--- a/alc/backends/pipewire.cpp	2026-05-11 22:21:07.000000000 -0400
++++ b/alc/backends/pipewire.cpp	2026-10-05 14:38:22.791365936 -0400
+@@ -1407,8 +1407,8 @@
+ {
+     RemoveDevice(id);
+ 
+-    auto node_end = std::ranges::remove_if(mNodeList, [id](NodeProxy const &node) noexcept
+-    { return node.mId == id; }, &std::unique_ptr<NodeProxy>::operator*);
++    auto node_end = std::ranges::remove_if(mNodeList, [id] (NodeProxy const &node) noexcept
++    { return node.mId == id; }, [] (const auto &ptr) -> auto & { return *ptr; });
+     mNodeList.erase(node_end.begin(), node_end.end());
+ 
+     if(mDefaultMetadata && mDefaultMetadata->mId == id)

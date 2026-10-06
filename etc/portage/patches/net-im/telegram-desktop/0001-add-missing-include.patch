@@ -1,0 +1,56 @@
+diff --color -ru a/Telegram/ThirdParty/rlottie/inc/rlottie.h b/Telegram/ThirdParty/rlottie/inc/rlottie.h
+--- a/Telegram/ThirdParty/rlottie/inc/rlottie.h	2026-08-11 13:24:41.000000000 -0400
++++ b/Telegram/ThirdParty/rlottie/inc/rlottie.h	2026-10-05 14:44:39.225340999 -0400
+@@ -19,6 +19,7 @@
+ #ifndef _RLOTTIE_H_
+ #define _RLOTTIE_H_
+ 
++#include <functional>
+ #include <future>
+ #include <vector>
+ #include <memory>
+diff --color -ru a/Telegram/ThirdParty/rlottie/src/vector/vraster.h b/Telegram/ThirdParty/rlottie/src/vector/vraster.h
+--- a/Telegram/ThirdParty/rlottie/src/vector/vraster.h	2026-08-11 13:24:41.000000000 -0400
++++ b/Telegram/ThirdParty/rlottie/src/vector/vraster.h	2026-10-05 16:50:35.174840465 -0400
+@@ -22,6 +22,8 @@
+ #include "vglobal.h"
+ #include "vrect.h"
+ 
++#include <memory>
++
+ V_BEGIN_NAMESPACE
+ 
+ class VPath;
+diff --color -ru a/Telegram/ThirdParty/rlottie/src/vector/vrle.cpp b/Telegram/ThirdParty/rlottie/src/vector/vrle.cpp
+--- a/Telegram/ThirdParty/rlottie/src/vector/vrle.cpp	2026-08-11 13:24:41.000000000 -0400
++++ b/Telegram/ThirdParty/rlottie/src/vector/vrle.cpp	2026-10-05 14:57:45.269288929 -0400
+@@ -21,6 +21,7 @@
+ #include <algorithm>
+ #include <array>
+ #include <cstdlib>
++#include <iterator>
+ #include <vector>
+ #include "vdebug.h"
+ #include "vglobal.h"
+diff --color -ru a/Telegram/ThirdParty/tgcalls/tgcalls/group/GroupJoinPayloadInternal.cpp b/Telegram/ThirdParty/tgcalls/tgcalls/group/GroupJoinPayloadInternal.cpp
+--- a/Telegram/ThirdParty/tgcalls/tgcalls/group/GroupJoinPayloadInternal.cpp	2026-07-11 16:31:44.000000000 -0400
++++ b/Telegram/ThirdParty/tgcalls/tgcalls/group/GroupJoinPayloadInternal.cpp	2026-10-05 17:40:37.237641598 -0400
+@@ -1,6 +1,7 @@
+ #include "GroupJoinPayloadInternal.h"
+ 
+ #include "third-party/json11.hpp"
++#include <iterator>
+ #include <sstream>
+ 
+ namespace tgcalls {
+diff --color -ru a/Telegram/lib_base/base/unique_function.h b/Telegram/lib_base/base/unique_function.h
+--- a/Telegram/lib_base/base/unique_function.h	2026-08-24 08:03:32.000000000 -0400
++++ b/Telegram/lib_base/base/unique_function.h	2026-10-05 18:34:40.467503412 -0400
+@@ -6,6 +6,7 @@
+ //
+ #pragma once
+ 
++#include <cstdlib>
+ #include <functional>
+ 
+ #ifndef Unexpected

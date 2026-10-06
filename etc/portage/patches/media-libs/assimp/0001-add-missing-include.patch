@@ -1,0 +1,11 @@
+diff --color -ru a/contrib/poly2tri/poly2tri/common/shapes.h b/contrib/poly2tri/poly2tri/common/shapes.h
+--- a/contrib/poly2tri/poly2tri/common/shapes.h	2025-06-08 15:50:39.000000000 -0400
++++ b/contrib/poly2tri/poly2tri/common/shapes.h	2026-10-04 19:27:54.741787729 -0400
+@@ -35,6 +35,7 @@
+ 
+ #include <cmath>
+ #include <cstddef>
++#include <ostream>
+ #include <stdexcept>
+ #include <vector>
+ 

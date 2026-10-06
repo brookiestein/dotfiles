@@ -1,0 +1,11 @@
+diff --color -ru a/compiler-rt/lib/orc/record_section_tracker.h b/compiler-rt/lib/orc/record_section_tracker.h
+--- a/compiler-rt/lib/orc/record_section_tracker.h	2026-06-15 18:33:53.000000000 -0400
++++ b/compiler-rt/lib/orc/record_section_tracker.h	2026-10-06 09:20:29.107152098 -0400
+@@ -17,6 +17,7 @@
+ #include "error.h"
+ #include "executor_address.h"
+ #include <algorithm>
++#include <iterator>
+ #include <vector>
+ 
+ namespace orc_rt {
