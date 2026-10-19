@@ -1,0 +1,69 @@
+#!/bin/sh
+# -*- mode: sh; sh-basic-offset: 4; indent-tabs-mode: nil; -*-
+
+PATH=/usr/sbin:/usr/bin:/sbin:/bin
+
+INTERFACE="$1"
+ACTION="$2"
+
+CONFIG="/etc/proton-autovpn/config"
+
+AUTO_VPN="yes"
+VPN_SERVICE="wg-quick@" # Fill with your actual VPN service.
+VPN_INTERFACE="" # Same
+
+if [ -r "${CONFIG}" ]; then
+    . "${CONFIG}"
+fi
+
+[ "${AUTO_VPN}" = "yes" ] || exit 0
+
+# We're only interested in physical interfaces.
+case "${INTERFACE}" in
+    eno1|wlan0)
+    ;;
+    *)
+        exit 0
+        ;;
+esac
+
+# React only when the connection is established.
+case "${ACTION}" in
+    up)
+    ;;
+    *)
+        exit 0
+        ;;
+esac
+
+# Proton endpoints are IPv4, so let's require INTERFACE to have one.
+if ! ip -4 addr show dev "${INTERFACE}" scope global 2>/dev/null | grep -q 'inet '; then
+    exit 0
+fi
+
+# If we have one, let's also require it to have a route.
+if ! ip -4 route show default dev "${INTERFACE}" 2>/dev/null | grep -q '^default '; then
+    exit 0
+fi
+
+# If VPN_INTERFACE, i.e., our WireGuard one is already up, there's nothing to do.
+if [ -n "$(wg show interfaces 2>/dev/null)" ]; then
+    logger -t proton-autovpn "WireGuard interface already active; not starting ${VPN_INTERFACE}"
+    exit 0
+fi
+
+# Avoid starting VPN_SERVICE once again if it's starting.
+state="$(systemctl show -P ActiveState --value "${VPN_SERVICE}")"
+
+case "${state}" in
+    active|activating)
+        exit 0
+        ;;
+esac
+
+logger -t proton-autovpn "${INTERFACE} became usable. Action=${ACTION}. Starting ${VPN_SERVICE}."
+
+# Return immediately to NetworkManager. systemd performs the actual start.
+systemctl start --no-block "${VPN_SERVICE}"
+
+exit 0
