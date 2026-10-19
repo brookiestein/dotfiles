@@ -1,0 +1,3 @@
+AUTO_VPN=yes
+VPN_SERVICE=wg-quick@
+VPN_INTERFACE=
