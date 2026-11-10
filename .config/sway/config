@@ -10,19 +10,18 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu bemenu-run --no-exec -c -H 26 -l 10 -i -w -p "Run:" | xargs -r swaymsg exec --
 
 # Autostart
-# exec gentoo-pipewire-launcher restart
-exec --no-startup-id dbus-update-activation-environment --all
 exec /usr/libexec/xdg-desktop-portal -r
 exec /usr/libexec/xdg-desktop-portal-wlr
 seat seat0 xcursor_theme Adwaita 16
 exec dunst
+exec emacs --daemon
 
 # Floating windows
 for_window [window_role = "pop-up"] floating enable
@@ -38,25 +37,21 @@ for_window [title = "Administrator privileges required"] floating enable
 # Firefox
 for_window [title = "About Mozilla Firefox"] floating enable
 for_window [window_role = "About"] floating enable
-for_window [app_id="firefox" title="Library"] floating enable, border pixel 1, sticky enable
+for_window [app_id = "firefox" title="Library"] floating enable, border pixel 1, sticky enable
+for_window [app_id = "Tor Browser"] floating enable
+# My Projects
+for_window [app_id = "Compras"] floating enable
+for_window [app_id = "UlogdViewer"] floating enable
 
-default_border none
-default_floating_border none
-titlebar_padding 1
-titlebar_border_thickness 0
-
-gaps inner 10
+gaps inner 5
 
 # Open windows workspace-specific
 assign [app_id="firefox"] 1:󰈹
-assign [class="Google-chrome"] 2:
-assign [app_id="org.telegram.desktop"] 5:
-assign [app_id="sqlitebrowser"] 6:
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/brayan/Wallpapers/360290.jpg fill
+output * bg /home/brayan/Wallpapers/wallhaven-lyw2qp_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -69,9 +64,7 @@ output * bg /home/brayan/Wallpapers/360290.jpg fill
 # Example configuration:
 #
 exec swayidle -w \
-          timeout 900 'swaylock -f -i /home/brayan/Pictures/Wallpapers/lockscreen.jpg -s fill' \
-          timeout 1200 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-          before-sleep 'swaylock -f -i /home/brayan/Pictures/Wallpapers/lockscreen.jpg -s fill'
+          before-sleep 'swaylock -f -i /home/brayan/Wallpapers/wallhaven-k8jk76_1920x1080.png -s fill'
 
 #
 # Screen capture
@@ -86,7 +79,7 @@ bindsym $ps1 exec grim - | wl-copy
 bindsym $ps2 exec grim -g "$(slurp)" - | wl-copy
 bindsym $ps3 exec grim $psf
 bindsym $ps4 exec grim -g "$(slurp)" $psf
-bindsym $mod+Ctrl+l exec 'swaylock -f -i "/home/brayan/Pictures/Wallpapers/lockscreen.jpg" -s fill'
+bindsym $mod+Ctrl+l exec 'swaylock -f -i "/home/brayan/Wallpapers/wallhaven-k8jk76_1920x1080.png" -s fill'
 #
 # This will lock your screen after 900 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -94,7 +87,7 @@ bindsym $mod+Ctrl+l exec 'swaylock -f -i "/home/brayan/Pictures/Wallpapers/locks
 
 ### Input configuration
 #
-input "2:7:SynPS/2_Synaptics_TouchPad" {
+input "1267:12806:ELAN0300:00_04F3:3206_Touchpad" {
     dwt enabled
     tap enabled
     natural_scroll enabled
@@ -102,8 +95,9 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 }
 
 input * {
-    xkb_layout "us"
+    xkb_layout "us,latam"
     xkb_variant "intl"
+    xkb_options "grp:win_space_toggle"
 }
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
@@ -137,21 +131,22 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
 
 # Programs
 bindsym $mod+Shift+w exec firefox
-bindsym $mod+Ctrl+c exec google-chrome-stable
-bindsym $mod+Shift+t exec telegram-desktop
-bindsym $mod+e exec emacs
+bindsym $mod+x exec emacsclient -nc
+bindsym $mod+e exec emacsclient -nc $HOME
 
 # Multimedia
 bindsym XF86AudioRaiseVolume exec 'wpctl set-volume @DEFAULT_SINK@ 0.05+'
 bindsym XF86AudioLowerVolume exec 'wpctl set-volume @DEFAULT_SINK@ 0.05-'
 bindsym XF86AudioMute exec 'wpctl set-mute @DEFAULT_SINK@ toggle'
 bindsym XF86AudioMicMute exec 'wpctl set-mute @DEFAULT_SOURCE@ toggle'
+bindsym XF86AudioPlay exec 'mpc toggle'
+bindsym XF86AudioPause exec 'mpc toggle'
+bindsym XF86AudioPrev exec 'mpc previous'
+bindsym XF86AudioNext exec 'mpc next'
 
 # Brightness control
 bindsym XF86MonBrightnessUp exec 'xbacklight -inc 10'
 bindsym XF86MonBrightnessDown exec 'xbacklight -dec 10'
-
-bindsym XF86WLAN exec '/home/brayan/.scripts/toggleWi-Fi.sh'
 
 #
 # Moving around:
@@ -271,7 +266,7 @@ bindsym $mod+r mode "resize"
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-	status_command waybar
+    status_command waybar
     mode invisible
 
     colors {
