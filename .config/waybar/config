@@ -15,7 +15,7 @@
 	"custom/separator",
 	"cpu",
 	"custom/separator",
-	"hyprland/workspaces"
+	"sway/workspaces"
     ],
 
     "modules-center": [
@@ -194,5 +194,22 @@
     	    "balanced": " ",
     	    "power-saver": " "
   	}
+    },
+
+    "sway/workspaces": {
+	"format": "{name}: {icon}",
+	"format-icons": {
+	    "1": "󰈹",
+	    "2": "",
+	    "3": "",
+	    "4": "",
+	    "5": "",
+	    "6": "",
+	    "7": "",
+	    "8": "",
+	    "9": "",
+	    "10": "",
+	    "urgent": ""
+	}
     }
 }
