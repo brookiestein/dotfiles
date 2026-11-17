@@ -1,1 +1,1 @@
-sys-apps/systemd boot cryptsetup
+>=sys-apps/systemd-260 boot cryptsetup ukify

@@ -1,6 +1,9 @@
->=dev-qt/qt-creator-15.0.1 designer doc qmldesigner webengine
-# required by dev-qt/qt-creator-15.0.1::gentoo[designer]
+>=dev-qt/qt-creator-20.0.0 designer doc qmldesigner webengine
+# required by dev-qt/qt-creator-20.0.2::gentoo[designer]
 # required by qt-creator (argument)
->=dev-qt/qttools-6.8.2 designer qdoc qtattributionsscanner
-# required by dev-qt/qttools-6.8.2::gentoo[qdoc]
->=dev-qt/qttools-6.8.2 clang
+>=dev-qt/qttools-6.11.3 designer
+# required by dev-qt/qttools-6.11.3::gentoo[designer]
+>=dev-qt/qttools-6.11.3 qml
+# required by dev-qt/qt-creator-20.0.2::gentoo[doc]
+# required by qt-creator (argument)
+>=dev-qt/qttools-6.11.3 qdoc qtattributionsscanner

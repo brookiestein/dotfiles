@@ -1,1 +1,1 @@
-sys-kernel/gentoo-sources experimental symlink
+>=sys-kernel/gentoo-sources-6.18.12 experimental symlink
