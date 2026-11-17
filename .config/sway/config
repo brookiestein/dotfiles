@@ -38,7 +38,7 @@ for_window [title = "Administrator privileges required"] floating enable
 for_window [title = "About Mozilla Firefox"] floating enable
 for_window [window_role = "About"] floating enable
 for_window [app_id = "firefox" title="Library"] floating enable, border pixel 1, sticky enable
-for_window [app_id = "Tor Browser"] floating enable
+for_window [class = "Tor Browser"] floating enable
 # My Projects
 for_window [app_id = "Compras"] floating enable
 for_window [app_id = "UlogdViewer"] floating enable
@@ -46,12 +46,12 @@ for_window [app_id = "UlogdViewer"] floating enable
 gaps inner 5
 
 # Open windows workspace-specific
-assign [app_id="firefox"] 󰈹
+assign [app_id="firefox"] 1
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/brayan/Wallpapers/wallhaven-lyw2qp_1920x1080.png fill
+output * bg /home/brayan/Wallpapers/purple-smoke-4k.png fill
 #
 # Example configuration:
 #
@@ -145,8 +145,8 @@ bindsym XF86AudioPrev exec 'mpc previous'
 bindsym XF86AudioNext exec 'mpc next'
 
 # Brightness control
-bindsym XF86MonBrightnessUp exec 'xbacklight -inc 10'
-bindsym XF86MonBrightnessDown exec 'xbacklight -dec 10'
+bindsym XF86MonBrightnessUp exec 'brightnessctl set 5%+'
+bindsym XF86MonBrightnessDown exec 'brightnessctl set 5%-'
 
 #
 # Moving around:
